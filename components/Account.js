@@ -165,7 +165,7 @@ export default function Account({ session }) {
                   return (
                     <div
                       key={color.hex}
-                      className="bg-blue-400 h-8 w-8 w-full max-w-16"
+                      className="bg-blue-400 h-8 w-8 max-w-16"
                       style={{
                         backgroundColor: color,
                       }}
