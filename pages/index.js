@@ -90,6 +90,7 @@ const Home = () => {
           {randomNewPalette.map((color) => {
             return (
               <div
+                key={color}
                 className="w-10 h-10 rounded-full"
                 style={{ backgroundColor: color }}
               ></div>
