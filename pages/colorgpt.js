@@ -118,7 +118,7 @@ const ColorGPT = () => {
                   setMood(e.target.value);
                 }}
                 placeholder="What's your mood?"
-                className="  border-[2px] p-4 rounded-full focus:outline-none focus:bg-gray-800 focus:text-white focus:placeholder-white/50"
+                className="border-[2px] p-4 rounded-full focus:outline-none focus:bg-gray-800 focus:text-white focus:placeholder-white/50"
               ></input>
               <div
                 onClick={() => {
@@ -167,9 +167,11 @@ const ColorGPT = () => {
                     <div className="flex gap-4 rounded-md p-4">
                       {response.map((color) => {
                         return (
-                          <div className="group w-16 flex flex-col items-center gap-2">
+                          <div
+                            key={color}
+                            className="group w-16 flex flex-col items-center gap-2"
+                          >
                             <div
-                              key={color}
                               className="w-12 h-12 rounded-full"
                               style={{ backgroundColor: color.hex }}
                             ></div>

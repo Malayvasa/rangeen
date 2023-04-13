@@ -96,11 +96,6 @@ const Home = () => {
   return (
     <div className="h-screen w-screen flex justify-center bg-gray-100 items-center  py-32 px-32">
       <Toaster position="bottom-right" />
-      {/* <div className="blur-[80px] md:blur-[120px] fixed -z-10 top-1/2 left-1/2 saturate-[200%] opacity-50">
-        <div className="circle1 left-1/2 top-1/2 -z-10 "></div>
-        <div className="circle2 left-1/2 top-1/2 -z-10 "></div>
-        <div className="circle3 left-1/2 top-1/2 -z-10 "></div>
-      </div> */}
 
       <div className="bg-white rounded-3xl shadow-sm z-20 w-full h-full flex flex-col justify-center items-center">
         {/* <motion.div className="font-bold text-8xl text-white mb-4 text-shadow mx-auto tracking-tighter z-20">
@@ -113,9 +108,11 @@ const Home = () => {
           <div className="flex gap-8">
             {randomNewPalette.map((color) => {
               return (
-                <div className="group w-16 flex flex-col items-center gap-2">
+                <div
+                  key={color}
+                  className="group w-16 flex flex-col items-center gap-2"
+                >
                   <div
-                    key={color}
                     className="w-12 h-12 rounded-full"
                     style={{ backgroundColor: color }}
                   ></div>
