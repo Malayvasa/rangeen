@@ -94,6 +94,7 @@ const ColorGPT = () => {
       const hexCodes = filtered.map((color) => color.hex);
       setHexList(hexCodes);
 
+      console.log(filtered);
       setResponse(filtered);
     } catch (e) {
       console.log('error');
@@ -168,7 +169,7 @@ const ColorGPT = () => {
                       {response.map((color) => {
                         return (
                           <div
-                            key={color}
+                            key={color.name}
                             className="group w-16 flex flex-col items-center gap-2"
                           >
                             <div
