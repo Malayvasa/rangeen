@@ -35,6 +35,7 @@ const Home = () => {
           name: 'random palette',
           colors: randomNewPalette,
           user_id: user.id,
+          type: 'random',
         },
       ]);
 
@@ -43,7 +44,6 @@ const Home = () => {
       }
 
       if (data) {
-        notifyAddPalette();
         //combine name and colors into one object and set it to palettes
         setPalettes(data);
         console.log(data);

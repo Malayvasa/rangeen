@@ -20,7 +20,7 @@ export default function SavedPalettes({ session }) {
 
       let { data, error, status } = await supabase
         .from('palettes')
-        .select(`id,name, colors`)
+        .select(`id,name, colors,type`)
         .eq('user_id', user.id);
 
       if (error && status !== 406) {
@@ -83,8 +83,36 @@ export default function SavedPalettes({ session }) {
             return (
               <div
                 key={palette.id}
-                className="flex bg-white shadow-sm p-4 rounded-md md:gap-4"
+                className="flex items-center relative bg-white shadow-sm p-4 rounded-md md:gap-4"
               >
+                {palette.type === 'colorgpt' && (
+                  <div className="flex justify-center gap-2 items-center text-blue-400 bg-blue-500/10 absolute rounded-full p-2 right-0 translate-x-[130%]">
+                    <svg
+                      width="24px"
+                      height="24px"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      color="currentColor"
+                    >
+                      <path
+                        d="M3 21l10-10m5-5l-2.5 2.5"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      ></path>
+                      <path
+                        d="M9.5 2l.945 2.555L13 5.5l-2.555.945L9.5 9l-.945-2.555L6 5.5l2.555-.945L9.5 2zM19 10l.54 1.46L21 12l-1.46.54L19 14l-.54-1.46L17 12l1.46-.54L19 10z"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linejoin="round"
+                      ></path>
+                    </svg>
+                    <div className="pr-2">ColorGPT</div>
+                  </div>
+                )}
                 {palette.colors.map((color) => {
                   return (
                     <div
