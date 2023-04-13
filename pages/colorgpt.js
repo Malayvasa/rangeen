@@ -19,6 +19,55 @@ const ColorGPT = () => {
   const { push } = useRouter();
   const [formattedResponse, setFormattedResponse] = useState([]);
   const [hexList, setHexList] = useState([]);
+  const [gptUsesRemaining, setGPTUsesRemaining] = useState(0);
+
+  async function getFreeGPTUsesRemaining() {
+    try {
+      setLoading(true);
+
+      let { data, error, status } = await supabase
+        .from('profiles')
+        .select('openai_generations')
+        .eq('id', user.id);
+
+      if (error && status !== 406) {
+        throw error;
+      }
+
+      if (data) {
+        setGPTUsesRemaining(data[0].openai_generations);
+        console.log(data);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function updateFreeGPTUsesRemaining() {
+    try {
+      setLoading(true);
+
+      let { data, error, status } = await supabase
+        .from('profiles')
+        .update({ openai_generations: gptUsesRemaining - 1 })
+        .eq('id', user.id);
+
+      if (error && status !== 406) {
+        throw error;
+      }
+
+      if (data) {
+        setGPTUsesRemaining(data[0].openai_generations);
+        console.log(data);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   async function addGPTPalette() {
     try {
@@ -41,6 +90,7 @@ const ColorGPT = () => {
         notifyAddPalette();
         //combine name and colors into one object and set it to palettes
         setPalettes(data);
+
         console.log(data);
       }
     } catch (error) {
@@ -96,6 +146,10 @@ const ColorGPT = () => {
 
       console.log(filtered);
       setResponse(filtered);
+
+      // update the number of uses remaining
+      updateFreeGPTUsesRemaining();
+      getFreeGPTUsesRemaining();
     } catch (e) {
       console.log('error');
       toast.error('Something went wrong, try again');
@@ -103,9 +157,13 @@ const ColorGPT = () => {
     }
   };
 
+  useEffect(() => {
+    getFreeGPTUsesRemaining();
+  }, [session]);
+
   return (
     <div className="h-screen w-screen flex justify-center bg-gray-100 items-center  py-32 px-32">
-      <Toaster position="bottom-center" />
+      <Toaster position="bottom-right" />
       {!session ? (
         <div className="pt-32">
           <LogIn />
@@ -113,19 +171,23 @@ const ColorGPT = () => {
       ) : (
         <div className="w-full bg-white h-full flex justify-center rounded-3xl pt-12">
           <div className=" flex flex-col items-center justify-between ">
-            <div className="flex gap-x-4 items-center">
+            <div className="flex gap-x-4 items-center border-[2px] rounded-full">
               <input
                 onChange={(e) => {
                   setMood(e.target.value);
                 }}
                 placeholder="What's your mood?"
-                className="border-[2px] p-4 rounded-full focus:outline-none focus:bg-gray-800 focus:text-white focus:placeholder-white/50"
+                className="p-4 rounded-full focus:outline-none  focus:text-blue-500 focus:placeholder-white/50"
               ></input>
-              <div
+              <button
+                disabled={gptUsesRemaining === 0 ? true : false}
                 onClick={() => {
                   getResponseFromOpenAI();
                 }}
-                className=" h-max w-max text-slate-500 rounded-md p-2 hover:bg-slate-800 hover:text-slate-100 transition-all duration-200"
+                // disabled button greyed out if no uses remaining
+                className={`${
+                  gptUsesRemaining === 0 ? ' text-gray-100' : ' text-blue-500'
+                } p-2 rounded-full focus:outline-none  focus:text-blue-500 focus:placeholder-white/50`}
               >
                 <svg
                   width="32px"
@@ -150,7 +212,12 @@ const ColorGPT = () => {
                     stroke-linejoin="round"
                   ></path>
                 </svg>
-              </div>
+              </button>
+            </div>
+            <div className="p-2 px-4 text-sm bg-green-50 text-green-500 rounded-full mt-4">
+              {gptUsesRemaining > 0
+                ? `You have ${gptUsesRemaining} free uses remaining`
+                : 'You have no free uses remaining'}
             </div>
 
             <div className="flex-grow h-full flex items-center justify-center">
@@ -187,6 +254,7 @@ const ColorGPT = () => {
                       <div
                         onClick={() => {
                           addGPTPalette();
+                          toast.success('Palette added to your collection!');
                         }}
                         className="h-max w-max bg-slate-500/5 text-slate-500 rounded-md p-2 hover:bg-slate-800 hover:text-slate-100 transition-all duration-200"
                       >
