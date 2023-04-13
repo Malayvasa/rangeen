@@ -1,4 +1,5 @@
 import '../styles/globals.css';
+import toast, { Toaster } from 'react-hot-toast';
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';

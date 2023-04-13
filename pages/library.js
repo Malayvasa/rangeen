@@ -1,13 +1,11 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
+import { useSession } from '@supabase/auth-helpers-react';
 import SavedPalettes from '@/components/SavedPalettes';
-import { motion } from 'framer-motion';
 import LogIn from '@/components/LogIn';
 
 const Library = () => {
   const session = useSession();
-  const supabase = useSupabaseClient();
   const { push } = useRouter();
 
   useEffect(() => {
@@ -17,11 +15,11 @@ const Library = () => {
   }, [session]);
 
   return (
-    <div className="w-screen h-screen flex justify-center py-16">
+    <div className="flex justify-center bg-gray-100 min-h-screen">
       {!session ? (
         <LogIn />
       ) : (
-        <div className="h-full px-4 overflow-scroll">
+        <div className="h-full p-32">
           <SavedPalettes session={session} />
         </div>
       )}
