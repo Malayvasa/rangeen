@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
 import Color from 'color';
@@ -81,7 +82,8 @@ export default function SavedPalettes({ session }) {
           </div>
           {palettes.map((palette) => {
             return (
-              <div
+              <Link
+                href={`/palette/${palette.id}`}
                 key={palette.id}
                 className="flex items-center relative bg-white shadow-sm p-4 rounded-md md:gap-4"
               >
@@ -148,7 +150,7 @@ export default function SavedPalettes({ session }) {
                     ></path>
                   </svg>
                 </button>
-              </div>
+              </Link>
             );
           })}
         </div>

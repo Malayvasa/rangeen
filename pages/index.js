@@ -16,15 +16,7 @@ const Home = () => {
   const supabase = useSupabaseClient();
   const user = useUser();
   const [loading, setLoading] = useState(true);
-  const [randomNewPalette, setRandomNewPalette] = useState([
-    '#1eff85',
-    '#3af3ffdf',
-    '#1c18e6a3',
-    '#fa1eff',
-    '#ff813a',
-    '#ffeb3a',
-    '#ff3a3a',
-  ]);
+  const [randomNewPalette, setRandomNewPalette] = useState([]);
 
   async function addRandomPalette(randomNewPalette) {
     try {
@@ -92,6 +84,10 @@ const Home = () => {
   function notifyAddPalette() {
     toast.success('Added to your palettes');
   }
+
+  useEffect(() => {
+    generateRandomColors();
+  }, []);
 
   return (
     <div className="h-screen w-screen flex justify-center bg-gray-100 items-center  py-32 px-32">

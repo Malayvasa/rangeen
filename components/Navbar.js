@@ -16,7 +16,7 @@ export default function NavBar() {
 
   return (
     <div className="fixed z-20 top-0 w-screen flex h-max p-4">
-      <div className=" w-1/2 items-center justify-between rounded-full shadow-sm mx-auto top-0 h-12 pl-4 pr-2 bg-white flex z-20">
+      <div className="w-full md:w-1/2 items-center justify-between rounded-full shadow-sm mx-auto top-0 h-12 pl-4 pr-2 bg-white flex z-20">
         <div className="flex h-full justify-center items-center text-neutral-700">
           <div className="font-bold text-lg pr-4">रंगीन</div>
           <div className="h-full">
