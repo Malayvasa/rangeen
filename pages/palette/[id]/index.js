@@ -99,7 +99,10 @@ export default function Palette() {
                 let rgb = Color(color).rgb().array();
 
                 return (
-                  <div className="bg-white w-44 px-2 h-52 shadow-md">
+                  <div
+                    key={color}
+                    className="bg-white w-44 px-2 h-52 shadow-md"
+                  >
                     <div
                       className="w-full h-32 mt-2"
                       style={{ backgroundColor: color }}
