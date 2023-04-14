@@ -73,22 +73,24 @@ export default function SavedPalettes({ session }) {
       {loading ? (
         <></>
       ) : (
-        <div className="w-max flex flex-col gap-4">
+        <div className="w-full md:w-max flex flex-col gap-4">
           <div className="text-xl justify-between w-full tracking-tight flex mb-4">
             <div className="font-bold text-gray-500">
               Saved palettes ( {palettesCount} ){' '}
             </div>
-            <div className=" text-gray-300">{session.user.email}</div>
+            <div className="hidden md:block text-gray-300">
+              {session.user.email}
+            </div>
           </div>
           {palettes.map((palette) => {
             return (
               <Link
                 href={`/palette/${palette.id}`}
                 key={palette.id}
-                className="flex items-center relative bg-white shadow-sm p-4 rounded-md md:gap-4"
+                className=" gap-y-4 flex justify-center items-center relative bg-white shadow-sm p-4 rounded-md md:gap-4"
               >
                 {palette.type === 'colorgpt' && (
-                  <div className="flex justify-center gap-2 items-center text-blue-400 bg-blue-500/10 absolute rounded-full p-2 right-0 translate-x-[130%]">
+                  <div className="hidden md:visible md:flex justify-center gap-2 items-center text-blue-400 bg-blue-500/10 absolute rounded-full p-2 right-0 translate-x-[130%]">
                     <svg
                       width="24px"
                       height="24px"
@@ -127,7 +129,7 @@ export default function SavedPalettes({ session }) {
                   );
                 })}
                 <button
-                  className="bg-slate-200/20 w-max text-slate-400 rounded-md p-2 hover:bg-slate-800 hover:text-slate-100 transition-all duration-200"
+                  className="hidden md:block bg-slate-200/20 w-max text-slate-400 rounded-md p-2 hover:bg-slate-800 hover:text-slate-100 transition-all duration-200"
                   onClick={() => {
                     deletePalette(palette);
                   }}

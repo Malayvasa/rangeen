@@ -19,7 +19,7 @@ const Library = () => {
       {!session ? (
         <LogIn />
       ) : (
-        <div className="h-full p-32">
+        <div className="h-full w-full md:w-max px-4 py-20 md:p-32">
           <SavedPalettes session={session} />
         </div>
       )}

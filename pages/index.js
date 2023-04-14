@@ -90,10 +90,10 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="h-screen w-screen flex justify-center bg-gray-100 items-center  py-32 px-32">
-      <Toaster position="bottom-right" />
+    <div className="h-screen w-screen flex justify-center bg-gray-100 items-center px-4 py-4 md:px-32">
+      <Toaster position="bottom-center" />
 
-      <div className="bg-white rounded-3xl shadow-sm z-20 w-full h-full flex flex-col justify-center items-center">
+      <div className="bg-white rounded-3xl shadow-sm z-[10] w-full h-full flex flex-col justify-center items-center">
         {/* <motion.div className="font-bold text-8xl text-white mb-4 text-shadow mx-auto tracking-tighter z-20">
           रंगीन
         </motion.div> */}
@@ -101,7 +101,7 @@ const Home = () => {
           a home for your colors
         </motion.div> */}
         <motion.div className="flex flex-col justify-center items-center z-20  p-8 rounded-lg w-max gap-4">
-          <div className="flex gap-8">
+          <div className="grid grid-cols-2 md:flex gap-8">
             {randomNewPalette.map((color) => {
               return (
                 <div

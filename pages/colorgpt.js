@@ -162,14 +162,14 @@ const ColorGPT = () => {
   }, [session]);
 
   return (
-    <div className="h-screen w-screen flex justify-center bg-gray-100 items-center  py-32 px-32">
+    <div className="h-screen w-screen flex justify-center bg-gray-100 items-center p-4  md:py-32 md:px-32">
       <Toaster position="bottom-right" />
       {!session ? (
         <div className="pt-32">
           <LogIn />
         </div>
       ) : (
-        <div className="w-full bg-white h-full flex justify-center rounded-3xl pt-12">
+        <div className="w-full h-full bg-white flex-grow flex justify-center rounded-3xl pt-24 py-8 md:mt-0 md:py-12">
           <div className=" flex flex-col items-center justify-between ">
             <div className="flex gap-x-4 items-center border-[2px] rounded-full">
               <input
@@ -232,7 +232,7 @@ const ColorGPT = () => {
               ) : (
                 response.length > 0 && (
                   <div className="flex flex-col justify-center items-center">
-                    <div className="flex gap-4 rounded-md p-4">
+                    <div className="grid grid-cols-2 md:flex gap-4 rounded-md p-4">
                       {response.map((color) => {
                         return (
                           <div
