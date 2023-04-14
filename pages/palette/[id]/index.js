@@ -25,37 +25,38 @@ export default function Palette() {
     ],
     type: 'loading',
   });
+
   const pid = router.query.id;
 
-  async function getPalette(pid) {
-    try {
-      setLoading(true);
-
-      //   //convert id to signed 8bit integer
-      //   pid = parseInt(pid);
-
-      let { data, error, status } = await supabase
-        .from('palettes')
-        .select(`id,name, colors,type`)
-        .eq('id', pid);
-
-      if (error && status !== 406) {
-        throw error;
-      }
-
-      if (data) {
-        //combine name and colors into one object and set it to palettes
-        setPalette(data[0]);
-        console.log(data[0]);
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  }
-
   useEffect(() => {
+    async function getPalette(pid) {
+      try {
+        setLoading(true);
+
+        //   //convert id to signed 8bit integer
+        //   pid = parseInt(pid);
+
+        let { data, error, status } = await supabase
+          .from('palettes')
+          .select(`id,name, colors,type`)
+          .eq('id', pid);
+
+        if (error && status !== 406) {
+          throw error;
+        }
+
+        if (data) {
+          //combine name and colors into one object and set it to palettes
+          setPalette(data[0]);
+          console.log(data[0]);
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
     getPalette(pid);
   }, [pid]);
 
