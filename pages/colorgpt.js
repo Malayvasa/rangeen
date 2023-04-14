@@ -6,6 +6,7 @@ import {
   useSession,
   useSupabaseClient,
 } from '@supabase/auth-helpers-react';
+import Link from 'next/link';
 import LogIn from '@/components/LogIn';
 
 const ColorGPT = () => {
@@ -165,8 +166,48 @@ const ColorGPT = () => {
     <div className="h-screen w-screen flex justify-center bg-gray-100 items-center p-4  md:py-32 md:px-32">
       <Toaster position="bottom-right" />
       {!session ? (
-        <div className="pt-32">
-          <LogIn />
+        <div className="w-full h-full bg-white flex flex-col justify-center items-center rounded-3xl pt-24 py-8 md:mt-0 md:py-12">
+          <div className="mx-auto text-2xl mb-4 font-bold tracking-tight">
+            ColorGPT
+          </div>
+          <div className="mx-auto text-lg text-center leading-tight">
+            Use GPT to generate <br /> radiant color palettes
+          </div>
+          <div className="relative w-max bg-black">
+            <Link
+              href={'/login'}
+              className="bg-white shadow-xl cta top-1/2 flex items-center justify-center w-16 h-16 text-blue-500 rounded-full z-[20]"
+            >
+              <svg
+                width="32px"
+                height="32px"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                color="currentColor"
+              >
+                <path
+                  d="M3 21l10-10m5-5l-2.5 2.5"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M9.5 2l.945 2.555L13 5.5l-2.555.945L9.5 9l-.945-2.555L6 5.5l2.555-.945L9.5 2zM19 10l.54 1.46L21 12l-1.46.54L19 14l-.54-1.46L17 12l1.46-.54L19 10z"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
+            </Link>
+            <div className="blur-[25px] h-64 saturate-[200%] mt-8">
+              <div className="loader1 left-1/2 top-1/2 z-10 "></div>
+              <div className="loader2 left-1/2 top-1/2 z-10 "></div>
+              <div className="loader3 left-1/2 top-1/2 z-10 "></div>
+            </div>
+          </div>
         </div>
       ) : (
         <div className="w-full h-full bg-white flex-grow flex justify-center rounded-3xl pt-24 py-8 md:mt-0 md:py-12">

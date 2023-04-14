@@ -37,29 +37,23 @@ export default function NavBar() {
             ></div>
           </div>
 
-          {session ? (
-            <>
-              <div className="h-full">
-                <Link
-                  className={`tracking-tight flex items-center px-2 hover:bg-gray-950/5 h-full `}
-                  href="/colorgpt"
-                >
-                  ColorGPT
-                </Link>
-                <div
-                  //make bg blue if url is home page and transparent if not
+          <div className="h-full">
+            <Link
+              className={`tracking-tight flex items-center px-2 hover:bg-gray-950/5 h-full `}
+              href="/colorgpt"
+            >
+              ColorGPT
+            </Link>
+            <div
+              //make bg blue if url is home page and transparent if not
 
-                  className={`w-full h-[4px]  -mt-[2px] ${
-                    currentPage === '/colorgpt'
-                      ? 'bg-gray-500/20'
-                      : 'bg-transparent'
-                  }`}
-                ></div>
-              </div>
-            </>
-          ) : (
-            <></>
-          )}
+              className={`w-full h-[4px]  -mt-[2px] ${
+                currentPage === '/colorgpt'
+                  ? 'bg-gray-500/20'
+                  : 'bg-transparent'
+              }`}
+            ></div>
+          </div>
         </div>
 
         {session ? (

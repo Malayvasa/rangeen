@@ -131,6 +131,11 @@ body {
   text-shadow: 1px 5px 4px rgba(0, 0, 0, 0.2);
 }
 
+.cta {
+  translate: -50% -50%;
+  position: absolute;
+}
+
 .loader1 {
   translate: -50% -50%;
   position: absolute;
@@ -150,7 +155,7 @@ body {
 .loader2 {
   translate: -50% -50%;
   position: absolute;
-  width: 170px;
+  width: 150px;
   height: 150px;
   border-radius: 600px;
 
@@ -167,8 +172,8 @@ body {
 .loader3 {
   translate: -50% -50%;
   position: absolute;
-  width: 130px;
-  height: 160px;
+  width: 150px;
+  height: 150px;
   border-radius: 600px;
 
   background: radial-gradient(

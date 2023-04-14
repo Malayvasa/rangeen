@@ -93,7 +93,7 @@ export default function Palette() {
                 <div className="font-bold">Generated Using ColorGPT</div>
               </div>
             )}
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4 mt-4">
+            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
               {palette.colors.map((color) => {
                 //convert hex to rgb
                 let rgb = Color(color).rgb().array();

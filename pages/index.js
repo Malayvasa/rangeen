@@ -90,7 +90,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="h-screen w-screen flex justify-center bg-gray-100 items-center px-4 py-4 md:px-32">
+    <div className="h-screen w-screen flex justify-center bg-gray-100 items-center px-4 py-4 md:py-32 md:px-32">
       <Toaster position="bottom-center" />
 
       <div className="bg-white rounded-3xl shadow-sm z-[10] w-full h-full flex flex-col justify-center items-center">
