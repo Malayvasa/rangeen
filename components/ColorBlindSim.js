@@ -35,9 +35,8 @@ export default function ColorBlindSim({ hexColors, type }) {
         <div className="flex  gap-4">
           {colorBlindPalette.map((color) => {
             return (
-              <div>
+              <div key={color}>
                 <div
-                  key={color}
                   className="w-10 h-10 md:rounded-full"
                   style={{
                     backgroundColor: color,
