@@ -5,6 +5,7 @@ import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
 import { simulate } from '@bjornlu/colorblind';
 import Link from 'next/link';
 import ColorBlindSim from '@/components/ColorBlindSim';
+import Head from 'next/head';
 
 export default function Palette() {
   const router = useRouter();
@@ -16,6 +17,7 @@ export default function Palette() {
     colors: [],
     type: 'loading',
   });
+  const [colorParams, setColorParams] = useState('');
 
   const pid = router.query.id;
   const colorblindTypes = [
@@ -49,6 +51,16 @@ export default function Palette() {
           //combine name and colors into one object and set it to palettes
           console.log(data);
           setPalette(data[0]);
+
+          //example params ccd5ae-e9edc9-fefae0-faedcd-d4a373
+          //formatted params for og image from palette
+          const params = data[0].colors
+            .map((color) => {
+              return color.replace('#', '');
+            })
+            .join('-');
+
+          setColorParams(params);
         }
       } catch (error) {
         console.log(error);
@@ -63,6 +75,13 @@ export default function Palette() {
   return (
     !loading && (
       <div className="flex justify-center bg-gray-100 min-h-screen">
+        <Head>
+          //og image
+          <meta
+            property="og:image"
+            content={`https://rangeenpalettes.vercel.app//api/og?colors=${colorParams}`}
+          />
+        </Head>
         <div className="h-full py-32 md:p-32">
           <div className="flex flex-col gap-8 items-center justify-center">
             {palette.type === 'colorgpt' && (
