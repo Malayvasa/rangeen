@@ -35,9 +35,6 @@ export default function Palette() {
       try {
         setLoading(true);
 
-        //   //convert id to signed 8bit integer
-        //   pid = parseInt(pid);
-
         let { data, error, status } = await supabase
           .from('palettes')
           .select(`id,name, colors,type`)
@@ -48,12 +45,9 @@ export default function Palette() {
         }
 
         if (data) {
-          //combine name and colors into one object and set it to palettes
           console.log(data);
           setPalette(data[0]);
 
-          //example params ccd5ae-e9edc9-fefae0-faedcd-d4a373
-          //formatted params for og image from palette
           const params = data[0].colors
             .map((color) => {
               return color.replace('#', '');
