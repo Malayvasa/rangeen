@@ -67,7 +67,6 @@ export default function Palette() {
     !loading && (
       <div className="flex justify-center bg-gray-100 min-h-screen">
         <Head>
-          //og image
           <meta
             property="og:image"
             content={`https://rangeenpalettes.vercel.app//api/og?colors=${colorParams}`}
