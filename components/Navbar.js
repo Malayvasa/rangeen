@@ -60,7 +60,7 @@ export default function NavBar() {
           <div className="flex h-full gap-4">
             <div className="h-full">
               <Link
-                className={`tracking-tight flex items-center px-2 hover:bg-gray-950/5 h-full`}
+                className={`tracking-tight flex items-center mr-4 px-2 hover:bg-gray-950/5 h-full`}
                 href="/library"
               >
                 Library
@@ -68,35 +68,13 @@ export default function NavBar() {
               <div
                 //make bg blue if url is home page and transparent if not
 
-                className={`w-full h-[4px]  -mt-[2px] ${
+                className={`h-[4px] mx-auto mr-4 -mt-[2px] ${
                   currentPage === '/library'
                     ? 'bg-gray-500/20'
                     : 'bg-transparent'
                 }`}
               ></div>
             </div>
-            <button
-              className="button text-gray-600 pr-2"
-              onClick={() => supabase.auth.signOut()}
-            >
-              <svg
-                width="24px"
-                height="24px"
-                stroke-width="1.5"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-                color="currentColor"
-              >
-                <path
-                  d="M12 12h7m0 0l-3 3m3-3l-3-3M19 6V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2v-1"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                ></path>
-              </svg>
-            </button>
           </div>
         ) : (
           <div>

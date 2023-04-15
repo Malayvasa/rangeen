@@ -9,6 +9,11 @@
   dependencies:
     "regenerator-runtime" "^0.13.11"
 
+"@bjornlu/colorblind@^1.0.3":
+  "integrity" "sha512-RG9W0BuFib5xN19R4U1dFK7s26+UPiJqHdwqawpvH7sywXJ6zc37onPpRpnFP0aNuKLhhmuitqPAXxLxOA+HgQ=="
+  "resolved" "https://registry.npmjs.org/@bjornlu/colorblind/-/colorblind-1.0.3.tgz"
+  "version" "1.0.3"
+
 "@emotion/is-prop-valid@^0.8.2":
   "integrity" "sha512-u5WtneEAr5IDG2Wv65yhunPSMLIpuKsbuOktRojfrEiEvRyC85LgPMZI63cr7NUqT8ZIGdSVg8ZKGxIug4lXcA=="
   "resolved" "https://registry.npmjs.org/@emotion/is-prop-valid/-/is-prop-valid-0.8.8.tgz"

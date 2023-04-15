@@ -70,27 +70,30 @@ export default function SavedPalettes({ session }) {
 
   return (
     <div>
-      {loading ? (
-        <></>
-      ) : (
-        <div className="w-full md:w-max flex flex-col gap-4">
-          <div className="text-xl justify-between w-full tracking-tight flex mb-4">
-            <div className="font-bold text-gray-500">
-              Saved palettes ( {palettesCount} ){' '}
-            </div>
-            <div className="hidden md:block text-gray-300">
-              {session.user.email}
-            </div>
+      <div className="w-full md:w-full flex flex-col gap-4">
+        <div className="text-xl justify-between w-full tracking-tight flex mb-4">
+          <div className="flex gap-2 items-center justify-center font-bold text-gray-500">
+            Saved palettes
+            {loading ? (
+              <div className="text-sm ml-2 text-gray-300">Loading</div>
+            ) : (
+              <div>({palettesCount})</div>
+            )}
           </div>
-          {palettes.map((palette) => {
-            return (
+          <div className="hidden md:block text-gray-300">
+            {session.user.email}
+          </div>
+        </div>
+        {palettes.map((palette) => {
+          return (
+            <div className="flex">
               <Link
                 href={`/palette/${palette.id}`}
                 key={palette.id}
                 className=" gap-y-4 flex justify-center items-center relative bg-white shadow-sm p-4 rounded-md md:gap-4"
               >
                 {palette.type === 'colorgpt' && (
-                  <div className="hidden md:visible md:flex justify-center gap-2 items-center text-blue-400 bg-blue-500/10 absolute rounded-full p-2 right-0 translate-x-[130%]">
+                  <div className="hidden md:visible md:flex justify-center gap-2 items-center text-blue-700 bg-blue-500/10 absolute rounded-full p-2 left-0 -translate-x-[130%]">
                     <svg
                       width="24px"
                       height="24px"
@@ -128,35 +131,35 @@ export default function SavedPalettes({ session }) {
                     ></div>
                   );
                 })}
-                <button
-                  className="hidden md:block bg-slate-200/20 w-max text-slate-400 rounded-md p-2 hover:bg-slate-800 hover:text-slate-100 transition-all duration-200"
-                  onClick={() => {
-                    deletePalette(palette);
-                  }}
-                >
-                  <svg
-                    width="18px"
-                    height="18px"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    color="currentColor"
-                  >
-                    <path
-                      d="M20 9l-1.995 11.346A2 2 0 0116.035 22h-8.07a2 2 0 01-1.97-1.654L4 9M21 6h-5.625M3 6h5.625m0 0V4a2 2 0 012-2h2.75a2 2 0 012 2v2m-6.75 0h6.75"
-                      stroke="currentColor"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    ></path>
-                  </svg>
-                </button>
               </Link>
-            );
-          })}
-        </div>
-      )}
+              <button
+                className="hidden md:block bg-slate-200/20 w-max text-slate-400 rounded-md p-2 hover:bg-slate-800 hover:text-slate-100 transition-all duration-200"
+                onClick={() => {
+                  deletePalette(palette);
+                }}
+              >
+                <svg
+                  width="18px"
+                  height="18px"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  color="currentColor"
+                >
+                  <path
+                    d="M20 9l-1.995 11.346A2 2 0 0116.035 22h-8.07a2 2 0 01-1.97-1.654L4 9M21 6h-5.625M3 6h5.625m0 0V4a2 2 0 012-2h2.75a2 2 0 012 2v2m-6.75 0h6.75"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

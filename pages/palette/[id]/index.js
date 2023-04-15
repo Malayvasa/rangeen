@@ -1,8 +1,10 @@
 import { useRouter } from 'next/router';
-import Color from 'color';
+import Color, { rgb } from 'color';
 import { useState, useEffect } from 'react';
 import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
+import { simulate } from '@bjornlu/colorblind';
 import Link from 'next/link';
+import ColorBlindSim from '@/components/ColorBlindSim';
 
 export default function Palette() {
   const router = useRouter();
@@ -11,22 +13,20 @@ export default function Palette() {
   const [palette, setPalette] = useState({
     id: 0,
     name: 'Loading...',
-    colors: [
-      '#000000',
-      '#000000',
-      '#000000',
-      '#000000',
-      '#000000',
-      '#000000',
-      '#000000',
-      '#000000',
-      '#000000',
-      '#000000',
-    ],
+    colors: [],
     type: 'loading',
   });
 
   const pid = router.query.id;
+  const colorblindTypes = [
+    'protanopia',
+
+    'deuteranopia',
+
+    'tritanopia',
+
+    'achromatopsia',
+  ];
 
   useEffect(() => {
     async function getPalette(pid) {
@@ -47,8 +47,8 @@ export default function Palette() {
 
         if (data) {
           //combine name and colors into one object and set it to palettes
+          console.log(data);
           setPalette(data[0]);
-          console.log(data[0]);
         }
       } catch (error) {
         console.log(error);
@@ -120,6 +120,45 @@ export default function Palette() {
               })}
             </div>
           </div>
+          <div className="mt-16 mb-8 font-bold mx-auto w-max tracking-tight text-3xl">
+            Colorblind Simulations
+          </div>
+          {palette.colors.length > 0 && (
+            <div className="flex flex-col gap-4 mx-auto w-max">
+              <div className="bg-white flex flex-col gap-2 shadow-sm p-4 rounded-md w-max ">
+                <div className="text-lg font-bold tracking-tight mb-2 mx-auto capitalize text-neutral-400">
+                  Typical Vision
+                </div>
+                <div className="flex  gap-4">
+                  {palette.colors.map((color) => {
+                    return (
+                      <div>
+                        <div
+                          key={color}
+                          className="w-10 h-10 md:rounded-full"
+                          style={{
+                            backgroundColor: color,
+                          }}
+                        ></div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              {
+                //loop through colorblind types and simulate colorblindness
+                colorblindTypes.map((type) => {
+                  return (
+                    <ColorBlindSim
+                      key={type}
+                      type={type}
+                      hexColors={palette.colors}
+                    />
+                  );
+                })
+              }
+            </div>
+          )}
         </div>
       </div>
     )

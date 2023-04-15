@@ -8,12 +8,6 @@ const Library = () => {
   const session = useSession();
   const { push } = useRouter();
 
-  useEffect(() => {
-    if (!session) {
-      push('/login');
-    }
-  }, [session]);
-
   return (
     <div className="flex justify-center bg-gray-100 min-h-screen">
       {!session ? (
