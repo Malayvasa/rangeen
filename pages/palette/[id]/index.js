@@ -108,7 +108,6 @@ export default function Palette() {
             )}
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
               {palette.colors.map((color) => {
-                //convert hex to rgb
                 let rgb = Color(color).rgb().array();
 
                 return (
@@ -157,18 +156,15 @@ export default function Palette() {
                   })}
                 </div>
               </div>
-              {
-                //loop through colorblind types and simulate colorblindness
-                colorblindTypes.map((type) => {
-                  return (
-                    <ColorBlindSim
-                      key={type}
-                      type={type}
-                      hexColors={palette.colors}
-                    />
-                  );
-                })
-              }
+              {colorblindTypes.map((type) => {
+                return (
+                  <ColorBlindSim
+                    key={type}
+                    type={type}
+                    hexColors={palette.colors}
+                  />
+                );
+              })}
             </div>
           )}
         </div>
