@@ -22,11 +22,8 @@ export default function Palette() {
   const pid = router.query.id;
   const colorblindTypes = [
     'protanopia',
-
     'deuteranopia',
-
     'tritanopia',
-
     'achromatopsia',
   ];
 
