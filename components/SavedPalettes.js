@@ -86,10 +86,9 @@ export default function SavedPalettes({ session }) {
         </div>
         {palettes.map((palette) => {
           return (
-            <div className="flex">
+            <div className="flex" key={palette.id}>
               <Link
                 href={`/palette/${palette.id}`}
-                key={palette.id}
                 className=" gap-y-4 flex justify-center items-center relative bg-white shadow-sm p-4 rounded-md md:gap-4"
               >
                 {palette.type === 'colorgpt' && (

@@ -132,9 +132,8 @@ export default function Palette() {
                 <div className="flex  gap-4">
                   {palette.colors.map((color) => {
                     return (
-                      <div>
+                      <div key={color}>
                         <div
-                          key={color}
                           className="w-10 h-10 md:rounded-full"
                           style={{
                             backgroundColor: color,
