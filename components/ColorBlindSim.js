@@ -28,8 +28,8 @@ export default function ColorBlindSim({ hexColors, type }) {
 
   return (
     <>
-      <div className="bg-white flex flex-col gap-2 shadow-sm p-4 rounded-md w-max ">
-        <div className="text-lg font-bold tracking-tight mb-2 mx-auto capitalize text-neutral-400">
+      <div className="bg-white relative flex flex-col gap-2 shadow-sm p-4 rounded-md w-max ">
+        <div className="text-lg absolute top-1/2 -translate-x-40 bg-neutral-800/10 p-2 rounded-full -translate-y-[50%] left-0 font-bold tracking-tight mb-2 mx-auto capitalize text-neutral-400">
           {type}
         </div>
         <div className="flex  gap-4">

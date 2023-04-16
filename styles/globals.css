@@ -8,6 +8,7 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --image: url('https://i.scdn.co/image/ab67616d00001e02a048415db06a5b6fa7ec4e1a');
 
   /* add ten new variables for the background gradient*/
   --background1-hex: #1eff85;
@@ -32,6 +33,37 @@
 body {
   background-color: white;
   font-family: 'Manrope', sans-serif;
+}
+
+.rainbow {
+  fill: linear-gradient(
+      rgba(255, 0, 0, 1) 0%,
+      rgba(255, 154, 0, 1) 10%,
+      rgba(208, 222, 33, 1) 20%,
+      rgba(79, 220, 74, 1) 30%,
+      rgba(63, 218, 216, 1) 40%,
+      rgba(47, 201, 226, 1) 50%,
+      rgba(28, 127, 238, 1) 60%,
+      rgba(95, 21, 242, 1) 70%,
+      rgba(186, 12, 248, 1) 80%,
+      rgba(251, 7, 217, 1) 90%,
+      rgba(255, 0, 0, 1) 100%
+    )
+    0 0/100% 200%;
+  animation: a 2s linear infinite;
+}
+
+@keyframes a {
+  to {
+    background-position: 0 -200%;
+  }
+}
+
+.albumImage {
+  background-image: var(--image);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .circle0 {

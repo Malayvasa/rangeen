@@ -3,6 +3,7 @@ import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import HeaderLogo from './Header_Logo';
 
 export default function NavBar() {
   const session = useSession();
@@ -15,16 +16,20 @@ export default function NavBar() {
   }, [router.pathname]);
 
   return (
-    <div className="fixed z-20 top-0 w-screen flex h-max p-4">
-      <div className="w-full md:w-1/2 items-center justify-between rounded-full shadow-sm mx-auto top-0 h-12 pl-4 pr-2 bg-white flex z-20">
-        <div className="flex h-full justify-center items-center text-neutral-700">
-          <div className="font-bold text-lg pr-4">रंगीन</div>
+    <div className="fixed z-20 top-0 w-screen flex h-max p-8 pt-10">
+      <div className="w-full md:w-1/2 items-center font-bold justify-between rounded-full shadow-sm mx-auto top-0 h-12 px-4 pr-4  bg-white flex z-20">
+        <div className="flex h-full justify-center items-center text-neutral-600">
+          <div className="font-bold text-lg h-full">
+            <Link href={'/'}>
+              <HeaderLogo />
+            </Link>
+          </div>
           <div className="h-full">
             {' '}
             <Link
               //if url is home page add a bottom border
               className={`tracking-tight flex items-center px-2 hover:bg-gray-950/5 h-full`}
-              href="/"
+              href="/randomizer"
             >
               Randomizer
             </Link>
@@ -32,7 +37,9 @@ export default function NavBar() {
               //make bg blue if url is home page and transparent if not
 
               className={`w-full h-[4px]  -mt-[2px] ${
-                currentPage === '/' ? 'bg-gray-500/20' : 'bg-transparent'
+                currentPage === '/randomizer'
+                  ? 'bg-gray-500/20'
+                  : 'bg-transparent'
               }`}
             ></div>
           </div>
@@ -54,13 +61,30 @@ export default function NavBar() {
               }`}
             ></div>
           </div>
+          <div className="h-full">
+            <Link
+              className={`tracking-tight flex items-center px-2 hover:bg-gray-950/5 h-full `}
+              href="/album_art"
+            >
+              Album Art
+            </Link>
+            <div
+              //make bg blue if url is home page and transparent if not
+
+              className={`w-full h-[4px]  -mt-[2px] ${
+                currentPage === '/album_art'
+                  ? 'bg-gray-500/20'
+                  : 'bg-transparent'
+              }`}
+            ></div>
+          </div>
         </div>
 
         {session ? (
           <div className="flex h-full gap-4">
             <div className="h-full">
               <Link
-                className={`tracking-tight flex items-center mr-4 px-2 hover:bg-gray-950/5 h-full`}
+                className={`tracking-tight flex items-center px-2 hover:bg-gray-950/5 h-full`}
                 href="/library"
               >
                 Library
@@ -68,7 +92,7 @@ export default function NavBar() {
               <div
                 //make bg blue if url is home page and transparent if not
 
-                className={`h-[4px] mx-auto mr-4 -mt-[2px] ${
+                className={`h-[4px] mx-auto -mt-[2px] ${
                   currentPage === '/library'
                     ? 'bg-gray-500/20'
                     : 'bg-transparent'
