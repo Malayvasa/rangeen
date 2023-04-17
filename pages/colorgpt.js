@@ -105,7 +105,7 @@ const ColorGPT = () => {
     setResponse('');
     setIsLoading(true);
 
-    const prompt = `generate a color palette (in accrod with modern color theory) with 10 hex codes based on the mood: ${mood} ,uniquely name each color accordingly, format the response as a JSON and only return the JSON, the JSON should have two parameters, name and hex and the entire list should be inside colorPalette. Response :`;
+    const prompt = `You are colorGPT an expert in color theory and curation, generate a color palette with 10 hex codes based on the prompt: ${mood} ,uniquely name each color accordingly, format the response as a JSON and only return the JSON, the JSON should have two parameters, name and hex and the entire list should be inside colorPalette. Response :`;
 
     const response = await fetch('/api/openai', {
       method: 'POST',
