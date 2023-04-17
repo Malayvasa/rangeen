@@ -155,7 +155,7 @@ export default function ExportModal({ hexList, children }) {
                 </svg>
               </div>
               SVG Palette
-              <div className="flex font-bold items-center gap-1 absolute mr-4 right-0 bg-amber-50 text-amber-400 text-center p-1 rounded-md text-xs w-max">
+              <div className="flex items-center gap-1 absolute mr-4 right-0 bg-amber-50 text-amber-400 text-center p-1 rounded-md text-xs w-max">
                 <div>
                   <svg
                     width="22px"

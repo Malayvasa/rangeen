@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,400;0,600;0,900;1,400;1,600;1,900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -32,7 +32,7 @@
 
 body {
   background-color: white;
-  font-family: 'Manrope', sans-serif;
+  font-family: 'Epilogue', sans-serif;
 }
 
 .rainbow {
@@ -126,6 +126,55 @@ body {
   animation: rotate 18s linear infinite;
 }
 
+.herocircle1 {
+  translate: -50% 0%;
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 600px;
+  mix-blend-mode: overlay;
+  background: radial-gradient(
+    circle at right,
+    var(--background1-hex) 0%,
+    var(--background2-hex) 37.9%,
+    rgba(255, 255, 255, 0) 66.67%
+  );
+  animation: rotate 15s linear infinite;
+}
+
+.herocircle2 {
+  translate: -50% 0%;
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 600px;
+
+  background: radial-gradient(
+    circle at right,
+    rgba(250, 30, 255, 0) 0%,
+    var(--background3-hex) 0.01%,
+    var(--background4-hex) 18.23%,
+    rgba(255, 255, 255, 0) 66.67%
+  );
+  animation: rotateinv 20s linear infinite;
+}
+
+.herocircle3 {
+  translate: -50% 0%;
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 600px;
+
+  background: radial-gradient(
+    86.86% 86.86% at 33.13% 1.99%,
+    rgba(255, 255, 255, 0) 45.83%,
+    var(--background5-hex) 92.71%,
+    var(--background6-hex) 100%
+  );
+  animation: rotate 18s linear infinite;
+}
+
 @media only screen and (max-width: 600px) {
   .circle1 {
     width: 900px;
@@ -204,6 +253,49 @@ body {
 .loader3 {
   translate: -50% -50%;
   position: absolute;
+  width: 150px;
+  height: 150px;
+  border-radius: 600px;
+
+  background: radial-gradient(
+    86.86% 86.86% at 33.13% 1.99%,
+    rgba(255, 255, 255, 0) 45.83%,
+    #ff813a 92.71%,
+    #ffeb3a 100%
+  );
+  animation: rotate 9s linear infinite;
+}
+
+.heroloader1 {
+  width: 150px;
+  height: 150px;
+  border-radius: 600px;
+  mix-blend-mode: overlay;
+  background: radial-gradient(
+    circle at right,
+    #1eff85 0%,
+    rgba(58, 243, 255, 0.874892) 37.9%,
+    rgba(255, 255, 255, 0) 66.67%
+  );
+  animation: rotate 8s linear infinite;
+}
+
+.heroloader2 {
+  width: 150px;
+  height: 150px;
+  border-radius: 600px;
+
+  background: radial-gradient(
+    circle at right,
+    rgba(250, 30, 255, 0) 0%,
+    rgba(28, 24, 230, 0.64) 0.01%,
+    #fa1eff 18.23%,
+    rgba(255, 255, 255, 0) 66.67%
+  );
+  animation: rotateinv 5s linear infinite;
+}
+
+.heroloader3 {
   width: 150px;
   height: 150px;
   border-radius: 600px;

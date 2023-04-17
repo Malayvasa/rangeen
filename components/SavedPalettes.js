@@ -77,7 +77,7 @@ export default function SavedPalettes({ session }) {
     <div>
       <div className="w-full md:w-full flex flex-col gap-4">
         <div className="text-xl justify-between w-full tracking-tight flex mb-4">
-          <div className="flex gap-2 items-center justify-center font-bold text-gray-500">
+          <div className="flex gap-2 items-center justify-center font-semibold text-gray-500">
             Saved palettes
             {loading ? (
               <div className="text-sm ml-2 text-gray-300">Loading</div>
