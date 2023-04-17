@@ -68,18 +68,18 @@ const Randomizer = () => {
     });
 
     setRandomNewPalette(randomColors);
-    //use the first six colors to change the css root variables
-    let root = document.documentElement;
-    root.style.setProperty('--background1-hex', randomColors[0]);
-    root.style.setProperty('--background2-hex', randomColors[1]);
-    root.style.setProperty('--background3-hex', randomColors[2]);
-    root.style.setProperty('--background4-hex', randomColors[3]);
-    root.style.setProperty('--background5-hex', randomColors[4]);
-    root.style.setProperty('--background6-hex', randomColors[5]);
-    root.style.setProperty('--background7-hex', randomColors[6]);
-    root.style.setProperty('--background8-hex', randomColors[7]);
-    root.style.setProperty('--background9-hex', randomColors[8]);
-    root.style.setProperty('--background10-hex', randomColors[9]);
+    // //use the first six colors to change the css root variables
+    // let root = document.documentElement;
+    // root.style.setProperty('--background1-hex', randomColors[0]);
+    // root.style.setProperty('--background2-hex', randomColors[1]);
+    // root.style.setProperty('--background3-hex', randomColors[2]);
+    // root.style.setProperty('--background4-hex', randomColors[3]);
+    // root.style.setProperty('--background5-hex', randomColors[4]);
+    // root.style.setProperty('--background6-hex', randomColors[5]);
+    // root.style.setProperty('--background7-hex', randomColors[6]);
+    // root.style.setProperty('--background8-hex', randomColors[7]);
+    // root.style.setProperty('--background9-hex', randomColors[8]);
+    // root.style.setProperty('--background10-hex', randomColors[9]);
   }
 
   function notifyAddPalette() {

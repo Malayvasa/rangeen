@@ -18,12 +18,12 @@ export default function NavBar() {
   return (
     <div className="fixed z-20 top-0 w-screen flex h-max px-4 pt-10">
       <div className="w-full md:w-3/4 items-center font-semibold justify-between rounded-full shadow-lg mx-auto top-0 h-12 px-4 pr-4  bg-white flex z-20">
-        <div className="flex h-full justify-center items-center text-neutral-600">
-          <div className="font-bold text-lg h-full">
-            <Link href={'/'}>
-              <HeaderLogo />
-            </Link>
-          </div>
+        <div className="font-bold text-lg h-full">
+          <Link href={'/'}>
+            <HeaderLogo />
+          </Link>
+        </div>
+        <div className=" hidden md:flex h-full justify-center items-center text-neutral-600">
           <div className="h-full">
             {' '}
             <Link

@@ -163,204 +163,228 @@ const AlbumArt = () => {
   return (
     <div className="h-screen w-screen flex justify-center bg-gray-100 items-center  md:py-32 md:px-32">
       <Toaster position="bottom-right" />
-      <div className="w-full h-full bg-white flex flex-row justify-center items-center rounded-3xl py-8 md:mt-0 md:pl-12">
-        <div className="flex flex-col h-72 gap-4 justify-center items-center">
-          <div className="flex flex-col rounded-3xl border-2 border-black border-opacity-10">
-            <div className="flex flex-row gap-2 w-full text-black/40 placeholder-black placeholder-opacity-40 rounded-t-3xl outline-none p-2 md:p-2">
-              <div className="opacity-40">
-                <svg
-                  width="32px"
-                  height="32px"
-                  stroke-width="1.5"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                  color="#000"
-                >
-                  <path
-                    d="M15.5 15.5L19 19M5 11a6 6 0 1012 0 6 6 0 00-12 0z"
-                    stroke="#000"
+      {session ? (
+        <div className="w-full h-full bg-white flex flex-row justify-center items-center rounded-3xl py-8 md:mt-0 md:pl-12">
+          <div className="flex flex-col h-72 gap-4 justify-center items-center">
+            <div className="flex flex-col rounded-3xl border-2 border-black border-opacity-10">
+              <div className="flex flex-row gap-2 w-full text-black/40 placeholder-black placeholder-opacity-40 rounded-t-3xl outline-none p-2 md:p-2">
+                <div className="opacity-40">
+                  <svg
+                    width="32px"
+                    height="32px"
                     stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  ></path>
-                </svg>
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    color="#000"
+                  >
+                    <path
+                      d="M15.5 15.5L19 19M5 11a6 6 0 1012 0 6 6 0 00-12 0z"
+                      stroke="#000"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </svg>
+                </div>
+                <input
+                  className="bg-transparent outline-none w-full text-black placeholder-black placeholder-opacity-80"
+                  placeholder={`Search for an album`}
+                  autoComplete="off"
+                  id="search"
+                  value={searchString}
+                  onChange={(e) => {
+                    setSearchString(e.target.value);
+                  }}
+                />
               </div>
-              <input
-                className="bg-transparent outline-none w-full text-black placeholder-black placeholder-opacity-80"
-                placeholder={`Search for an album`}
-                autoComplete="off"
-                id="search"
-                value={searchString}
-                onChange={(e) => {
-                  setSearchString(e.target.value);
-                }}
-              />
-            </div>
-            <div className=" max-w-[300px] w-96 ">
-              {albums.length > 0 && (
-                <motion.div
-                  initial={{ opacity: 0, height: 'auto' }}
-                  animate={{ opacity: 1, height: 'auto' }}
-                  key={albums}
-                  className="border-t-2 border-black border-opacity-10 flex flex-col w-full max-h-72 overflow-y-scroll"
-                >
-                  {albums.map((album, key) => (
-                    <div
-                      key={key}
-                      onClick={() => {
-                        handleAlbumSelect(album);
-                      }}
-                      className="cursor-pointer group py-2 px-4 flex flex-row max-w-[300px] w-96 items-center hover:bg-opacity-5"
-                    >
-                      <img
-                        src={album.images[2].url}
-                        width={50}
-                        height={50}
-                        className=" opacity-60 group-hover:opacity-100"
-                      />
-                      <div className="ml-4 text-sm text-black text-opacity-40 group-hover:text-opacity-80">
-                        {album.name}
+              <div className=" max-w-[300px] w-96 ">
+                {albums.length > 0 && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 'auto' }}
+                    animate={{ opacity: 1, height: 'auto' }}
+                    key={albums}
+                    className="border-t-2 border-black border-opacity-10 flex flex-col w-full max-h-72 overflow-y-scroll"
+                  >
+                    {albums.map((album, key) => (
+                      <div
+                        key={key}
+                        onClick={() => {
+                          handleAlbumSelect(album);
+                        }}
+                        className="cursor-pointer group py-2 px-4 flex flex-row max-w-[300px] w-96 items-center hover:bg-opacity-5"
+                      >
+                        <img
+                          src={album.images[2].url}
+                          width={50}
+                          height={50}
+                          className=" opacity-60 group-hover:opacity-100"
+                        />
+                        <div className="ml-4 text-sm text-black text-opacity-40 group-hover:text-opacity-80">
+                          {album.name}
+                        </div>
                       </div>
+                    ))}
+                  </motion.div>
+                )}
+              </div>
+            </div>
+            <div>
+              {selectedAlbum && (
+                <div className="bg-gray-50 flex flex-col items-center p-4 rounded-md">
+                  <motion.div
+                    initial={{
+                      y: 20,
+                      opacity: 0,
+                    }}
+                    animate={{
+                      y: 0,
+                      opacity: 1,
+                    }}
+                    exit={{
+                      y: -20,
+                      opacity: 0,
+                    }}
+                    transition={{ duration: 0.3 }}
+                    key={selectedAlbum.name}
+                    id="albumPreview"
+                    className="z-10  shadow-sm albumImage w-[150px] aspect-square"
+                  ></motion.div>
+                  <div className=" flex flex-col text-center mt-2 h-8 justify-center items-center">
+                    <div className="text-black text-opacity-40 w-24 text-sm truncate">
+                      {selectedAlbum.name}
                     </div>
-                  ))}
-                </motion.div>
+                  </div>
+                </div>
               )}
             </div>
           </div>
           <div>
             {selectedAlbum && (
-              <div className="bg-gray-50 flex flex-col items-center p-4 rounded-md">
-                <motion.div
-                  initial={{
-                    y: 20,
-                    opacity: 0,
+              <>
+                <ColorExtractor
+                  maxColors={10}
+                  src={selectedAlbum.images[0].url}
+                  getColors={setColors}
+                ></ColorExtractor>
+              </>
+            )}
+          </div>
+          <div className="px-32 flex justify-center items-center">
+            {generated ? (
+              <div className="flex flex-col items-center justify-center">
+                <div className="flex flex-row gap-4">
+                  {colors.map((color) => {
+                    return (
+                      <div
+                        key={color.name}
+                        className="group w-16 flex flex-col items-center gap-2"
+                      >
+                        <div
+                          className="w-12 h-12 rounded-full"
+                          style={{ backgroundColor: color }}
+                        ></div>
+                        <div className=" text-transparent group-hover:text-gray-300 transition-all duration-200">
+                          {color}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <div
+                  onClick={() => {
+                    addSpotifyPalette();
+                    notifyAddPalette();
                   }}
-                  animate={{
-                    y: 0,
-                    opacity: 1,
-                  }}
-                  exit={{
-                    y: -20,
-                    opacity: 0,
-                  }}
-                  transition={{ duration: 0.3 }}
-                  key={selectedAlbum.name}
-                  id="albumPreview"
-                  className="z-10  shadow-sm albumImage w-[150px] aspect-square"
-                ></motion.div>
-                <div className=" flex flex-col text-center mt-2 h-8 justify-center items-center">
-                  <div className="text-black text-opacity-40 w-24 text-sm truncate">
-                    {selectedAlbum.name}
-                  </div>
+                  className="h-max w-max bg-slate-500/5 text-slate-500 rounded-md p-4 hover:bg-slate-800 hover:text-slate-100 transition-all duration-200"
+                >
+                  Save Palette
                 </div>
               </div>
+            ) : (
+              <>
+                {!generating && (
+                  <button>
+                    <div
+                      onClick={() => {
+                        startGenerating();
+                      }}
+                      className="h-max flex gap-2 w-max bg-slate-500/5 text-slate-500 rounded-md p-4 hover:bg-slate-800 hover:text-slate-100 transition-all duration-200"
+                    >
+                      <svg
+                        width="24px"
+                        height="24px"
+                        stroke-width="1.5"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        color="currentColor"
+                      >
+                        <path
+                          d="M12 14.5a6 6 0 100-12 6 6 0 000 12z"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                        <path
+                          d="M16 21.5a6 6 0 100-12 6 6 0 000 12z"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                        <path
+                          d="M8 21.5a6 6 0 100-12 6 6 0 000 12z"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                      </svg>
+                      Generate Palette
+                    </div>
+                  </button>
+                )}
+              </>
+            )}
+            {generating ? (
+              <>
+                <div className="blur-[15px] saturate-[200%] mt-8">
+                  <div className="loader1 left-1/2 top-1/2 z-10 "></div>
+                  <div className="loader2 left-1/2 top-1/2 z-10 "></div>
+                  <div className="loader3 left-1/2 top-1/2 z-10 "></div>
+                </div>
+              </>
+            ) : (
+              <></>
             )}
           </div>
         </div>
-        <div>
-          {selectedAlbum && (
-            <>
-              <ColorExtractor
-                maxColors={10}
-                src={selectedAlbum.images[0].url}
-                getColors={setColors}
-              ></ColorExtractor>
-            </>
-          )}
-        </div>
-        <div className="flex-grow flex justify-center items-center">
-          {generated ? (
-            <div className="flex flex-col items-center justify-center">
-              <div className="flex flex-row gap-4">
-                {colors.map((color) => {
-                  return (
-                    <div
-                      key={color.name}
-                      className="group w-16 flex flex-col items-center gap-2"
-                    >
-                      <div
-                        className="w-12 h-12 rounded-full"
-                        style={{ backgroundColor: color }}
-                      ></div>
-                      <div className=" text-transparent group-hover:text-gray-300 transition-all duration-200">
-                        {color}
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
-
-              <div
-                onClick={() => {
-                  addSpotifyPalette();
-                  notifyAddPalette();
-                }}
-                className="h-max w-max bg-slate-500/5 text-slate-500 rounded-md p-4 hover:bg-slate-800 hover:text-slate-100 transition-all duration-200"
-              >
-                Save Palette
-              </div>
+      ) : (
+        <div className="w-full h-full bg-white flex flex-col justify-center items-center rounded-3xl pt-24 py-8 md:mt-0 md:py-12">
+          <div className="mx-auto text-2xl mb-4 font-bold tracking-tight">
+            Album Art
+          </div>
+          <div className="mx-auto text-lg text-center leading-tight">
+            Convert your fav album artworks to <br /> radiant color palettes
+          </div>
+          <div className="relative w-max bg-black">
+            <Link
+              href={'/login'}
+              className="bg-white shadow-sm cta top-1/2 flex items-center justify-center w-64 h-16 text-blue-500 rounded-full z-[20]"
+            >
+              <div>Choose Album</div>
+            </Link>
+            <div className="blur-[25px] h-64 saturate-[200%] mt-8">
+              <div className="loader1 left-1/2 top-1/2 z-10 "></div>
+              <div className="loader2 left-1/2 top-1/2 z-10 "></div>
+              <div className="loader3 left-1/2 top-1/2 z-10 "></div>
             </div>
-          ) : (
-            <>
-              {!generating && (
-                <button>
-                  <div
-                    onClick={() => {
-                      startGenerating();
-                    }}
-                    className="h-max flex gap-2 w-max bg-slate-500/5 text-slate-500 rounded-md p-4 hover:bg-slate-800 hover:text-slate-100 transition-all duration-200"
-                  >
-                    <svg
-                      width="24px"
-                      height="24px"
-                      stroke-width="1.5"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      color="currentColor"
-                    >
-                      <path
-                        d="M12 14.5a6 6 0 100-12 6 6 0 000 12z"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      ></path>
-                      <path
-                        d="M16 21.5a6 6 0 100-12 6 6 0 000 12z"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      ></path>
-                      <path
-                        d="M8 21.5a6 6 0 100-12 6 6 0 000 12z"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      ></path>
-                    </svg>
-                    Generate Palette
-                  </div>
-                </button>
-              )}
-            </>
-          )}
-          {generating ? (
-            <>
-              <div className="blur-[15px] saturate-[200%] mt-8">
-                <div className="loader1 left-1/2 top-1/2 z-10 "></div>
-                <div className="loader2 left-1/2 top-1/2 z-10 "></div>
-                <div className="loader3 left-1/2 top-1/2 z-10 "></div>
-              </div>
-            </>
-          ) : (
-            <></>
-          )}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

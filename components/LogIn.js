@@ -8,7 +8,7 @@ export default function LogIn() {
   const supabase = useSupabaseClient();
 
   return (
-    <div className="w-[400px] flex flex-col m-auto">
+    <div className="w-[400px] overscroll-none flex flex-col m-auto">
       <motion.div
         initial={{ y: 0, opacity: 0, rotate: 270 }}
         animate={{ y: 0, opacity: 1, rotate: 0 }}
@@ -43,7 +43,7 @@ export default function LogIn() {
           stiffness: 40,
           tween: 'easeOut',
         }}
-        className="text-center font-bold text-xl tracking-tight leading-tight text-white/60 mb-16 mx-auto z-20"
+        className="text-center font-semibold text-xl tracking-tight leading-tight text-white/60 mb-16 mx-auto z-20"
       >
         a home for your colors
       </motion.div>

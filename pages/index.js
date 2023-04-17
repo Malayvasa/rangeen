@@ -135,7 +135,7 @@ const Home = () => {
   };
 
   return (
-    <div className=" w-screen flex justify-center bg-gray-100 pt-44 px-4 py-4 md:px-32">
+    <div className="overflow-x-hidden w-screen flex justify-center bg-gray-100 pt-44 px-4 py-4 md:px-32">
       <div className="flex flex-col w-full">
         <div className="font-black text-5xl md:text-7xl tracking-tighter text-center">
           Start making your world <br /> more{' '}
@@ -509,7 +509,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="bg-white w-full rounded-3xl mt-24 mb-12 md:my-44 md:pb-24 py-12 md:px-12 mx-auto">
+        <div className="bg-white w-full md:w-max rounded-3xl mt-24 mb-12 md:my-44 md:pb-24 py-12 md:px-12 mx-auto">
           <div className="flex flex-col md:flex-row gap-8 relative">
             <div className="flex flex-col  ">
               <div className="font-black text-5xl md:text-7xl tracking-tighter text-center md:text-left">
@@ -735,7 +735,7 @@ const Home = () => {
           <span className="text-[#45C746]">your</span> way
         </div>
 
-        <div className="flex flex-col gap-4 mb-4 md:flex-row md:mb-16 md:h-32 md:w-2/3 mx-auto relative">
+        <div className="flex flex-col gap-4 mb-4 md:flex-row md:mb-16 md:h-32 md:w-2/3 max-w-[800px] mx-auto relative">
           <div className="w-[250px] md:w-[500px] justify-between flex items-center gap-4 text-[#E72DAD] bg-white rounded-full md:text-2xl p-8 md:absolute md:left-0 md:-translate-y-[100%]">
             Polar Coordinate Based Palettes
             <svg
@@ -750,7 +750,7 @@ const Home = () => {
               />
             </svg>
           </div>
-          <div className="w-[250px] md:w-[500px] justify-between flex items-center gap-4 text-[#4114DF] bg-white rounded-full md:text-2xl p-8 md:absolute md:right-0 md:translate-y-[10%] md:translate-x-[10%]">
+          <div className="w-[250px] md:w-[500px] justify-between flex items-center gap-4 text-[#4114DF] bg-white rounded-full md:text-2xl p-8 md:absolute md:right-0 md:translate-y-[40%] md:translate-x-[10%]">
             Figma Plugin
             <svg
               width="32"
@@ -765,7 +765,7 @@ const Home = () => {
             </svg>
           </div>
         </div>
-        <div className="flex flex-col gap-4 md:flex-row md:h-32 md:w-2/3 mx-auto relative">
+        <div className="flex flex-col gap-4 md:flex-row md:h-32 md:w-2/3 md:mt-16 max-w-[800px] mx-auto relative">
           <div className="flex items-center gap-4 w-[250px] md:w-[500px] justify-between bg-white text-[#F2BB54] rounded-full md:text-2xl p-8 md:absolute md:left-0 md:-translate-y-[100%] md:-translate-x-[15%]">
             Curated Palettes
             <svg
@@ -806,13 +806,13 @@ const Home = () => {
               <div className="herocircle3 left-1/2  z-10 "></div>
             </div>
 
-            <div className="font-black text-center text-7xl absolute left-1/2 top-1/2 -translate-x-[50%] -translate-y-[150%] mx-auto text-white z-[20]">
+            <div className="font-black text-center text-5xl md:text-7xl absolute left-1/2 top-1/2 -translate-x-[50%] -translate-y-[150%] mx-auto text-white z-[20]">
               Get Started <br /> with rangeen.
             </div>
 
             <div>
               <Link href="/login">
-                <button className="bg-slate-800 mix-blend-overlay text-3xl font-semibold w-max flex absolute left-1/2 top-1/2 -translate-x-[50%] -translate-y-[0%] text-slate-300 rounded-full py-[30px] gap-2 px-[10px] px-[40px] hover:bg-slate-800 hover:text-slate-100 transition-all duration-200 z-[20]">
+                <button className="bg-slate-800 mix-blend-overlay text-3xl font-semibold w-max flex absolute left-1/2 top-1/2 -translate-x-[50%] -translate-y-[50%] md:-translate-y-[0%] text-slate-300 rounded-full py-[30px] gap-2 px-[40px] hover:bg-slate-800 hover:text-slate-100 transition-all duration-200 z-[20]">
                   Sign Up
                 </button>
               </Link>

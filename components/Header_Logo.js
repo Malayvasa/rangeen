@@ -21,7 +21,7 @@ export default function HeaderLogo() {
           <div>
             {isHovering ? (
               <svg
-                height="24"
+                height="22"
                 viewBox="0 0 84 37"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -113,7 +113,7 @@ export default function HeaderLogo() {
               </svg>
             ) : (
               <svg
-                height="24"
+                height="22"
                 viewBox="0 0 84 37"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -131,7 +131,7 @@ export default function HeaderLogo() {
           </div>
         ) : (
           <svg
-            height="24"
+            height="22"
             viewBox="0 0 84 37"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
