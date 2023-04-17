@@ -671,10 +671,13 @@ const Home = () => {
             <div className="flex flex-col gap-4">
               {SavePalettes.palettes.map((palette, index) => {
                 return (
-                  <div className="bg-gray-100 p-4 rounded-md grid grid-cols-5 md:flex items-center md:w-full mx-auto justify-center gap-4 ">
+                  <div
+                    key={index}
+                    className="bg-gray-100 p-4 rounded-md grid grid-cols-5 md:flex items-center md:w-full mx-auto justify-center gap-4 "
+                  >
                     {palette.map((color, index) => {
                       return (
-                        <motion.div>
+                        <motion.div key={index}>
                           <div
                             className="w-[40px] h-[40px] rounded-full"
                             style={{
@@ -809,7 +812,7 @@ const Home = () => {
 
             <div>
               <Link href="/login">
-                <button className="bg-slate-800 mix-blend-overlay text-3xl font-semibold w-max flex absolute left-1/2 top-1/2 -translate-x-[50%] -translate-y-[0%] text-slate-300 rounded-full py-[30px] gap-2 px-[10px] md:px-[40px] hover:bg-slate-800 hover:text-slate-100 transition-all duration-200 z-[20]">
+                <button className="bg-slate-800 mix-blend-overlay text-3xl font-semibold w-max flex absolute left-1/2 top-1/2 -translate-x-[50%] -translate-y-[0%] text-slate-300 rounded-full py-[30px] gap-2 px-[10px] px-[40px] hover:bg-slate-800 hover:text-slate-100 transition-all duration-200 z-[20]">
                   Sign Up
                 </button>
               </Link>
