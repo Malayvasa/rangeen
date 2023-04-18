@@ -177,14 +177,14 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="flex flex-col w-max mx-auto md:px-24 items-center shadow-sm rounded-3xl my-20 py-16 px-8 gap-12 bg-white justify-center">
+        <div className="flex flex-col w-full max-w-[1050px] mx-auto md:px-24 items-center shadow-sm rounded-3xl my-20 py-16 px-8 gap-12 bg-white justify-center">
           {randomNewPalette && (
             <motion.div
               variants={container}
               initial="hidden"
               animate="show"
               key={randomNewPalette}
-              className=" grid grid-cols-5 md:flex items-center md:w-max mx-auto justify-center gap-6 "
+              className=" grid grid-cols-5 md:flex items-center md:w-full mx-auto justify-center gap-6 "
             >
               {randomNewPalette.map((color, index) => {
                 return (
@@ -204,7 +204,9 @@ const Home = () => {
                     className="
                     w-[40px] h-[40px]
                     aspect-w-1 aspect-h-1
-                    md:w-[68px] md:h-[73px]"
+                    md:w-[60px] md:h-[60px]
+                    
+                    "
                   >
                     <svg
                       viewBox="0 0 68 73"
@@ -215,6 +217,8 @@ const Home = () => {
                         d="M24.4025 3.25643C30.1449 -0.0589556 37.2199 -0.058957 42.9623 3.25643L58.0081 11.9432C63.7506 15.2585 67.288 21.3856 67.288 28.0164V45.3899C67.288 52.0206 63.7506 58.1477 58.0081 61.4631L42.9623 70.1498C37.2199 73.4652 30.1449 73.4652 24.4025 70.1498L9.35663 61.4631C3.61421 58.1477 0.07674 52.0206 0.07674 45.3899L0.07674 28.0164C0.07674 21.3856 3.61421 15.2585 9.35663 11.9432L24.4025 3.25643Z"
                         style={{
                           fill: color,
+                          filter:
+                            'drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.25))',
                         }}
                       />
                     </svg>
@@ -296,9 +300,9 @@ const Home = () => {
           <span className="text-[#ec3d3d]">33</span>
         </div>
 
-        <div className="flex flex-col lg:flex-row w-max h-max mx-auto gap-8 mt-12">
-          <div className="flex flex-col w-max h-max items-center">
-            <div className="flex w-max justify-center items-center rounded-t-3xl pt-6 pb-8 gap-8">
+        <div className="flex flex-col lg:flex-row w-full max-w-[950px] h-max mx-auto gap-8 mt-12">
+          <div className="flex flex-col w-full h-max items-center">
+            <div className="flex w-full justify-center items-center rounded-t-3xl pt-6 pb-8 gap-8">
               <svg
                 height="60"
                 viewBox="0 0 69 73"
@@ -325,7 +329,7 @@ const Home = () => {
               </svg>
               <div className="font-semibold text-2xl">Prompt to Palette</div>
             </div>
-            <div className="bg-white shadow-lg flex flex-col items-center w-max p-4 pt-6 md:p-8 rounded-3xl">
+            <div className="bg-white shadow-lg flex flex-col items-center w-full  max-w-[450px] p-4 pt-6 md:p-8 rounded-3xl">
               <div className="w-max">
                 <div className="flex gap-x-4 items-center border-[2px] rounded-full">
                   <input
@@ -375,7 +379,7 @@ const Home = () => {
                     initial="hidden"
                     animate="show"
                     key={colorGPTExamplePalette}
-                    className="bg-gray-100 p-4 rounded-md flex items-center md:w-full mx-auto justify-center md:gap-4 "
+                    className="bg-gray-100 p-4 rounded-md flex items-center md:w-full mx-auto justify-center gap-4 "
                   >
                     {colorGPTExamplePalette.map((color, index) => {
                       return (
@@ -400,7 +404,7 @@ const Home = () => {
                           className=""
                         >
                           <div
-                            className="w-[50px] h-[50px] rounded-full"
+                            className="w-[30px] h-[30px] rounded-full"
                             style={{
                               backgroundColor: color,
                             }}
@@ -453,7 +457,7 @@ const Home = () => {
                   Album Art to Palette
                 </div>
               </div>
-              <div className="bg-white flex-grow shadow-lg flex flex-col items-center p-4 pt-8 md:p-8 rounded-3xl">
+              <div className="bg-white flex-grow shadow-lg flex flex-col w-full max-w-[450px] items-center p-4 pt-8 md:p-8 rounded-3xl">
                 <div
                   className="
                 w-[300px] h-[300px] bg-gray-100 rounded-md flex items-center justify-center mb-8
@@ -468,7 +472,7 @@ const Home = () => {
                       initial="hidden"
                       animate="show"
                       key={albumArtExamplePalette}
-                      className="bg-gray-100 p-4 rounded-md flex items-center md:w-full mx-auto justify-center md:gap-4 "
+                      className="bg-gray-100 p-4 rounded-md flex items-center md:w-full mx-auto justify-center gap-4 "
                     >
                       {albumArtExamplePalette.map((color, index) => {
                         return (
@@ -493,7 +497,7 @@ const Home = () => {
                             className=""
                           >
                             <div
-                              className="w-[50px] h-[50px] rounded-full"
+                              className="w-[30px] h-[30px] rounded-full"
                               style={{
                                 backgroundColor: color,
                               }}
@@ -509,177 +513,29 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="bg-white w-full md:w-max rounded-3xl mt-24 mb-12 md:my-44 md:pb-24 py-12 md:px-12 mx-auto">
-          <div className="flex flex-col md:flex-row gap-8 relative">
+        <div className="bg-white relative w-full max-w-[1050px] rounded-3xl mt-24 mb-12 md:my-44 md:pb-24 py-8 md:px-12 mx-auto">
+          <div className="flex flex-col md:flex-row gap-8 relative overflow-x-hidden overflow-y-hidden">
             <div className="flex flex-col  ">
-              <div className="font-black text-5xl md:text-7xl tracking-tighter text-center md:text-left">
+              <div className="font-black text-5xl md:text-6xl tracking-tighter text-center md:text-left">
                 Easily <span className="text-[#EC3D3D]">save</span>, <br />
                 <span className="text-[#1ECDD6]">view</span> and <br />
                 <span className="text-[#7A36A5]">export</span> your <br />{' '}
                 palettes.
               </div>
             </div>
-            <div className="bg-gray-50 md:absolute md:bottom-0 md:right-0 scale-75 md:scale-[90%] md:translate-y-[50%] flex items-center justify-center p-8 rounded-3xl shadow-lg">
-              <div className="flex flex-col gap-y-4">
-                <div className="w-96 p-4 gap-2 relative items-center shadow-sm flex text-gray-600 rounded-lg bg-white">
-                  <div>
-                    <svg
-                      width="24px"
-                      height="24px"
-                      stroke-width="1.5"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      color="currentColor"
-                    >
-                      <path
-                        d="M19.4 20H9.6a.6.6 0 01-.6-.6V9.6a.6.6 0 01.6-.6h9.8a.6.6 0 01.6.6v9.8a.6.6 0 01-.6.6z"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      ></path>
-                      <path
-                        d="M15 9V4.6a.6.6 0 00-.6-.6H4.6a.6.6 0 00-.6.6v9.8a.6.6 0 00.6.6H9"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      ></path>
-                    </svg>
-                  </div>
-                  SVG Palette
-                  <div className="flex items-center gap-1 absolute mr-4 right-0 bg-amber-50 text-amber-400 text-center p-1 rounded-md text-xs w-max">
-                    <div>
-                      <svg
-                        width="22px"
-                        height="22px"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        color="currentColor"
-                      >
-                        <g
-                          clip-path="url(#bright-star_svg__clip0_3057_14628)"
-                          stroke="currentColor"
-                          stroke-width="1.5"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                        >
-                          <path d="M9.952 9.623l1.559-3.305a.535.535 0 01.978 0l1.559 3.305 3.485.533c.447.068.625.644.302.974l-2.522 2.57.595 3.631c.077.467-.391.822-.791.602L12 16.218l-3.117 1.715c-.4.22-.868-.135-.791-.602l.595-3.63-2.522-2.571c-.323-.33-.145-.906.302-.974l3.485-.533zM22 12h1M12 2V1M12 23v-1M20 20l-1-1M20 4l-1 1M4 20l1-1M4 4l1 1M1 12h1"></path>
-                        </g>
-                        <defs>
-                          <clipPath id="bright-star_svg__clip0_3057_14628">
-                            <path fill="#fff" d="M0 0h24v24H0z"></path>
-                          </clipPath>
-                        </defs>
-                      </svg>
-                    </div>
-                    Recommended
-                  </div>
-                </div>
-                <div className="w-96 p-4 gap-2 items-center shadow-sm flex text-gray-600 rounded-lg bg-white">
-                  <div>
-                    <svg
-                      width="24px"
-                      height="24px"
-                      stroke-width="1.5"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      color="currentColor"
-                    >
-                      <path
-                        d="M19.4 20H9.6a.6.6 0 01-.6-.6V9.6a.6.6 0 01.6-.6h9.8a.6.6 0 01.6.6v9.8a.6.6 0 01-.6.6z"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      ></path>
-                      <path
-                        d="M15 9V4.6a.6.6 0 00-.6-.6H4.6a.6.6 0 00-.6.6v9.8a.6.6 0 00.6.6H9"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      ></path>
-                    </svg>
-                  </div>
-                  HEX Palette
-                </div>
-                <div className="w-96 p-4 gap-2 items-center shadow-sm flex text-gray-600 rounded-lg bg-white">
-                  <div>
-                    <svg
-                      width="24px"
-                      height="24px"
-                      stroke-width="1.5"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      color="currentColor"
-                    >
-                      <path
-                        d="M19.4 20H9.6a.6.6 0 01-.6-.6V9.6a.6.6 0 01.6-.6h9.8a.6.6 0 01.6.6v9.8a.6.6 0 01-.6.6z"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      ></path>
-                      <path
-                        d="M15 9V4.6a.6.6 0 00-.6-.6H4.6a.6.6 0 00-.6.6v9.8a.6.6 0 00.6.6H9"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      ></path>
-                    </svg>
-                  </div>
-                  RGB Palette
-                </div>
-                <div className="w-96 p-4 gap-2 items-center shadow-sm flex text-gray-600 rounded-lg bg-white">
-                  <div>
-                    <svg
-                      width="24px"
-                      height="24px"
-                      stroke-width="1.5"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                      color="currentColor"
-                    >
-                      <path
-                        d="M19.4 20H9.6a.6.6 0 01-.6-.6V9.6a.6.6 0 01.6-.6h9.8a.6.6 0 01.6.6v9.8a.6.6 0 01-.6.6z"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      ></path>
-                      <path
-                        d="M15 9V4.6a.6.6 0 00-.6-.6H4.6a.6.6 0 00-.6.6v9.8a.6.6 0 00.6.6H9"
-                        stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      ></path>
-                    </svg>
-                  </div>
-                  CMYK Palette
-                </div>
-              </div>
-            </div>
-            <div className="flex flex-col gap-4">
+
+            <div className="flex flex-col gap-4 mx-4 md:mx-0">
               {SavePalettes.palettes.map((palette, index) => {
                 return (
                   <div
                     key={index}
-                    className="bg-gray-100 p-4 rounded-md grid grid-cols-5 md:flex items-center md:w-full mx-auto justify-center gap-4 "
+                    className="bg-gray-100 p-4 rounded-md grid grid-cols-5 md:flex items-center justify-center gap-4 "
                   >
                     {palette.map((color, index) => {
                       return (
                         <motion.div key={index}>
                           <div
-                            className="w-[40px] h-[40px] rounded-full"
+                            className="w-10 h-10 rounded-full"
                             style={{
                               backgroundColor: color,
                             }}
@@ -690,6 +546,155 @@ const Home = () => {
                   </div>
                 );
               })}
+            </div>
+          </div>
+          <div className="bg-gray-50 md:absolute z-[10] md:bottom-0 md:right-0 scale-75 md:scale-[90%] md:translate-y-[35%] md:-translate-x-[10%] mx-auto flex items-center justify-center p-8 w-max rounded-3xl shadow-lg">
+            <div className="flex flex-col gap-y-4">
+              <div className="w-72 md:w-96 p-4 gap-2 relative items-center shadow-sm flex text-gray-600 rounded-lg bg-white">
+                <div>
+                  <svg
+                    width="24px"
+                    height="24px"
+                    stroke-width="1.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    color="currentColor"
+                  >
+                    <path
+                      d="M19.4 20H9.6a.6.6 0 01-.6-.6V9.6a.6.6 0 01.6-.6h9.8a.6.6 0 01.6.6v9.8a.6.6 0 01-.6.6z"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                    <path
+                      d="M15 9V4.6a.6.6 0 00-.6-.6H4.6a.6.6 0 00-.6.6v9.8a.6.6 0 00.6.6H9"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </svg>
+                </div>
+                SVG Palette
+                <div className="flex items-center gap-1 absolute mr-4 right-0 bg-amber-50 text-amber-400 text-center p-1 rounded-md text-xs w-max">
+                  <div>
+                    <svg
+                      width="22px"
+                      height="22px"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      color="currentColor"
+                    >
+                      <g
+                        clip-path="url(#bright-star_svg__clip0_3057_14628)"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path d="M9.952 9.623l1.559-3.305a.535.535 0 01.978 0l1.559 3.305 3.485.533c.447.068.625.644.302.974l-2.522 2.57.595 3.631c.077.467-.391.822-.791.602L12 16.218l-3.117 1.715c-.4.22-.868-.135-.791-.602l.595-3.63-2.522-2.571c-.323-.33-.145-.906.302-.974l3.485-.533zM22 12h1M12 2V1M12 23v-1M20 20l-1-1M20 4l-1 1M4 20l1-1M4 4l1 1M1 12h1"></path>
+                      </g>
+                      <defs>
+                        <clipPath id="bright-star_svg__clip0_3057_14628">
+                          <path fill="#fff" d="M0 0h24v24H0z"></path>
+                        </clipPath>
+                      </defs>
+                    </svg>
+                  </div>
+                  Recommended
+                </div>
+              </div>
+              <div className="w-72 md:w-96 p-4 gap-2 items-center shadow-sm flex text-gray-600 rounded-lg bg-white">
+                <div>
+                  <svg
+                    width="24px"
+                    height="24px"
+                    stroke-width="1.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    color="currentColor"
+                  >
+                    <path
+                      d="M19.4 20H9.6a.6.6 0 01-.6-.6V9.6a.6.6 0 01.6-.6h9.8a.6.6 0 01.6.6v9.8a.6.6 0 01-.6.6z"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                    <path
+                      d="M15 9V4.6a.6.6 0 00-.6-.6H4.6a.6.6 0 00-.6.6v9.8a.6.6 0 00.6.6H9"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </svg>
+                </div>
+                HEX Palette
+              </div>
+              <div className="w-72 md:w-96 p-4 gap-2 items-center shadow-sm flex text-gray-600 rounded-lg bg-white">
+                <div>
+                  <svg
+                    width="24px"
+                    height="24px"
+                    stroke-width="1.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    color="currentColor"
+                  >
+                    <path
+                      d="M19.4 20H9.6a.6.6 0 01-.6-.6V9.6a.6.6 0 01.6-.6h9.8a.6.6 0 01.6.6v9.8a.6.6 0 01-.6.6z"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                    <path
+                      d="M15 9V4.6a.6.6 0 00-.6-.6H4.6a.6.6 0 00-.6.6v9.8a.6.6 0 00.6.6H9"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </svg>
+                </div>
+                RGB Palette
+              </div>
+              <div className="w-72 md:w-96 p-4 gap-2 items-center shadow-sm flex text-gray-600 rounded-lg bg-white">
+                <div>
+                  <svg
+                    width="24px"
+                    height="24px"
+                    stroke-width="1.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    color="currentColor"
+                  >
+                    <path
+                      d="M19.4 20H9.6a.6.6 0 01-.6-.6V9.6a.6.6 0 01.6-.6h9.8a.6.6 0 01.6.6v9.8a.6.6 0 01-.6.6z"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                    <path
+                      d="M15 9V4.6a.6.6 0 00-.6-.6H4.6a.6.6 0 00-.6.6v9.8a.6.6 0 00.6.6H9"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ></path>
+                  </svg>
+                </div>
+                CMYK Palette
+              </div>
             </div>
           </div>
         </div>

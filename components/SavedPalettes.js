@@ -76,34 +76,32 @@ export default function SavedPalettes({ session }) {
   return (
     <div>
       <div className="w-full md:w-full flex flex-col gap-4">
-        <div className="text-xl justify-between w-full tracking-tight flex mb-4">
+        <div className="text-xl justify-between gap-4 w-full tracking-tight flex mb-4">
           <div className="flex gap-2 items-center justify-center font-semibold text-gray-500">
             Saved palettes
-            {loading ? (
-              <div className="text-sm ml-2 text-gray-300">Loading</div>
-            ) : (
-              <div>({palettesCount})</div>
-            )}
+            {loading ? <></> : <div>({palettesCount})</div>}
           </div>
-          <div className="hidden md:flex text-gray-300">
+          <div className="hidden md:flex items-center gap-4 text-gray-400">
             {session.user.email}
             <div
+              title="Sign out"
+              className="bg-slate-500/5 w-max text-slate-300 rounded-md p-2 hover:bg-slate-800 hover:text-slate-100 transition-all duration-200"
               onClick={() => {
                 supabase.auth.signOut();
               }}
             >
               <svg
-                width="32px"
-                height="32px"
+                width="24px"
+                height="24px"
                 stroke-width="1.5"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
-                color="#000000"
+                color="currentColor"
               >
                 <path
                   d="M12 12h7m0 0l-3 3m3-3l-3-3M19 6V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2v-1"
-                  stroke="#000000"
+                  stroke="currentColor"
                   stroke-width="1.5"
                   stroke-linecap="round"
                   stroke-linejoin="round"

@@ -16,7 +16,7 @@ export default function NavBar() {
   }, [router.pathname]);
 
   return (
-    <div className="fixed z-20 top-0 w-screen flex h-max px-4 pt-10">
+    <div className="fixed z-30 top-0 w-screen flex h-max px-4 pt-10">
       <div className="w-full md:w-3/4 items-center font-semibold justify-between rounded-full shadow-lg mx-auto top-0 h-12 px-4 pr-2 md:pr-4  bg-white flex z-20">
         <div className="font-bold text-lg h-full">
           <Link href={'/'}>

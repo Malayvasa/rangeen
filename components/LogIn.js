@@ -8,7 +8,7 @@ export default function LogIn() {
   const supabase = useSupabaseClient();
 
   return (
-    <div className="w-full md:w-[400px] px-8 overscroll-none flex flex-col m-auto">
+    <div className="w-full md:w-[400px]  px-8 overflow-hidden flex flex-col m-auto">
       <motion.div
         initial={{ y: 0, opacity: 0, rotate: 270 }}
         animate={{ y: 0, opacity: 1, rotate: 0 }}

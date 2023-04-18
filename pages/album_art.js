@@ -47,6 +47,59 @@ const AlbumArt = () => {
   const [generated, setGenerated] = useState(false);
   const [generating, setGenerating] = useState(false);
   const [hexList, setHexList] = useState([]);
+  const [freeSpotifyUsesRemaining, setFreeSpotifyUsesRemaining] = useState(0);
+
+  async function getFreeSpotifyUsesRemaining() {
+    try {
+      setLoading(true);
+
+      let { data, error, status } = await supabase
+        .from('profiles')
+        .select('spotify_generations')
+        .eq('id', user.id);
+
+      if (error && status !== 406) {
+        throw error;
+      }
+
+      if (data) {
+        setFreeSpotifyUsesRemaining(data[0].spotify_generations);
+        console.log(data);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  async function updateFreeSpotifyUsesRemaining() {
+    try {
+      setLoading(true);
+
+      let { data, error, status } = await supabase
+        .from('profiles')
+        .update({ spotify_generations: freeSpotifyUsesRemaining - 1 })
+        .eq('id', user.id);
+
+      if (error && status !== 406) {
+        throw error;
+      }
+
+      if (data) {
+        setFreeSpotifyUsesRemaining(data[0].spotify_generations);
+        console.log(data);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    getFreeSpotifyUsesRemaining();
+  }, [session]);
 
   let GetData = async () => {
     let tokenres = await fetch('/api/spotify?token=true', {
@@ -90,25 +143,6 @@ const AlbumArt = () => {
     setGenerated(false);
   };
 
-  const averageColor = (color1, color2, ratio, format) => {
-    const r1 = parseInt(color1.substring(1, 3), 16);
-    const g1 = parseInt(color1.substring(3, 5), 16);
-    const b1 = parseInt(color1.substring(5, 7), 16);
-    const r2 = parseInt(color2.substring(1, 3), 16);
-    const g2 = parseInt(color2.substring(3, 5), 16);
-    const b2 = parseInt(color2.substring(5, 7), 16);
-    const r = Math.floor(r1 * (1 - ratio) + r2 * ratio);
-    const g = Math.floor(g1 * (1 - ratio) + g2 * ratio);
-    const b = Math.floor(b1 * (1 - ratio) + b2 * ratio);
-    const rr =
-      r.toString(16).length == 1 ? '0' + r.toString(16) : r.toString(16);
-    const gg =
-      g.toString(16).length == 1 ? '0' + g.toString(16) : g.toString(16);
-    const bb =
-      b.toString(16).length == 1 ? '0' + b.toString(16) : b.toString(16);
-    return '#' + rr + gg + bb;
-  };
-
   const startGenerating = () => {
     setGenerating(true);
 
@@ -116,6 +150,7 @@ const AlbumArt = () => {
     setHexList(colors);
 
     setTimeout(() => {
+      updateFreeSpotifyUsesRemaining();
       setGenerated(true);
       setGenerating(false);
     }, 2000);
@@ -258,6 +293,11 @@ const AlbumArt = () => {
                 </div>
               )}
             </div>
+            <div className="p-2 px-4 text-sm bg-green-50 text-green-500 rounded-full mt-4">
+              {freeSpotifyUsesRemaining > 0
+                ? `You have ${freeSpotifyUsesRemaining} free uses remaining`
+                : 'You have no free uses remaining'}
+            </div>
           </div>
           <div>
             {selectedAlbum && (
@@ -305,13 +345,19 @@ const AlbumArt = () => {
             ) : (
               <>
                 {!generating && (
-                  <button>
-                    <div
-                      onClick={() => {
-                        startGenerating();
-                      }}
-                      className="h-max flex gap-2 w-max bg-slate-500/5 text-slate-500 rounded-md p-4 hover:bg-slate-800 hover:text-slate-100 transition-all duration-200"
-                    >
+                  <button
+                    disabled={freeSpotifyUsesRemaining === 0 ? true : false}
+                    onClick={() => {
+                      startGenerating();
+                    }}
+                    //make button disabled if no free uses remaining
+                    className={
+                      freeSpotifyUsesRemaining === 0
+                        ? `h-max w-max bg-slate-500/5 text-slate-500 rounded-md p-4 cursor-not-allowed`
+                        : `h-max w-max bg-slate-500/5 text-slate-500 rounded-md p-4 hover:bg-slate-800 hover:text-slate-100 transition-all duration-200`
+                    }
+                  >
+                    <div className="flex gap-2 w-max">
                       <svg
                         width="24px"
                         height="24px"
