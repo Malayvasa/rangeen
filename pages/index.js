@@ -141,8 +141,7 @@ const Home = () => {
         <title>Rangeen</title>
         <meta name="description" content="Rangeen" />
         <link rel="icon" href="/favicon.ico" />
-        // add og metadata here
-
+        
         <meta property="og:title" content="Rangeen" />
         <meta property="og:description" content="The tool to create and curate color palettes for your next project" />
         <meta property="og:image" content="https://rangeenpalettes.vercel.app/og.png" />
