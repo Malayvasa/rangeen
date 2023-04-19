@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import toast, { Toaster } from 'react-hot-toast';
 import album from '../components/assets/album.jpeg';
 import Image from 'next/image';
+import Head from 'next/head';
 
 import {
   useUser,
@@ -136,6 +137,24 @@ const Home = () => {
 
   return (
     <div className="overflow-x-hidden w-screen flex justify-center bg-gray-100 pt-44 px-4 py-4 md:px-32">
+      <Head>
+        <title>Rangeen</title>
+        <meta name="description" content="Rangeen" />
+        <link rel="icon" href="/favicon.ico" />
+        // add og metadata here
+
+        <meta property="og:title" content="Rangeen" />
+        <meta property="og:description" content="The tool to create and curate color palettes for your next project" />
+        <meta property="og:image" content="https://rangeenpalettes.vercel.app/og.png" />
+        <meta property="og:url" content="https://rangeen.vercel.app/" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Rangeen" />
+        <meta name="twitter:description" content="The tool to create and curate color palettes for your next project" />
+        <meta name="twitter:image" content="https://rangeenpalettes.vercel.app/og.png" />
+        <meta name="twitter:site" content="@rangeen" />
+        <meta name="twitter:creator" content="@rangeen" />
+        </Head>
       <div className="flex flex-col w-full">
         <div className="font-black text-5xl md:text-7xl tracking-tighter text-center">
           Start making your world <br /> more{' '}
@@ -184,7 +203,7 @@ const Home = () => {
               initial="hidden"
               animate="show"
               key={randomNewPalette}
-              className=" grid grid-cols-5 md:flex items-center md:w-full mx-auto justify-center gap-6 "
+              className=" grid grid-cols-5 md:flex flex-wrap items-center md:w-full mx-auto justify-center gap-6 "
             >
               {randomNewPalette.map((color, index) => {
                 return (
@@ -202,26 +221,17 @@ const Home = () => {
                       rotate: Math.floor(Math.random() * 360),
                     }}
                     className="
-                    w-[40px] h-[40px]
+                    w-[50px] h-[50px]
                     aspect-w-1 aspect-h-1
                     md:w-[60px] md:h-[60px]
                     
                     "
                   >
-                    <svg
-                      viewBox="0 0 68 73"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M24.4025 3.25643C30.1449 -0.0589556 37.2199 -0.058957 42.9623 3.25643L58.0081 11.9432C63.7506 15.2585 67.288 21.3856 67.288 28.0164V45.3899C67.288 52.0206 63.7506 58.1477 58.0081 61.4631L42.9623 70.1498C37.2199 73.4652 30.1449 73.4652 24.4025 70.1498L9.35663 61.4631C3.61421 58.1477 0.07674 52.0206 0.07674 45.3899L0.07674 28.0164C0.07674 21.3856 3.61421 15.2585 9.35663 11.9432L24.4025 3.25643Z"
-                        style={{
-                          fill: color,
-                          filter:
-                            'drop-shadow(0px 0px 1px rgba(0, 0, 0, 0.25))',
-                        }}
-                      />
-                    </svg>
+<svg  viewBox="0 0 288 288" fill={color} xmlns="http://www.w3.org/2000/svg">
+<path d="M123.5 11.8357C136.185 4.51174 151.815 4.51174 164.5 11.8357L248.208 60.1643C260.893 67.4883 268.708 81.0235 268.708 95.6714V192.329C268.708 206.977 260.893 220.512 248.208 227.836L164.5 276.164C151.815 283.488 136.185 283.488 123.5 276.164L39.7923 227.836C27.1069 220.512 19.2923 206.977 19.2923 192.329V95.6714C19.2923 81.0235 27.1069 67.4883 39.7923 60.1643L123.5 11.8357Z" fill={color}/>
+</svg>
+
+
                   </motion.div>
                 );
               })}
