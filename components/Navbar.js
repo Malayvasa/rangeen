@@ -96,7 +96,7 @@ export default function NavBar() {
                   }`}
               ></div>
             </div>
-            <div className={`tracking-tight flex items-center h-full`}>
+            <div className={`tracking-tight flex items-center md:hidden h-full`}>
               <MobileNav />
             </div>
           </div>
