@@ -67,6 +67,7 @@ const ColorGPT = () => {
       console.log(error);
     } finally {
       setLoading(false);
+      getFreeGPTUsesRemaining();
     }
   }
 
@@ -226,9 +227,8 @@ const ColorGPT = () => {
                   getResponseFromOpenAI();
                 }}
                 // disabled button greyed out if no uses remaining
-                className={`${
-                  gptUsesRemaining === 0 ? ' text-gray-100' : ' text-blue-500'
-                } p-2 rounded-full focus:outline-none  focus:text-blue-500 focus:placeholder-white/50`}
+                className={`${gptUsesRemaining === 0 ? ' text-gray-100' : ' text-blue-500'
+                  } p-2 rounded-full focus:outline-none  focus:text-blue-500 focus:placeholder-white/50`}
               >
                 <svg
                   width="32px"
@@ -257,7 +257,7 @@ const ColorGPT = () => {
             </div>
             <div className="p-2 px-4 text-sm bg-green-50 text-green-500 rounded-full mt-4">
               {gptUsesRemaining > 0
-                ? `You have ${gptUsesRemaining} free uses remaining`
+                ? `${gptUsesRemaining} Free uses remaining`
                 : 'You have no free uses remaining'}
             </div>
 

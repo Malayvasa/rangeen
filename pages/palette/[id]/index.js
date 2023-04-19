@@ -102,7 +102,13 @@ export default function Palette() {
                 <div className="font-bold">Generated Using ColorGPT</div>
               </div>
             )}
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            <div
+              // if screen size is above md palette has 10 colors use grid-cols-5 else grid-cols-3 
+              // if screen size is below use grid-cols-2
+              className={`grid grid-cols-2 gap-4 w-full ${palette.colors.length == 10 ? 'md:grid-cols-5' : 'md:grid-cols-3'
+                }`}
+
+            >
               {palette.colors.map((color) => {
                 let rgb = Color(color).rgb().array();
 
@@ -132,17 +138,17 @@ export default function Palette() {
             Colorblind Simulations
           </div>
           {palette.colors.length > 0 && (
-            <div className="flex flex-col gap-4 mx-auto w-max">
-              <div className="bg-white relative flex flex-col gap-2 shadow-sm p-4 rounded-md w-max ">
-                <div className="text-lg absolute top-1/2 -translate-x-40 bg-neutral-800/10 p-2 rounded-full -translate-y-[50%] left-0 font-bold tracking-tight mb-2 mx-auto capitalize text-neutral-400">
+            <div className="flex flex-col gap-4 mx-auto w-full md:w-max">
+              <div className="bg-white relative flex flex-col gap-2 shadow-sm p-4 rounded-md w-full md:w-max ">
+                <div className="text-lg md:absolute md:top-1/2 md:-translate-x-40 bg-neutral-800/5 p-2 rounded-full md:-translate-y-[50%] left-0 font-semibold tracking-tight mb-2 mx-auto capitalize text-neutral-500">
                   Typical Vision
                 </div>
-                <div className="flex  gap-4">
+                <div className="flex justify-between w-full  md:gap-4">
                   {palette.colors.map((color) => {
                     return (
                       <div key={color}>
                         <div
-                          className="w-10 h-10 md:rounded-full"
+                          className="w-8 md:w-10 h-8 md:h-10 rounded-full"
                           style={{
                             backgroundColor: color,
                           }}

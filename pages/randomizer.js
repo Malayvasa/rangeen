@@ -103,13 +103,13 @@ const Randomizer = () => {
         {/* <motion.div className="text-center font-bold text-xl tracking-tight leading-tight text-white/60 mb-16 mx-auto z-20">
           a home for your colors
         </motion.div> */}
-        <motion.div className="flex flex-col justify-center items-center p-8 rounded-lg w-max gap-4">
-          <div className="grid grid-cols-2 md:flex w-full justify-evenly">
+        <motion.div className="flex w-full flex-col justify-center items-center">
+          <div className="grid grid-cols-2 md:flex w-max justify-evenly">
             {randomNewPalette.map((color) => {
               return (
                 <div
                   key={color}
-                  className="group w-16 flex flex-col items-center gap-2"
+                  className="group max-w-16 flex flex-col items-center gap-2"
                 >
                   <div
                     className="w-12 h-12 rounded-full"
@@ -122,7 +122,7 @@ const Randomizer = () => {
               );
             })}
           </div>
-          <div className="flex gap-8">
+          <div className="flex gap-8 mt-8 justify-evenly">
             <button
               className="bg-slate-500/20 w-max text-slate-500 rounded-md p-2 hover:bg-slate-800 hover:text-slate-100 transition-all duration-200"
               onClick={() => {

@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import HeaderLogo from './Header_Logo';
+import MobileNav from './MobileNav';
 
 export default function NavBar() {
   const session = useSession();
@@ -36,11 +37,10 @@ export default function NavBar() {
             <div
               //make bg blue if url is home page and transparent if not
 
-              className={`w-full h-[4px]  -mt-[2px] ${
-                currentPage === '/randomizer'
-                  ? 'bg-gray-500/20'
-                  : 'bg-transparent'
-              }`}
+              className={`w-full h-[4px]  -mt-[2px] ${currentPage === '/randomizer'
+                ? 'bg-gray-500/20'
+                : 'bg-transparent'
+                }`}
             ></div>
           </div>
 
@@ -54,11 +54,10 @@ export default function NavBar() {
             <div
               //make bg blue if url is home page and transparent if not
 
-              className={`w-full h-[4px]  -mt-[2px] ${
-                currentPage === '/colorgpt'
-                  ? 'bg-gray-500/20'
-                  : 'bg-transparent'
-              }`}
+              className={`w-full h-[4px]  -mt-[2px] ${currentPage === '/colorgpt'
+                ? 'bg-gray-500/20'
+                : 'bg-transparent'
+                }`}
             ></div>
           </div>
           <div className="h-full">
@@ -71,18 +70,17 @@ export default function NavBar() {
             <div
               //make bg blue if url is home page and transparent if not
 
-              className={`w-full h-[4px]  -mt-[2px] ${
-                currentPage === '/album_art'
-                  ? 'bg-gray-500/20'
-                  : 'bg-transparent'
-              }`}
+              className={`w-full h-[4px]  -mt-[2px] ${currentPage === '/album_art'
+                ? 'bg-gray-500/20'
+                : 'bg-transparent'
+                }`}
             ></div>
           </div>
         </div>
 
         {session ? (
           <div className="flex h-full gap-4">
-            <div className="h-full">
+            <div className="h-full hidden md:block">
               <Link
                 className={`tracking-tight flex items-center px-2 hover:bg-gray-950/5 h-full`}
                 href="/library"
@@ -92,12 +90,14 @@ export default function NavBar() {
               <div
                 //make bg blue if url is home page and transparent if not
 
-                className={`h-[4px] mx-auto -mt-[2px] ${
-                  currentPage === '/library'
-                    ? 'bg-gray-500/20'
-                    : 'bg-transparent'
-                }`}
+                className={`h-[4px] mx-auto -mt-[2px] ${currentPage === '/library'
+                  ? 'bg-gray-500/20'
+                  : 'bg-transparent'
+                  }`}
               ></div>
+            </div>
+            <div className={`tracking-tight flex items-center h-full`}>
+              <MobileNav />
             </div>
           </div>
         ) : (

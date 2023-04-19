@@ -28,7 +28,7 @@ export default function ExportModal({ hexList, children }) {
     setIsOpen(true);
   }
 
-  function afterOpenModal() {}
+  function afterOpenModal() { }
 
   function closeModal() {
     setIsOpen(false);
@@ -68,13 +68,12 @@ export default function ExportModal({ hexList, children }) {
     width="${hexList.length * 100}" 
     height="100" viewBox="0 0 ${hexList.length * 100} 100">
     ${hexList
-      .map(
-        (hex, index) =>
-          `<rect width="100" height="100" fill="${hex}" x="${
-            index * 100
-          }" y="0" />`
-      )
-      .join('')}
+        .map(
+          (hex, index) =>
+            `<rect width="100" height="100" fill="${hex}" x="${index * 100
+            }" y="0" />`
+        )
+        .join('')}
     </svg>`;
 
     // copy svg to clipboard
@@ -103,7 +102,7 @@ export default function ExportModal({ hexList, children }) {
   }
 
   return (
-    <>
+    <div>
       <Toaster position="bottom-center" />
       <div
         onClick={() => {
@@ -293,6 +292,6 @@ export default function ExportModal({ hexList, children }) {
           </div>
         </Modal>
       </div>
-    </>
+    </div>
   );
 }

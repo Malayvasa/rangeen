@@ -94,6 +94,7 @@ const AlbumArt = () => {
       console.log(error);
     } finally {
       setLoading(false);
+      getFreeSpotifyUsesRemaining();
     }
   }
 
@@ -196,12 +197,18 @@ const AlbumArt = () => {
   }, [selectedAlbum]);
 
   return (
-    <div className="h-screen w-screen flex justify-center bg-gray-100 items-center  md:py-32 md:px-32">
+    <div className=" h-screen w-screen relative flex justify-center bg-gray-100 items-center p-4 md:py-32 md:px-32">
       <Toaster position="bottom-right" />
+
       {session ? (
-        <div className="w-full h-full bg-white flex flex-row justify-center items-center rounded-3xl py-8 md:mt-0 md:pl-12">
-          <div className="flex flex-col h-72 gap-4 justify-center items-center">
-            <div className="flex flex-col rounded-3xl border-2 border-black border-opacity-10">
+        <div className="w-full relative h-max  md:h-full overflow-y-scroll bg-white flex flex-col gap-4 md:flex-row justify-center items-center rounded-3xl py-8 md:mt-0 md:pl-12">
+          <div className="p-2 bottom-4 h-max md:top-0 md:right-0 md:mr-4 absolute px-4 text-sm bg-green-50 text-green-500 rounded-full mt-4">
+            {freeSpotifyUsesRemaining > 0
+              ? `You have ${freeSpotifyUsesRemaining} free uses remaining`
+              : 'You have no free uses remaining'}
+          </div>
+          <div className="flex flex-col gap-4 justify-center items-center">
+            <div className="flex flex-col mt-12 rounded-3xl border-2 border-black border-opacity-10">
               <div className="flex flex-row gap-2 w-full text-black/40 placeholder-black placeholder-opacity-40 rounded-t-3xl outline-none p-2 md:p-2">
                 <div className="opacity-40">
                   <svg
@@ -239,7 +246,7 @@ const AlbumArt = () => {
                     initial={{ opacity: 0, height: 'auto' }}
                     animate={{ opacity: 1, height: 'auto' }}
                     key={albums}
-                    className="border-t-2 border-black border-opacity-10 flex flex-col w-full max-h-72 overflow-y-scroll"
+                    className="border-t-2 border-black border-opacity-10 flex flex-col w-full max-h-36 md:max-h-64 overflow-y-scroll"
                   >
                     {albums.map((album, key) => (
                       <div
@@ -266,7 +273,7 @@ const AlbumArt = () => {
             </div>
             <div>
               {selectedAlbum && (
-                <div className="bg-gray-50 flex flex-col items-center p-4 rounded-md">
+                <div className="bg-gray-50 flex flex-row md:flex-col items-center p-4 rounded-md">
                   <motion.div
                     initial={{
                       y: 20,
@@ -283,7 +290,7 @@ const AlbumArt = () => {
                     transition={{ duration: 0.3 }}
                     key={selectedAlbum.name}
                     id="albumPreview"
-                    className="z-10  shadow-sm albumImage w-[150px] aspect-square"
+                    className="z-10  shadow-sm albumImage w-[50px] md:w-[150px] aspect-square"
                   ></motion.div>
                   <div className=" flex flex-col text-center mt-2 h-8 justify-center items-center">
                     <div className="text-black text-opacity-40 w-24 text-sm truncate">
@@ -293,27 +300,24 @@ const AlbumArt = () => {
                 </div>
               )}
             </div>
-            <div className="p-2 px-4 text-sm bg-green-50 text-green-500 rounded-full mt-4">
-              {freeSpotifyUsesRemaining > 0
-                ? `You have ${freeSpotifyUsesRemaining} free uses remaining`
-                : 'You have no free uses remaining'}
-            </div>
+
           </div>
           <div>
             {selectedAlbum && (
               <>
                 <ColorExtractor
                   maxColors={10}
+                  className="bg-red-500"
                   src={selectedAlbum.images[0].url}
                   getColors={setColors}
                 ></ColorExtractor>
               </>
             )}
           </div>
-          <div className="px-32 flex justify-center items-center">
+          <div className=" flex justify-center items-center">
             {generated ? (
               <div className="flex flex-col items-center justify-center">
-                <div className="flex flex-row gap-4">
+                <div className="grid grid-cols-2 md:flex flex-row gap-1 md:gap-4">
                   {colors.map((color) => {
                     return (
                       <div
