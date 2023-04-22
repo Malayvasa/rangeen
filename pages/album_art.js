@@ -9,6 +9,7 @@ import {
 } from '@supabase/auth-helpers-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const AlbumArt = () => {
   const user = useUser();
@@ -256,7 +257,7 @@ const AlbumArt = () => {
                         }}
                         className="cursor-pointer group py-2 px-4 flex flex-row max-w-[300px] w-96 items-center hover:bg-opacity-5"
                       >
-                        <img
+                        <Image
                           src={album.images[2].url}
                           width={50}
                           height={50}
@@ -300,7 +301,6 @@ const AlbumArt = () => {
                 </div>
               )}
             </div>
-
           </div>
           <div>
             {selectedAlbum && (

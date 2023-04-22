@@ -45,7 +45,7 @@ export default function NavBar() {
 
         <div className="flex h-full py-[4px] ">
           {pages.map((page) => (
-            <div className="flex h-full gap-4">
+            <div key={page.name} className="flex h-full gap-4">
               <div className="h-full hidden md:block">
                 <Link
                   className={`mx-1 group  relative flex items-center px-2 h-full`}
