@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,400;0,600;0,900;1,400;1,600;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Delicious+Handrawn&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -33,6 +35,47 @@
 body {
   background-color: white;
   font-family: 'Epilogue', sans-serif;
+}
+
+.spectrum {
+  overflow: hidden;
+}
+
+.spectrum:after {
+  content: '';
+  height: 500px;
+  width: 500px;
+  position: absolute;
+  filter: blur(5px);
+
+  /* position the circle in the center of the div */
+  left: -130px;
+  top: -220px;
+
+  z-index: -1;
+  background-image: conic-gradient(
+    from 180deg at 50% 50%,
+    #ff0200 -9.93deg,
+    #ff0000 4.09deg,
+    #ffa800 40.28deg,
+    #ebff00 73.38deg,
+    #24ff00 116.22deg,
+    #00f0ff 150.26deg,
+    #00fff0 183.69deg,
+    #0066ff 224.55deg,
+    #ad00ff 268.49deg,
+    #ff00a8 310.68deg,
+    #ff0200 350.07deg,
+    #ff0000 364.09deg
+  );
+  mix-blend-mode: overlay;
+  animation: spin 10s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .rainbow {
