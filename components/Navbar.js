@@ -35,7 +35,18 @@ export default function NavBar() {
   }, [router.pathname]);
 
   return (
-    <div className="fixed z-30 top-0 w-screen flex h-max px-4 pt-10">
+    <motion.div
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{
+        duration: 1,
+        type: 'spring',
+        delay: 1.0,
+        stiffness: 40,
+        tween: 'easeOut',
+      }}
+      className="fixed z-30 top-0 w-screen flex h-max px-4 pt-10"
+    >
       <div className="w-full md:w-3/5 items-center font-semibold justify-between rounded-full shadow-lg mx-auto top-0 h-12 pl-4 pr-2 md:pr-0  bg-white flex z-20">
         <div className="font-bold text-lg h-full">
           <Link href={'/'}>
@@ -127,6 +138,6 @@ export default function NavBar() {
           )}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
