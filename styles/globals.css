@@ -39,6 +39,7 @@ body {
 
 .spectrum {
   overflow: hidden;
+  border-radius: 9999px;
 }
 
 .spectrum:after {
@@ -49,8 +50,8 @@ body {
   filter: blur(5px);
 
   /* position the circle in the center of the div */
-  left: -130px;
-  top: -220px;
+  left: -175px;
+  top: -230px;
 
   z-index: -1;
   background-image: conic-gradient(

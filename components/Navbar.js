@@ -127,12 +127,30 @@ export default function NavBar() {
               </div>
             </div>
           ) : (
-            <div>
+            <div className="flex h-full">
               <Link
-                className="px-6 text-sm py-[11px] rounded-full bg-black/70 text-white tracking-tight"
+                className="relative px-6 md:mr-[4px] h-full rounded-full  text-white bg-black -mr-[4px] tracking-tight"
                 href="/login"
               >
-                Log In
+                <div
+                  className="absolute z-[8] cursor-none  inset-0 border-[2px] border-white/60"
+                  style={{
+                    borderRadius: '9999px',
+                  }}
+                ></div>
+                <div
+                  className="absolute z-[6] cursor-none  inset-0 spectrum"
+                  style={{
+                    borderRadius: '9999px',
+                    opacity: 0.8,
+                  }}
+                ></div>
+                <span
+                  //if active page, make text white
+                  className={`flex relative items-center text-white mix-blend-overlay px-2 h-full z-20`}
+                >
+                  Try Rangeen
+                </span>
               </Link>
             </div>
           )}
