@@ -1,31 +1,22 @@
 import { useState, useEffect } from 'react';
+import { Supabase_data } from '@/context/supabaseContext';
+import { useContext } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
-import { useRouter } from 'next/navigation';
-import {
-  useUser,
-  useSession,
-  useSupabaseClient,
-} from '@supabase/auth-helpers-react';
 import Link from 'next/link';
-import LogIn from '@/components/LogIn';
 
 const ColorGPT = () => {
-  const user = useUser();
+  const { supabase, user, session, AddPaletteToLibrary } =
+    useContext(Supabase_data);
   const [loading, setLoading] = useState(true);
   const [response, setResponse] = useState([]);
-  const session = useSession();
   const [mood, setMood] = useState('dreamy vibes');
   const [isLoading, setIsLoading] = useState(false);
-  const supabase = useSupabaseClient();
-  const { push } = useRouter();
-  const [formattedResponse, setFormattedResponse] = useState([]);
   const [hexList, setHexList] = useState([]);
   const [gptUsesRemaining, setGPTUsesRemaining] = useState(0);
 
   async function getFreeGPTUsesRemaining() {
     try {
       setLoading(true);
-
       let { data, error, status } = await supabase
         .from('profiles')
         .select('openai_generations')
@@ -34,10 +25,8 @@ const ColorGPT = () => {
       if (error && status !== 406) {
         throw error;
       }
-
       if (data) {
         setGPTUsesRemaining(data[0].openai_generations);
-        console.log(data);
       }
     } catch (error) {
       console.log(error);
@@ -68,37 +57,6 @@ const ColorGPT = () => {
     } finally {
       setLoading(false);
       getFreeGPTUsesRemaining();
-    }
-  }
-
-  async function addGPTPalette() {
-    try {
-      setLoading(true);
-
-      let { data, error, status } = await supabase.from('palettes').insert([
-        {
-          name: `${mood} - generated palette`,
-          colors: hexList,
-          user_id: user.id,
-          type: 'colorgpt',
-        },
-      ]);
-
-      if (error && status !== 406) {
-        throw error;
-      }
-
-      if (data) {
-        notifyAddPalette();
-        //combine name and colors into one object and set it to palettes
-        setPalettes(data);
-
-        console.log(data);
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
     }
   }
 
@@ -165,7 +123,6 @@ const ColorGPT = () => {
 
   return (
     <div className="h-screen w-screen flex justify-center bg-gray-100 items-center p-4  md:py-32 md:px-32">
-      <Toaster position="bottom-right" />
       {!session ? (
         <div className="w-full h-full bg-white flex flex-col justify-center items-center rounded-3xl pt-24 py-8 md:mt-0 md:py-12">
           <div className="mx-auto text-2xl mb-4 font-bold tracking-tight">
@@ -227,8 +184,9 @@ const ColorGPT = () => {
                   getResponseFromOpenAI();
                 }}
                 // disabled button greyed out if no uses remaining
-                className={`${gptUsesRemaining === 0 ? ' text-gray-100' : ' text-blue-500'
-                  } p-2 rounded-full focus:outline-none  focus:text-blue-500 focus:placeholder-white/50`}
+                className={`${
+                  gptUsesRemaining === 0 ? ' text-gray-100' : ' text-blue-500'
+                } p-2 rounded-full focus:outline-none  focus:text-blue-500 focus:placeholder-white/50`}
               >
                 <svg
                   width="32px"
@@ -294,8 +252,13 @@ const ColorGPT = () => {
                     <button>
                       <div
                         onClick={() => {
-                          addGPTPalette();
-                          toast.success('Palette added to your collection!');
+                          // addGPTPalette();
+                          let hexList = response.map((color) => color.hex);
+                          AddPaletteToLibrary(
+                            `${mood} - Generated Palette`,
+                            hexList,
+                            'colorgpt'
+                          );
                         }}
                         className="h-max w-max bg-slate-500/5 text-slate-500 rounded-md p-2 hover:bg-slate-800 hover:text-slate-100 transition-all duration-200"
                       >

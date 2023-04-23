@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import Color from 'color';
 import { motion } from 'framer-motion';
-import toast, { Toaster } from 'react-hot-toast';
 import album from '../components/assets/album.jpeg';
 import Image from 'next/image';
 import Head from 'next/head';
@@ -141,19 +140,31 @@ const Home = () => {
         <title>Rangeen</title>
         <meta name="description" content="Rangeen" />
         <link rel="icon" href="/favicon.ico" />
-        
+
         <meta property="og:title" content="Rangeen" />
-        <meta property="og:description" content="The tool to create and curate color palettes for your next project" />
-        <meta property="og:image" content="https://rangeenpalettes.vercel.app/og.png" />
+        <meta
+          property="og:description"
+          content="The tool to create and curate color palettes for your next project"
+        />
+        <meta
+          property="og:image"
+          content="https://rangeenpalettes.vercel.app/og.png"
+        />
         <meta property="og:url" content="https://rangeen.vercel.app/" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Rangeen" />
-        <meta name="twitter:description" content="The tool to create and curate color palettes for your next project" />
-        <meta name="twitter:image" content="https://rangeenpalettes.vercel.app/og.png" />
+        <meta
+          name="twitter:description"
+          content="The tool to create and curate color palettes for your next project"
+        />
+        <meta
+          name="twitter:image"
+          content="https://rangeenpalettes.vercel.app/og.png"
+        />
         <meta name="twitter:site" content="@rangeen" />
         <meta name="twitter:creator" content="@rangeen" />
-        </Head>
+      </Head>
       <div className="flex flex-col w-full">
         <div className="font-black text-5xl md:text-7xl tracking-tighter text-center">
           Start making your world <br /> more{' '}
@@ -226,11 +237,16 @@ const Home = () => {
                     
                     "
                   >
-<svg  viewBox="0 0 288 288" fill={color} xmlns="http://www.w3.org/2000/svg">
-<path d="M123.5 11.8357C136.185 4.51174 151.815 4.51174 164.5 11.8357L248.208 60.1643C260.893 67.4883 268.708 81.0235 268.708 95.6714V192.329C268.708 206.977 260.893 220.512 248.208 227.836L164.5 276.164C151.815 283.488 136.185 283.488 123.5 276.164L39.7923 227.836C27.1069 220.512 19.2923 206.977 19.2923 192.329V95.6714C19.2923 81.0235 27.1069 67.4883 39.7923 60.1643L123.5 11.8357Z" fill={color}/>
-</svg>
-
-
+                    <svg
+                      viewBox="0 0 288 288"
+                      fill={color}
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M123.5 11.8357C136.185 4.51174 151.815 4.51174 164.5 11.8357L248.208 60.1643C260.893 67.4883 268.708 81.0235 268.708 95.6714V192.329C268.708 206.977 260.893 220.512 248.208 227.836L164.5 276.164C151.815 283.488 136.185 283.488 123.5 276.164L39.7923 227.836C27.1069 220.512 19.2923 206.977 19.2923 192.329V95.6714C19.2923 81.0235 27.1069 67.4883 39.7923 60.1643L123.5 11.8357Z"
+                        fill={color}
+                      />
+                    </svg>
                   </motion.div>
                 );
               })}

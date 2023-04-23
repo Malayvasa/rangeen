@@ -1,21 +1,22 @@
 import '../styles/globals.css';
-import toast, { Toaster } from 'react-hot-toast';
 import { createBrowserSupabaseClient } from '@supabase/auth-helpers-nextjs';
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
-import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
+import SupabaseContext from '@/context/supabaseContext';
 import { useState } from 'react';
 import NavBar from '@/components/Navbar';
 
 function App({ Component, pageProps }) {
-  const [supabase] = useState(() => createBrowserSupabaseClient());
+  const [supabaseCP] = useState(() => createBrowserSupabaseClient());
 
   return (
     <SessionContextProvider
-      supabaseClient={supabase}
+      supabaseClient={supabaseCP}
       initialSession={pageProps.initialSession}
     >
-      <NavBar />
-      <Component {...pageProps} />
+      <SupabaseContext>
+        <NavBar />
+        <Component {...pageProps} />
+      </SupabaseContext>
     </SessionContextProvider>
   );
 }

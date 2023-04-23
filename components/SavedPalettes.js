@@ -1,76 +1,27 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { useUser, useSupabaseClient } from '@supabase/auth-helpers-react';
-import Color from 'color';
+import { Supabase_data } from '@/context/supabaseContext';
+import { useContext } from 'react';
 import ExportModal from './ExportModal';
 
-export default function SavedPalettes({ session }) {
-  const supabase = useSupabaseClient();
-  const user = useUser();
-  const [loading, setLoading] = useState(true);
+export default function SavedPalettes({}) {
   const [palettes, setPalettes] = useState([]);
-  const [palettesCount, setPalettesCount] = useState(0);
+  const { session, SignOut, GetPalettes, DeletePalette } =
+    useContext(Supabase_data);
 
   useEffect(() => {
-    getPalettes();
+    GetPalettes().then((data) => {
+      setPalettes(data);
+    });
   }, [session]);
 
-  async function getPalettes() {
-    try {
-      setLoading(true);
-
-      let { data, error, status } = await supabase
-        .from('palettes')
-        .select(`id,name, colors,type, created_at`)
-        .eq('user_id', user.id);
-
-      if (error && status !== 406) {
-        throw error;
-      }
-
-      if (data) {
-        //combine name and colors into one object and set it to palettes
-        // sort by created_at
-        data.sort((a, b) => {
-          return new Date(b.created_at) - new Date(a.created_at);
-        });
-
-        setPalettes(data);
-        //count the number of palettes
-        setPalettesCount(data.length);
-
-        console.log(data);
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  }
-
   async function deletePalette(palette) {
-    try {
-      setLoading(true);
-
-      let { data, error, status } = await supabase
-        .from('palettes')
-        .delete()
-        .eq('id', palette.id);
-
-      if (error && status !== 406) {
-        throw error;
-      }
-
-      if (data) {
-        console.log(data);
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-      getPalettes();
-    }
+    DeletePalette(palette).then((data) => {
+      GetPalettes().then((data) => {
+        setPalettes(data);
+      });
+    });
   }
 
   return (
@@ -79,7 +30,7 @@ export default function SavedPalettes({ session }) {
         <div className="text-xl justify-between gap-4 w-full tracking-tight flex mb-4">
           <div className="flex gap-2 items-center justify-center font-semibold text-gray-500">
             Saved palettes
-            {loading ? <></> : <div>({palettesCount})</div>}
+            <div>({palettes.length})</div>
           </div>
           <div className="hidden md:flex items-center gap-4 text-gray-400">
             {session.user.email}
@@ -87,7 +38,7 @@ export default function SavedPalettes({ session }) {
               title="Sign out"
               className="bg-slate-500/5 w-max text-slate-300 rounded-md p-2 hover:bg-slate-800 hover:text-slate-100 transition-all duration-200"
               onClick={() => {
-                supabase.auth.signOut();
+                SignOut();
               }}
             >
               <svg
@@ -162,6 +113,7 @@ export default function SavedPalettes({ session }) {
                   );
                 })}
               </Link>
+
               <ExportModal hexList={palette.colors}>
                 <button className="hidden md:block bg-slate-200/20 h-full w-max text-slate-400 rounded-md p-2 hover:bg-slate-800 hover:text-slate-100 transition-all duration-200">
                   <svg

@@ -45,7 +45,7 @@ export default function NavBar() {
         stiffness: 40,
         tween: 'easeOut',
       }}
-      className="fixed z-30 top-0 w-screen flex h-max px-4 pt-10"
+      className="fixed z-[5] top-0 w-screen flex h-max px-4 pt-10"
     >
       <div className="w-full md:w-3/5 items-center font-semibold justify-between rounded-full shadow-lg mx-auto top-0 h-12 pl-4 pr-2 md:pr-0  bg-white flex z-20">
         <div className="font-bold text-lg h-full">

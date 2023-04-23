@@ -1,12 +1,10 @@
-import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import { useSession } from '@supabase/auth-helpers-react';
 import SavedPalettes from '@/components/SavedPalettes';
 import LogIn from '@/components/LogIn';
+import { Supabase_data } from '@/context/supabaseContext';
+import { useContext } from 'react';
 
 const Library = () => {
-  const session = useSession();
-  const { push } = useRouter();
+  const { session } = useContext(Supabase_data);
 
   return (
     <div className="flex justify-center bg-gray-100 min-h-screen">

@@ -1,52 +1,13 @@
 import { useEffect, useState } from 'react';
 import Color from 'color';
 import { motion } from 'framer-motion';
-import toast, { Toaster } from 'react-hot-toast';
-
-import {
-  useUser,
-  useSession,
-  useSupabaseClient,
-} from '@supabase/auth-helpers-react';
-
-import LogIn from '@/components/LogIn';
+import { Supabase_data } from '@/context/supabaseContext';
+import { useContext } from 'react';
 import ExportModal from '@/components/ExportModal';
 
-const Randomizer = () => {
-  const session = useSession();
-  const supabase = useSupabaseClient();
-  const user = useUser();
-  const [loading, setLoading] = useState(true);
+const Randomizer = ({}) => {
   const [randomNewPalette, setRandomNewPalette] = useState([]);
-
-  async function addRandomPalette(randomNewPalette) {
-    try {
-      setLoading(true);
-
-      let { data, error, status } = await supabase.from('palettes').insert([
-        {
-          name: 'random palette',
-          colors: randomNewPalette,
-          user_id: user.id,
-          type: 'random',
-        },
-      ]);
-
-      if (error && status !== 406) {
-        throw error;
-      }
-
-      if (data) {
-        //combine name and colors into one object and set it to palettes
-        setPalettes(data);
-        console.log(data);
-      }
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
-    }
-  }
+  const { session, AddPaletteToLibrary } = useContext(Supabase_data);
 
   function generateRandomColors() {
     let randomColors = [];
@@ -68,22 +29,6 @@ const Randomizer = () => {
     });
 
     setRandomNewPalette(randomColors);
-    // //use the first six colors to change the css root variables
-    // let root = document.documentElement;
-    // root.style.setProperty('--background1-hex', randomColors[0]);
-    // root.style.setProperty('--background2-hex', randomColors[1]);
-    // root.style.setProperty('--background3-hex', randomColors[2]);
-    // root.style.setProperty('--background4-hex', randomColors[3]);
-    // root.style.setProperty('--background5-hex', randomColors[4]);
-    // root.style.setProperty('--background6-hex', randomColors[5]);
-    // root.style.setProperty('--background7-hex', randomColors[6]);
-    // root.style.setProperty('--background8-hex', randomColors[7]);
-    // root.style.setProperty('--background9-hex', randomColors[8]);
-    // root.style.setProperty('--background10-hex', randomColors[9]);
-  }
-
-  function notifyAddPalette() {
-    toast.success('Added to your library!');
   }
 
   useEffect(() => {
@@ -93,16 +38,9 @@ const Randomizer = () => {
 
   return (
     <div className="h-screen w-screen flex justify-center bg-gray-100 items-center px-4 py-4 md:py-32 md:px-32">
-      <Toaster position="bottom-center" />
       <div></div>
 
       <div className="bg-white rounded-3xl shadow-sm w-full h-full flex flex-col justify-center items-center">
-        {/* <motion.div className="font-bold text-8xl text-white mb-4 text-shadow mx-auto tracking-tighter z-20">
-          रंगीन
-        </motion.div> */}
-        {/* <motion.div className="text-center font-bold text-xl tracking-tight leading-tight text-white/60 mb-16 mx-auto z-20">
-          a home for your colors
-        </motion.div> */}
         <motion.div className="flex w-full flex-col justify-center items-center">
           <div className="grid grid-cols-2 md:flex w-max justify-evenly">
             {randomNewPalette.map((color) => {
@@ -165,9 +103,15 @@ const Randomizer = () => {
             {session ? (
               <button
                 className="bg-slate-500/20 w-max text-slate-500 rounded-md p-2 hover:bg-slate-800 hover:text-slate-100 transition-all duration-200"
-                onClick={() => {
-                  addRandomPalette(randomNewPalette);
-                  notifyAddPalette();
+                onClick={async () => {
+                  // addRandomPalette(randomNewPalette);
+                  const result = await AddPaletteToLibrary(
+                    'Random Palette',
+                    randomNewPalette,
+                    'random'
+                  );
+                  console.log(result);
+                  // notifyAddPalette(result);
                 }}
               >
                 <svg
