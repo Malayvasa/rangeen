@@ -96,7 +96,7 @@ const Randomizer = ({}) => {
               variants={container}
               initial="hidden"
               animate="show"
-              className="grid grid-cols-2 mx-2 md:w-[650px] lg:w-[1000px] h-96 md:flex gap-2 justify-evenly"
+              className="mx-2 w-[250px] md:w-[650px] lg:w-[1000px] md:h-96 flex flex-col md:flex-row gap-2 justify-evenly"
             >
               {randomNewPalette.map((color, index) => {
                 return (
@@ -107,7 +107,7 @@ const Randomizer = ({}) => {
                   >
                     <div
                       //if the color is dark, add a white border to it
-                      className={`w-full flex-grow h-96 rounded-full flex justify-center items-center ${
+                      className={`w-full flex-grow h-12 md:h-96 rounded-full flex justify-center items-center ${
                         Color(color.hex).isDark()
                           ? 'hover:border-8 border-gray-200/40'
                           : 'hover:border-8 border-gray-800/40'

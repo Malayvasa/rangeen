@@ -147,7 +147,7 @@ export default function ExportModal({ hexList, children }) {
                         copySVG(hexList);
                         closeModal();
                       }}
-                      className="w-96 p-4 gap-2 relative items-center shadow-sm flex text-gray-600 rounded-lg bg-white"
+                      className="w-80 md:w-96 p-4 gap-2 relative items-center shadow-sm flex text-gray-600 rounded-lg bg-white"
                     >
                       <div>
                         <svg
@@ -211,7 +211,7 @@ export default function ExportModal({ hexList, children }) {
                         copyHexList(hexList);
                         closeModal();
                       }}
-                      className="w-96 p-4 gap-2 items-center shadow-sm flex text-gray-600 rounded-lg bg-white"
+                      className="w-80 md:w-96 p-4 gap-2 items-center shadow-sm flex text-gray-600 rounded-lg bg-white"
                     >
                       <div>
                         <svg
@@ -246,7 +246,7 @@ export default function ExportModal({ hexList, children }) {
                         copyRGBList(hexList);
                         closeModal();
                       }}
-                      className="w-96 p-4 gap-2 items-center shadow-sm flex text-gray-600 rounded-lg bg-white"
+                      className="w-80 md:w-96 p-4 gap-2 items-center shadow-sm flex text-gray-600 rounded-lg bg-white"
                     >
                       <div>
                         <svg
@@ -281,7 +281,7 @@ export default function ExportModal({ hexList, children }) {
                         copyCMYKList(hexList);
                         closeModal();
                       }}
-                      className="w-96 p-4 gap-2 items-center shadow-sm flex text-gray-600 rounded-lg bg-white"
+                      className="w-80 md:w-96 p-4 gap-2 items-center shadow-sm flex text-gray-600 rounded-lg bg-white"
                     >
                       <div>
                         <svg

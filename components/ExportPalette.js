@@ -42,7 +42,7 @@ export default function ExportPalette({ hexList }) {
           initial="hidden"
           animate="show"
           key={hexList}
-          className="w-96 p-4 gap-1 relative items-center shadow-inner flex  rounded-lg bg-neutral-100/50"
+          className="w-80 md:w-96 p-4 gap-1 relative items-center shadow-inner flex  rounded-lg bg-neutral-100/50"
         >
           {hexList.map((hex, index) => {
             return (
