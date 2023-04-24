@@ -22,13 +22,14 @@ const Home = () => {
   const user = useUser();
   const colorblindTypes = ['protanopia', 'deuteranopia', 'tritanopia'];
   const [randomNewPalette, setRandomNewPalette] = useState([
+    '#9867D5',
     '#DF8F7F',
     '#50523F',
     '#9EF453',
     '#61CAD4',
     '#5FA4D3',
     '#1534A3',
-    '#9867D5',
+
     '#CAAAE1',
     '#A924C6',
     '#A3314C',
@@ -167,8 +168,30 @@ const Home = () => {
       </Head>
       <div className="flex flex-col w-full">
         <div className="font-black text-5xl md:text-7xl tracking-tighter text-center">
-          Start making your world <br /> more{' '}
-          <span className="text-[#EDA315]">rangeen</span>
+          The perfect{' '}
+          <span
+            style={{
+              color: `${Color(randomNewPalette[0])
+                .saturate(1)
+                .darken(0.3)
+                .hex()}`,
+            }}
+          >
+            color
+          </span>{' '}
+          <span
+            style={{
+              color: `${Color(randomNewPalette[0])
+                .hue(Color(randomNewPalette[0]).hue() + 90)
+                .saturate(1)
+                .darken(0.3)
+                .hex()}`,
+            }}
+          >
+            palettes
+          </span>{' '}
+          <br /> for your next project.{' '}
+          {/* <span className="text-[#EDA315]">rangeen</span> */}
         </div>
 
         <div className="flex h-max flex-row justify-center items-center gap-4 mt-12">
@@ -573,7 +596,7 @@ const Home = () => {
               })}
             </div>
           </div>
-          <div className="bg-gray-50 md:absolute z-[10] md:bottom-0 md:right-0 scale-75 md:scale-[90%] md:translate-y-[35%] md:-translate-x-[10%] mx-auto flex items-center justify-center p-8 w-max rounded-3xl shadow-lg">
+          <div className="bg-gray-50 md:absolute z-[4] md:bottom-0 md:right-0 scale-75 md:scale-[90%] md:translate-y-[35%] md:-translate-x-[10%] mx-auto flex items-center justify-center p-8 w-max rounded-3xl shadow-lg">
             <div className="flex flex-col gap-y-4">
               <div className="w-72 md:w-96 p-4 gap-2 relative items-center shadow-sm flex text-gray-600 rounded-lg bg-white">
                 <div>
