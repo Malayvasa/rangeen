@@ -13,6 +13,48 @@ function SupabaseContext({ children }) {
   const supabase = useSupabaseClient();
   const user = useUser();
 
+  async function SignUp(email, password) {
+    try {
+      let { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+      });
+
+      if (data) {
+        console.log(data);
+        toast.success('Check your email for the confirmation link!', {
+          duration: 5000,
+        });
+        return 'Waiting for confirmation';
+      }
+
+      if (error) {
+        toast.error(error.message);
+        return error.message;
+      }
+    } catch (error) {
+      console.log(error);
+      return error.message;
+    }
+  }
+
+  async function SignIn(email, password) {
+    try {
+      let { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (error) {
+        toast.error(error.message);
+        return error.message;
+      }
+    } catch (error) {
+      console.log(error);
+      return error.message;
+    }
+  }
+
   function SignOut() {
     supabase.auth.signOut();
   }
@@ -118,6 +160,8 @@ function SupabaseContext({ children }) {
         supabase,
         session,
         user,
+        SignUp,
+        SignIn,
         SignOut,
         GetPalettes,
         DeletePalette,

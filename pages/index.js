@@ -188,7 +188,7 @@ const Home = () => {
                 .hex()}`,
             }}
           >
-            palettes
+            palette
           </span>{' '}
           <br /> for your next project.{' '}
           {/* <span className="text-[#EDA315]">rangeen</span> */}
@@ -864,7 +864,7 @@ const Home = () => {
             </div>
 
             <div>
-              <Link href="/login">
+              <Link href="/signup">
                 <button className="bg-slate-800 mix-blend-overlay text-3xl font-semibold w-max flex absolute left-1/2 top-1/2 -translate-x-[50%] -translate-y-[50%] md:-translate-y-[0%] text-slate-300 rounded-full py-[30px] gap-2 px-[40px] hover:bg-slate-800 hover:text-slate-100 transition-all duration-200 z-[20]">
                   Sign Up
                 </button>

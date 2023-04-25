@@ -7,13 +7,12 @@ import { useContext } from 'react';
 import { useSupabaseClient, useSession } from '@supabase/auth-helpers-react';
 import Link from 'next/link';
 
-export default function LogIn() {
+export default function SignUp() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const supabase = useSupabaseClient();
-  const { session, SignIn, SignOut, GetPalettes, DeletePalette } =
-    useContext(Supabase_data);
+  const { SignUp } = useContext(Supabase_data);
 
   return (
     <div className="w-full md:w-[600px] items-center px-8 overflow-hidden flex flex-col m-auto">
@@ -114,19 +113,27 @@ export default function LogIn() {
         <button
           className="p-4 w-full bg-black/40 mt-8 text-lg rounded-md font-bold text-white"
           onClick={async () => {
-            let error = await SignIn(email, password);
+            let error = await SignUp(email, password);
             if (error) {
               setError(error);
             }
           }}
         >
-          Log In
+          Sign Up
         </button>
-        <Link href={'/signup'}>
-          <div className="text-black/40 text-sm font-semibold hover:text-black">
-            Don't have an account? Sign up here.
-          </div>
-        </Link>
+        <div>
+          {error.length <= 0 ? (
+            <Link href={'/login'}>
+              <div className="text-black/40 text-sm font-semibold hover:text-black">
+                Already have an account? Log in here.
+              </div>
+            </Link>
+          ) : (
+            <div className="text-black/40 text-sm font-semibold hover:text-black">
+              {error}
+            </div>
+          )}
+        </div>
       </motion.div>
     </div>
   );
