@@ -124,7 +124,7 @@ export default function LogIn() {
         </button>
         <Link href={'/signup'}>
           <div className="text-black/40 text-sm font-semibold hover:text-black">
-            Don't have an account? Sign up here.
+            {"Don't have an account? Sign up here."}
           </div>
         </Link>
       </motion.div>

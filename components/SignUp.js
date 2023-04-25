@@ -125,7 +125,7 @@ export default function SignUp() {
           {error.length <= 0 ? (
             <Link href={'/login'}>
               <div className="text-black/40 text-sm font-semibold hover:text-black">
-                Already have an account? Log in here.
+                {'Already have an account? Log in here.'}
               </div>
             </Link>
           ) : (
