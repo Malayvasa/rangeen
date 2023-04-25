@@ -7,7 +7,7 @@ import ExportModal from './ExportModal';
 import Color from 'color';
 
 export default function SavedPalettes({}) {
-  const [filter, setFilter] = useState('random');
+  const [filter, setFilter] = useState('all');
   const [filteredPalettes, setFilteredPalettes] = useState([]);
   const [palettes, setPalettes] = useState([]);
   const { session, SignOut, GetPalettes, DeletePalette } =
