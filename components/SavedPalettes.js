@@ -159,7 +159,9 @@ export default function SavedPalettes({}) {
               key={palette.id}
             >
               <div className=" gap-y-4 w-full min-w-full flex flex-col justify-between items-start relative bg-white hover:shadow-xl transition-all shadow-sm py-4 rounded-md md:gap-4">
-                <div className="text-gray-400 px-4">{palette.name}</div>
+                <div className="text-gray-400 px-4 capitalize">
+                  {palette.name}
+                </div>
 
                 <div className="flex flex-wrap md:flex-auto my-2 gap-1 px-4">
                   {palette.colors.map((color) => {
