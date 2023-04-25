@@ -7,7 +7,7 @@ const Library = () => {
   const { session } = useContext(Supabase_data);
 
   return (
-    <div className="flex justify-center bg-gray-100 min-h-screen">
+    <div className="flex justify-center bg-gray-100 w-screen min-h-screen">
       {!session ? (
         <LogIn />
       ) : (
