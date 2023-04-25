@@ -85,7 +85,7 @@ export default function SavedPalettes({}) {
   };
 
   return (
-    <div>
+    <div className=" rounded-3xl h-full w-full">
       <div className=" w-full text-center my-4 mt-8 tracking-tight font-bold text-3xl">
         Library
       </div>
@@ -113,7 +113,7 @@ export default function SavedPalettes({}) {
         variants={container}
         initial="hidden"
         animate="show"
-        className="w-full grid grid-cols-1 md:grid-cols-1 gap-8"
+        className="w-full grid grid-cols-1 md:grid-cols-2 gap-8"
       >
         {/* <div className="text-xl justify-between gap-4 w-full tracking-tight flex mb-4">
           <div className="flex gap-2 items-center justify-center font-semibold text-gray-500">
