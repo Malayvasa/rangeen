@@ -129,17 +129,23 @@ export default function NavBar() {
           ) : (
             <div className="flex h-full">
               <Link
-                className="relative px-6 md:mr-[4px] h-full rounded-full  text-white bg-black -mr-[4px] tracking-tight"
+                className="relative px-6 md:mr-[4px] h-full rounded-full text-white  -mr-[4px] tracking-tight"
                 href="/signup"
               >
                 <div
-                  className="absolute z-[8] cursor-none  inset-0 border-[2px] border-white/60"
+                  className="absolute z-[9] cursor-none bg-black/20 inset-0 border-[0px] border-white/60"
                   style={{
                     borderRadius: '9999px',
                   }}
                 ></div>
                 <div
-                  className="absolute z-[6] cursor-none  inset-0 spectrum"
+                  className="absolute z-[8] cursor-none  spectrum blur-sm inset-0 border-[0px] border-white/60"
+                  style={{
+                    borderRadius: '9999px',
+                  }}
+                ></div>
+                <div
+                  className="absolute z-[6] cursor-none  inset-0"
                   style={{
                     borderRadius: '9999px',
                     opacity: 0.8,

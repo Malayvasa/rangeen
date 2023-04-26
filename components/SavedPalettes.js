@@ -5,6 +5,8 @@ import { Supabase_data } from '@/context/supabaseContext';
 import { useContext } from 'react';
 import ExportModal from './ExportModal';
 import Color from 'color';
+import Iconoir from 'iconoir/icons/iconoir.svg';
+import { toast } from 'react-hot-toast';
 
 export default function SavedPalettes({}) {
   const [filter, setFilter] = useState('all');
@@ -43,6 +45,18 @@ export default function SavedPalettes({}) {
       GetPalettes().then((data) => {
         setPalettes(data);
       });
+    });
+  }
+
+  function copyPalleteLink(id) {
+    const el = document.createElement('textarea');
+    el.value = `https://rangeen.studio/palette/${id}`;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    toast.success('Link copied to clipboard!', {
+      duration: 5000,
     });
   }
 
@@ -247,6 +261,35 @@ export default function SavedPalettes({}) {
                         <span className="text-xs">Export</span>
                       </button>
                     </ExportModal>
+                    <button
+                      onClick={() => {
+                        copyPalleteLink(palette.id);
+                      }}
+                      className="flex justify-center items-center gap-2 w-max  bg-slate-200/20 hover:bg-slate-900 text-slate-400 rounded-md p-2  hover:text-slate-100 transition-all duration-200"
+                    >
+                      <svg
+                        width="20px"
+                        height="20px"
+                        stroke-width="1.5"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        color="currentColor"
+                      >
+                        <path
+                          d="M18 22a3 3 0 100-6 3 3 0 000 6zM18 8a3 3 0 100-6 3 3 0 000 6zM6 15a3 3 0 100-6 3 3 0 000 6z"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                        <path
+                          d="M15.5 6.5l-7 4M8.5 13.5l7 4"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                        ></path>
+                      </svg>
+                    </button>
                     <button
                       className="flex justify-center items-center gap-2 bg-slate-200/20 w-max text-slate-400 rounded-md p-2 hover:bg-slate-800 hover:text-slate-100 transition-all duration-200"
                       onClick={() => {

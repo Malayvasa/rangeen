@@ -99,15 +99,17 @@ export default function Palette() {
                     stroke-linejoin="round"
                   ></path>
                 </svg>
-                <div className="font-bold">Generated Using ColorGPT</div>
+                <div className="font-semibold">Generated Using ColorGPT</div>
               </div>
             )}
             <div
-              // if screen size is above md palette has 10 colors use grid-cols-5 else grid-cols-3 
+              // if screen size is above md palette has 10 colors use grid-cols-5 else grid-cols-3
               // if screen size is below use grid-cols-2
-              className={`grid grid-cols-2 gap-4 w-full ${palette.colors.length == 10 ? 'md:grid-cols-5' : 'md:grid-cols-3'
-                }`}
-
+              className={`grid grid-cols-2 gap-4 w-full ${
+                palette.colors.length == 10
+                  ? 'md:grid-cols-5'
+                  : 'md:grid-cols-3'
+              }`}
             >
               {palette.colors.map((color) => {
                 let rgb = Color(color).rgb().array();
