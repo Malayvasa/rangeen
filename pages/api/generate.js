@@ -1,16 +1,23 @@
 import { OpenAIStream } from '../../utils/OpenAIStream';
 
+if (!process.env.OPEN_API_KEY) {
+  throw new Error('Missing env var from OpenAI');
+}
+
 export const config = {
   runtime: 'edge',
 };
 
 const handler = async (req) => {
-  const { prompt } = (await req.json()) || {};
-  console.log('api prompt :', prompt);
+  const { prompt } = await req.json();
+
+  if (!prompt) {
+    return new Response('No prompt in the request', { status: 400 });
+  }
 
   const payload = {
-    model: 'text-davinci-003',
-    prompt,
+    model: 'gpt-3.5-turbo',
+    messages: [{ role: 'user', content: prompt }],
     temperature: 0.7,
     top_p: 1,
     frequency_penalty: 0,
