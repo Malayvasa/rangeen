@@ -122,13 +122,13 @@ const AlbumArt = () => {
   };
 
   useEffect(() => {
-    if (searchString.length > 0) {
+    const delayDebounceFn = setTimeout(() => {
+      console.log(searchString);
       GetData();
-    } else {
-      {
-        setAlbums([]);
-      }
-    }
+      // Send Axios request here
+    }, 1500);
+
+    return () => clearTimeout(delayDebounceFn);
   }, [searchString]);
 
   const handleAlbumSelect = (album) => {
@@ -363,7 +363,7 @@ const AlbumArt = () => {
             )}
             {generating ? (
               <>
-                <div className="blur-[15px] saturate-[200%] mt-8">
+                <div className="blur-[15px] saturate-[200%] mt-8 ml-32">
                   <div className="loader1 left-1/2 top-1/2 z-10 "></div>
                   <div className="loader2 left-1/2 top-1/2 z-10 "></div>
                   <div className="loader3 left-1/2 top-1/2 z-10 "></div>
