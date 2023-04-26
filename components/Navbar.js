@@ -129,34 +129,25 @@ export default function NavBar() {
           ) : (
             <div className="flex h-full">
               <Link
-                className="relative px-6 md:mr-[4px] h-full rounded-full text-white  -mr-[4px] tracking-tight"
+                className="relative group md:mr-[4px] h-full bg-black rounded-full text-white border-white/60 border-2  -mr-[4px] tracking-tight"
                 href="/signup"
               >
-                <div
-                  className="absolute z-[9] cursor-none bg-black/20 inset-0 border-[0px] border-white/60"
-                  style={{
-                    borderRadius: '9999px',
+                <motion.span
+                  //make text bigger on hover
+                  whileHover={{
+                    fontSize: '14px',
+                    paddingLeft: '38px',
+                    paddingRight: '38px',
                   }}
-                ></div>
-                <div
-                  className="absolute z-[8] cursor-none  spectrum blur-sm inset-0 border-[0px] border-white/60"
-                  style={{
-                    borderRadius: '9999px',
+                  //make text animate colors ON HOVER
+                  transition={{
+                    duration: 0.3,
+                    type: 'spring',
                   }}
-                ></div>
-                <div
-                  className="absolute z-[6] cursor-none  inset-0"
-                  style={{
-                    borderRadius: '9999px',
-                    opacity: 0.8,
-                  }}
-                ></div>
-                <span
-                  //if active page, make text white
-                  className={`flex relative items-center text-white mix-blend-overlay px-2 h-full z-20`}
+                  className={`flex relative items-center text-sm text-white px-4 h-full w-full z-20`}
                 >
                   Try Rangeen
-                </span>
+                </motion.span>
               </Link>
             </div>
           )}
