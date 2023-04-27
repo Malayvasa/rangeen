@@ -44,6 +44,13 @@ function SupabaseContext({ children }) {
         email,
         password,
       });
+      if (data) {
+        console.log(data);
+        toast.success(`Welcome back ${data.user.email}!`, {
+          duration: 5000,
+        });
+        return 'Success';
+      }
 
       if (error) {
         toast.error(error.message);
