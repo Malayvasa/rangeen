@@ -5,6 +5,7 @@ import {
   useSession,
   useSupabaseClient,
 } from '@supabase/auth-helpers-react';
+import { PostHogProvider, usePostHog } from 'posthog-js/react';
 
 export const Supabase_data = createContext(null);
 

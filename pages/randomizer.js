@@ -4,11 +4,13 @@ import { motion } from 'framer-motion';
 import { Supabase_data } from '@/context/supabaseContext';
 import { useContext } from 'react';
 import ExportModal from '@/components/ExportModal';
+import { usePostHog } from 'posthog-js/react';
 
 const Randomizer = ({}) => {
   const [randomNewPalette, setRandomNewPalette] = useState([]);
   const [currentHexList, setCurrentHexList] = useState([]);
   const { session, AddPaletteToLibrary } = useContext(Supabase_data);
+  const posthog = usePostHog();
 
   function generateRandomColors() {
     let randomColors = [];
@@ -114,7 +116,6 @@ const Randomizer = ({}) => {
                       } transition-all`}
                       style={{ backgroundColor: color.hex }}
                       onClick={() => {
-                        console.log(Color(color.hex).darken(0.5).hex());
                         let newColors = [...randomNewPalette];
                         newColors[index].locked = !newColors[index].locked;
                         setRandomNewPalette(newColors);
@@ -188,6 +189,9 @@ const Randomizer = ({}) => {
               className="bg-slate-500/20 w-max text-slate-500 rounded-md p-2 hover:bg-slate-800 hover:text-slate-100 transition-all duration-200"
               onClick={() => {
                 generateRandomColors();
+                posthog.capture('Randomizer', {
+                  property: currentHexList,
+                });
               }}
             >
               <svg

@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
+import { usePostHog } from 'posthog-js/react';
 
 const AlbumArt = () => {
   const { supabase, user, session, AddPaletteToLibrary } =
@@ -41,6 +42,7 @@ const AlbumArt = () => {
   const [generating, setGenerating] = useState(false);
   const [hexList, setHexList] = useState([]);
   const [freeSpotifyUsesRemaining, setFreeSpotifyUsesRemaining] = useState(0);
+  const posthog = usePostHog();
 
   async function getFreeSpotifyUsesRemaining() {
     try {
@@ -315,6 +317,9 @@ const AlbumArt = () => {
                     disabled={freeSpotifyUsesRemaining === 0 ? true : false}
                     onClick={() => {
                       startGenerating();
+                      posthog.capture('Album Art', {
+                        property: `${selectedAlbum.name} by ${selectedAlbum.artists[0].name}`,
+                      });
                     }}
                     //make button disabled if no free uses remaining
                     className={

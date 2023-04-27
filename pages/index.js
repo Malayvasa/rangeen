@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import album from '../components/assets/album.jpeg';
 import Image from 'next/image';
 import Head from 'next/head';
+import { usePostHog } from 'posthog-js/react';
 
 import {
   useUser,
@@ -17,6 +18,7 @@ import ColorBlindSim from '@/components/ColorBlindSim';
 import Link from 'next/link';
 
 const Home = () => {
+  const posthog = usePostHog();
   const session = useSession();
   const supabase = useSupabaseClient();
   const user = useUser();
@@ -281,6 +283,9 @@ const Home = () => {
                 className="bg-slate-800 w-max flex text-slate-300 rounded-full py-[10px] gap-2 px-[10px] md:px-[20px] hover:bg-slate-800 hover:text-slate-100 transition-all duration-200"
                 onClick={() => {
                   generateRandomColors();
+                  posthog.capture('Home Page Randomize', {
+                    property: randomNewPalette,
+                  });
                 }}
               >
                 Randomize

@@ -3,6 +3,7 @@ import { Supabase_data } from '@/context/supabaseContext';
 import { useContext } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import Link from 'next/link';
+import { usePostHog } from 'posthog-js/react';
 
 const ColorGPT = () => {
   const { supabase, user, session, AddPaletteToLibrary } =
@@ -13,6 +14,7 @@ const ColorGPT = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [hexList, setHexList] = useState([]);
   const [gptUsesRemaining, setGPTUsesRemaining] = useState(0);
+  const posthog = usePostHog();
 
   async function getFreeGPTUsesRemaining() {
     try {
@@ -182,6 +184,9 @@ const ColorGPT = () => {
                 disabled={gptUsesRemaining === 0 ? true : false}
                 onClick={() => {
                   getResponseFromOpenAI();
+                  posthog.capture('Color GPT', {
+                    property: mood,
+                  });
                 }}
                 // disabled button greyed out if no uses remaining
                 className={`${
