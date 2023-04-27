@@ -6,6 +6,10 @@ const handler = async (req, res) => {
     res.status(401).send('Unauthorized');
     return;
   }
+  if (req.method !== 'POST') {
+    res.status(405).send('Method not allowed');
+    return;
+  }
 
   const stripe = initStripe(process.env.STRIPE_SECRET_KEY);
 
