@@ -27,46 +27,56 @@ const Pricing = ({ plans }) => {
         <div className="circle2 left-1/2 top-1/2 z-10 "></div>
         <div className="circle3 left-1/2 top-1/2 z-10 "></div>
       </div>
-      {plans.map((plan) => (
-        <div
-          className="bg-white w-96 z-20 shadow-lg rounded-lg px-4 py-4 flex flex-col"
-          key={plan.id}
-        >
-          <h2 className="text-xl font-semibold tracking-tight">{plan.name}</h2>
-          <p className="mt-2 ml-2 text-blue-500 flex-grow">
-            {plan.currency === 'inr' ? '₹' : '$'}
-            {plan.price}/ {plan.interval}
-            {plan.description}
-          </p>
-          {showSubscribeButton && (
-            <button
-              onClick={() => {
-                processSubscription(plan.id);
-              }}
-              className="mt-4 w-full bg-blue-500 text-white rounded-lg px-4 py-2"
-            >
-              Subscribe
-            </button>
-          )}
 
-          {showSignUpButton && (
-            <Link
-              href={'/signup'}
-              className="mt-4 w-full bg-blue-500 text-white rounded-lg px-4 py-2"
+      {plans.map((plan) =>
+        plan.id == 'price_1N2JIsSIhw3xzm9SvWJ4LTuM' ||
+        plan.id == 'price_1N2JKUSIhw3xzm9SVSHfmBCE' ? (
+          <div>
+            <div
+              className="bg-white w-96 z-20 shadow-lg rounded-lg px-4 py-4 flex flex-col"
+              key={plan.id}
             >
-              Sign Up
-            </Link>
-          )}
-          {ManageSubscription && (
-            <Link
-              href="/dashboard"
-              className="mt-4 w-full bg-blue-500 text-white rounded-lg px-4 py-2"
-            >
-              Manage Subscription
-            </Link>
-          )}
-        </div>
-      ))}
+              <h2 className="text-xl font-semibold tracking-tight">
+                {plan.name}
+              </h2>
+              <p className="mt-2 ml-2 text-blue-500 flex-grow">
+                {plan.currency === 'inr' ? '₹' : '$'}
+                {plan.price}/ {plan.interval}
+                {plan.description}
+              </p>
+              {showSubscribeButton && (
+                <button
+                  onClick={() => {
+                    processSubscription(plan.id);
+                  }}
+                  className="mt-4 w-full bg-blue-500 text-white rounded-lg px-4 py-2"
+                >
+                  Subscribe
+                </button>
+              )}
+
+              {showSignUpButton && (
+                <Link
+                  href={'/signup'}
+                  className="mt-4 w-full bg-blue-500 text-white rounded-lg px-4 py-2"
+                >
+                  Sign Up
+                </Link>
+              )}
+              {ManageSubscription && (
+                <Link
+                  href="/dashboard"
+                  className="mt-4 w-full bg-blue-500 text-white rounded-lg px-4 py-2"
+                >
+                  Manage Subscription
+                </Link>
+              )}
+            </div>
+          </div>
+        ) : (
+          <></>
+        )
+      )}
     </div>
   );
 };
