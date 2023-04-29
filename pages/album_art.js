@@ -7,7 +7,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const AlbumArt = () => {
-  const { supabase, user, session, AddPaletteToLibrary } =
+  const { supabase, userFull, user, session, AddPaletteToLibrary } =
     useContext(Supabase_data);
   const [albums, setAlbums] = useState([]);
   const [selectedAlbum, setSelectedAlbum] = useState({
@@ -41,6 +41,7 @@ const AlbumArt = () => {
   const [generating, setGenerating] = useState(false);
   const [hexList, setHexList] = useState([]);
   const [freeSpotifyUsesRemaining, setFreeSpotifyUsesRemaining] = useState(0);
+  const subscribed = userFull?.is_subscribed;
 
   async function getFreeSpotifyUsesRemaining() {
     try {
@@ -57,7 +58,6 @@ const AlbumArt = () => {
 
       if (data) {
         setFreeSpotifyUsesRemaining(data[0].spotify_generations);
-        console.log(data);
       }
     } catch (error) {
       console.log(error);
@@ -81,7 +81,6 @@ const AlbumArt = () => {
 
       if (data) {
         setFreeSpotifyUsesRemaining(data[0].spotify_generations);
-        console.log(data);
       }
     } catch (error) {
       console.log(error);
@@ -162,9 +161,19 @@ const AlbumArt = () => {
       {session ? (
         <div className="w-full relative h-max  md:h-full overflow-y-scroll bg-white flex flex-col gap-4 md:flex-row justify-center items-center rounded-3xl py-8 md:mt-0 md:pl-12">
           <div className="p-2 bottom-4 h-max md:top-0 md:right-0 md:mr-4 absolute px-4 text-sm bg-green-50 text-green-500 rounded-full mt-4">
-            {freeSpotifyUsesRemaining > 0
-              ? `You have ${freeSpotifyUsesRemaining} free uses remaining`
-              : 'You have no free uses remaining'}
+            {!subscribed ? (
+              <div>
+                {freeSpotifyUsesRemaining > 0 ? (
+                  <div>{freeSpotifyUsesRemaining} free uses remaining</div>
+                ) : (
+                  <div>
+                    Sign up for a subscription to get unlimited generations
+                  </div>
+                )}
+              </div>
+            ) : (
+              <div></div>
+            )}
           </div>
           <div className="flex flex-col gap-4 justify-center items-center">
             <div className="flex flex-col mt-12 rounded-3xl border-2 border-black border-opacity-10">
@@ -313,13 +322,19 @@ const AlbumArt = () => {
               <>
                 {!generating && (
                   <button
-                    disabled={freeSpotifyUsesRemaining === 0 ? true : false}
+                    disabled={
+                      (freeSpotifyUsesRemaining === 0 && subscribed == false) ||
+                      subscribed == false
+                        ? true
+                        : false
+                    }
                     onClick={() => {
                       startGenerating();
                     }}
                     //make button disabled if no free uses remaining
                     className={
-                      freeSpotifyUsesRemaining === 0
+                      (freeSpotifyUsesRemaining === 0 && subscribed == false) ||
+                      subscribed == false
                         ? `h-max w-max bg-slate-500/5 text-slate-500 rounded-md p-4 cursor-not-allowed`
                         : `h-max w-max bg-slate-500/5 text-slate-500 rounded-md p-4 hover:bg-slate-800 hover:text-slate-100 transition-all duration-200`
                     }
