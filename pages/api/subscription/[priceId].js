@@ -37,16 +37,11 @@ const handler = async (req, res) => {
     ];
 
     let mode = null;
-    if (priceId == 'price_1N1gx5SIhw3xzm9SQUV7fXte') {
-      mode = 'payment';
-    } else {
-      mode = 'subscription';
-    }
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: lineItems,
-      mode: mode,
+      mode: 'subscription',
       success_url: `${process.env.CLIENT_URL}/payment/success`,
       cancel_url: `${process.env.CLIENT_URL}/payment/cancel`,
       customer: stripe_customer,
