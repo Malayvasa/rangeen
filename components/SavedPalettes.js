@@ -164,7 +164,6 @@ export default function SavedPalettes({}) {
           </div>
         </div> */}
         {filteredPalettes.map((palette) => {
-          console.log(palette);
           return (
             <motion.div
               variants={itemUp}

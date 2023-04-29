@@ -1,10 +1,12 @@
+import { use, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
-import { createContext } from 'react';
+import { createContext, useEffect } from 'react';
 import {
   useUser,
   useSession,
   useSupabaseClient,
 } from '@supabase/auth-helpers-react';
+import axios from 'axios';
 
 export const Supabase_data = createContext(null);
 
@@ -12,6 +14,67 @@ function SupabaseContext({ children }) {
   const session = useSession();
   const supabase = useSupabaseClient();
   const user = useUser();
+  const [loading, setLoading] = useState(true);
+  const [userFull, setUserFull] = useState(null);
+
+  useEffect(() => {
+    if (user) {
+      getUser();
+    }
+  }, [user]);
+
+  useEffect(() => {
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        if (event === 'SIGNED_OUT' || event === 'USER_DELETED') {
+          // delete cookies on sign out
+          console.log('cookie deleted');
+          const expires = new Date(0).toUTCString();
+          document.cookie = `my-access-token=; path=/; expires=${expires}; SameSite=Lax; secure`;
+          document.cookie = `my-refresh-token=; path=/; expires=${expires}; SameSite=Lax; secure`;
+        } else if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
+          console.log('cookie set');
+          const maxAge = 100 * 365 * 24 * 60 * 60; // 100 years, never expires
+          document.cookie = `my-access-token=${session.access_token}; path=/; max-age=${maxAge}; SameSite=Lax; secure`;
+          document.cookie = `my-refresh-token=${session.refresh_token}; path=/; max-age=${maxAge}; SameSite=Lax; secure`;
+        }
+      }
+    );
+  }, []);
+
+  async function getUser() {
+    let { data, error } = await supabase
+      .from('profiles')
+      .select(`*`)
+      .eq('id', user.id);
+
+    if (error) {
+      console.log(error);
+    }
+
+    if (data) {
+      let newData = data[0];
+      if (newData.email === null || newData.email === '') {
+        await supabase
+          .from('profiles')
+          .update({ email: user.email })
+          .eq('id', user.id);
+        newData.email = user.email;
+      }
+      if (!newData.stripe_customer || newData.stripe_customer === '') {
+        const data = await axios.post('/api/create-stripe-for-old-customer', {
+          record: {
+            id: newData.id,
+            email: newData.email,
+          },
+        });
+      }
+      console.log(newData);
+      let userData = { ...user, ...newData };
+      setUserFull(userData);
+      setLoading(false);
+    }
+  }
 
   async function SignUp(email, password) {
     try {
@@ -64,6 +127,7 @@ function SupabaseContext({ children }) {
 
   function SignOut() {
     supabase.auth.signOut();
+    setUserFull(null);
   }
 
   async function GetPalettes() {
@@ -164,6 +228,8 @@ function SupabaseContext({ children }) {
   return (
     <Supabase_data.Provider
       value={{
+        loading,
+        userFull,
         supabase,
         session,
         user,

@@ -2,10 +2,6 @@ import initStripe from 'stripe';
 import { supabaseAdmin } from '../../utils/supabase';
 
 const handler = async (req, res) => {
-  if (req.query.STRIPE_ROUTE_SECRET !== process.env.STRIPE_ROUTE_SECRET) {
-    res.status(401).send('Unauthorized');
-    return;
-  }
   if (req.method !== 'POST') {
     res.status(405).send('Method not allowed');
     return;

@@ -35,25 +35,25 @@ export default function HeaderLogo() {
                     x2="1"
                     y2="1"
                   >
-                    <stop offset="0" stop-color="red">
+                    <stop offset="0" stopColor="red">
                       <animate
-                        attributeName="stop-color"
+                        attributeName="stopColor"
                         values="red;purple;blue;green;yellow;orange;red;"
                         dur="5s"
                         repeatCount="indefinite"
                       ></animate>
                     </stop>
-                    <stop offset=".5" stop-color="purple">
+                    <stop offset=".5" stopColor="purple">
                       <animate
-                        attributeName="stop-color"
+                        attributeName="stopColor"
                         values="purple;blue;green;yellow;orange;red;purple;"
                         dur="5s"
                         repeatCount="indefinite"
                       ></animate>
                     </stop>
-                    <stop offset="1" stop-color="blue">
+                    <stop offset="1" stopColor="blue">
                       <animate
-                        attributeName="stop-color"
+                        attributeName="stopColor"
                         values="blue;green;yellow;orange;red;purple;blue;"
                         dur="5s"
                         repeatCount="indefinite"
@@ -76,17 +76,17 @@ export default function HeaderLogo() {
                     x2="1"
                     y2="1"
                   >
-                    <stop offset="0" stop-color="red">
+                    <stop offset="0" stopColor="red">
                       <animate
-                        attributeName="stop-color"
+                        attributeName="stopColor"
                         values="red;purple;blue;green;yellow;orange;red;"
                         dur="20s"
                         repeatCount="indefinite"
                       ></animate>
                     </stop>
-                    <stop offset="1" stop-color="purple" stop-opacity="0">
+                    <stop offset="1" stopColor="purple" stopOpacity="0">
                       <animate
-                        attributeName="stop-color"
+                        attributeName="stopColor"
                         values="purple;blue;green;yellow;orange;red;purple;"
                         dur="20s"
                         repeatCount="indefinite"
@@ -96,7 +96,7 @@ export default function HeaderLogo() {
                       attributeName="gradientTransform"
                       type="rotate"
                       values="360 .5 .5;0 .5 .5"
-                      class="ignore"
+                      className="ignore"
                       dur="10s"
                       repeatCount="indefinite"
                     />
@@ -145,25 +145,25 @@ export default function HeaderLogo() {
                 x2="1"
                 y2="1"
               >
-                <stop offset="0" stop-color="red">
+                <stop offset="0" stopColor="red">
                   <animate
-                    attributeName="stop-color"
+                    attributeName="stopColor"
                     values="red;purple;blue;green;yellow;orange;red;"
                     dur="5s"
                     repeatCount="indefinite"
                   ></animate>
                 </stop>
-                <stop offset=".5" stop-color="purple">
+                <stop offset=".5" stopColor="purple">
                   <animate
-                    attributeName="stop-color"
+                    attributeName="stopColor"
                     values="purple;blue;green;yellow;orange;red;purple;"
                     dur="5s"
                     repeatCount="indefinite"
                   ></animate>
                 </stop>
-                <stop offset="1" stop-color="blue">
+                <stop offset="1" stopColor="blue">
                   <animate
-                    attributeName="stop-color"
+                    attributeName="stopColor"
                     values="blue;green;yellow;orange;red;purple;blue;"
                     dur="5s"
                     repeatCount="indefinite"
@@ -186,17 +186,17 @@ export default function HeaderLogo() {
                 x2="1"
                 y2="1"
               >
-                <stop offset="0" stop-color="red">
+                <stop offset="0" stopColor="red">
                   <animate
-                    attributeName="stop-color"
+                    attributeName="stopColor"
                     values="red;purple;blue;green;yellow;orange;red;"
                     dur="20s"
                     repeatCount="indefinite"
                   ></animate>
                 </stop>
-                <stop offset="1" stop-color="purple" stop-opacity="0">
+                <stop offset="1" stopColor="purple" stopOpacity="0">
                   <animate
-                    attributeName="stop-color"
+                    attributeName="stopColor"
                     values="purple;blue;green;yellow;orange;red;purple;"
                     dur="20s"
                     repeatCount="indefinite"
@@ -206,7 +206,7 @@ export default function HeaderLogo() {
                   attributeName="gradientTransform"
                   type="rotate"
                   values="360 .5 .5;0 .5 .5"
-                  class="ignore"
+                  className="ignore"
                   dur="10s"
                   repeatCount="indefinite"
                 />

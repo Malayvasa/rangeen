@@ -215,10 +215,11 @@ const AlbumArt = () => {
                         }}
                         className="cursor-pointer group py-2 px-4 flex flex-row max-w-[300px] w-96 items-center hover:bg-opacity-5"
                       >
-                        <Image
+                        <img
                           src={album.images[2].url}
                           width={50}
                           height={50}
+                          alt="album cover"
                           className=" opacity-60 group-hover:opacity-100"
                         />
                         <div className="ml-4 text-sm text-black text-opacity-40 group-hover:text-opacity-80">
