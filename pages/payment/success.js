@@ -14,6 +14,7 @@ const Success = () => {
         <div className="constantcircle3 left-1/2 top-1/2 z-10 "></div>
       </div>
       <p className="z-20 font-bold text-4xl md:text-6xl text-center text-white">
+        Hooray! <br />
         Payment successful
       </p>
       <Link

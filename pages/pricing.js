@@ -30,7 +30,9 @@ const Pricing = ({ plans }) => {
 
       {plans.map((plan) =>
         plan.id == 'price_1N2JIsSIhw3xzm9SvWJ4LTuM' ||
-        plan.id == 'price_1N2JKUSIhw3xzm9SVSHfmBCE' ? (
+        plan.id == 'price_1N2JKUSIhw3xzm9SVSHfmBCE' ||
+        plan.id == 'price_1N1gvXSIhw3xzm9STGLzyDXB' ||
+        plan.id == 'price_1N2HVRSIhw3xzm9STXakfpds' ? (
           <div key={plan.id} className="z-20">
             <div className="bg-white w-96 z-20 shadow-lg rounded-lg px-4 py-4 flex flex-col">
               <h2 className="text-xl font-semibold tracking-tight">

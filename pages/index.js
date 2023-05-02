@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import Color from 'color';
 import { motion } from 'framer-motion';
-import album from '../components/assets/album.jpeg';
 import Image from 'next/image';
 import Head from 'next/head';
 
@@ -20,7 +19,16 @@ const Home = () => {
   const session = useSession();
   const supabase = useSupabaseClient();
   const user = useUser();
-  const colorblindTypes = ['protanopia', 'deuteranopia', 'tritanopia'];
+  const colorblindTypes = [
+    'protanomaly',
+
+    'deuteranomaly',
+
+    'tritanomaly',
+
+    'achromatomaly',
+    'achromatopsia',
+  ];
   const [randomNewPalette, setRandomNewPalette] = useState([
     '#9867D5',
     '#DF8F7F',
@@ -381,6 +389,7 @@ const Home = () => {
                   <input
                     value={'ghibli ocean'}
                     readOnly
+                    disabled
                     placeholder="What's your mood?"
                     className="p-4 rounded-full focus:outline-none  focus:text-blue-500 focus:placeholder-white/50"
                   ></input>
@@ -510,7 +519,7 @@ const Home = () => {
                 w-[300px] h-[300px] bg-gray-100 rounded-md flex items-center justify-center mb-8
                 "
                 >
-                  <img alt="album" src={album} />
+                  <img className="rounded-md" alt="album" src="/album.jpeg" />
                 </div>
                 <div>
                   {albumArtExamplePalette && (

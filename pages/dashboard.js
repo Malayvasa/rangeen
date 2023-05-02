@@ -21,6 +21,33 @@ const Dashboard = () => {
       <div className="bg-white rounded-3xl shadow-sm w-full h-full flex flex-col p-32 px-8 items-center">
         <h1 className="font-semibold text-3xl">User Dashboard</h1>
         <p className="mb-8">{userFull?.email}</p>
+        <div className="bg-gray-100 flex  divide-y-2 flex-col p-4 mb-16 rounded-md w-full md:w-1/2">
+          <div className="flex gap-2 w-full justify-between items-center p-8">
+            <div>ColorGPT Generations remaining</div>
+            <div className="bg-green-200 h-full flex items-center justify-center w-24 text-center text-green-700 rounded-md py-1 px-2">
+              {userFull?.openai_generations}
+            </div>
+          </div>
+          <div className="flex gap-2 w-full justify-between items-center p-8">
+            <div>Album Art Generations remaining</div>
+            <div className="bg-green-200 h-full flex items-center justify-center w-24 text-center text-green-700 rounded-md py-1 px-2">
+              {userFull?.is_subscribed
+                ? 'Unlimited'
+                : userFull?.openai_generations}
+            </div>
+          </div>
+        </div>
+        {!loading && userFull?.current_period_end && (
+          <div className="py-8">
+            <p>
+              Subscription renews on{' '}
+              {new Date(
+                userFull?.current_period_end * 1000
+              ).toLocaleDateString()}
+            </p>
+          </div>
+        )}
+
         {!loading &&
           (userFull?.is_subscribed ? (
             <div className="flex flex-col gap-8 items-center">

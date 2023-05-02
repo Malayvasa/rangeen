@@ -1,34 +1,33 @@
 import Color, { rgb } from 'color';
 import { useEffect, useState } from 'react';
 import { simulate } from '@bjornlu/colorblind';
+import axios from 'axios';
 
 export default function ColorBlindSim({ hexColors, type }) {
   const [colorBlindPalette, setColorBlindPalette] = useState([]);
 
-  useEffect(() => {
-    //convert all hex colors to rgb in format like { r: 120, g: 50, b: 30 } for colorblindness simulation
-    let rgbColors = hexColors.map((color) => {
-      let rgb = Color(color).rgb().array();
-      return { r: rgb[0], g: rgb[1], b: rgb[2] };
-    });
-
-    //simulate color blindness, convert back to hex and store in array
-    let palette = rgbColors.map((color) => {
-      let simulatedColor = simulate(color, type);
-      return Color.rgb(
-        simulatedColor.r,
-        simulatedColor.g,
-        simulatedColor.b
-      ).hex();
-    });
-
-    //always keep aray length at 10
-    if (palette.length > 10) {
-      palette = palette.slice(0, 10);
+  async function simulateColors(hexColors, type) {
+    try {
+      //convert array to string
+      let hexList = hexColors.join(',');
+      const { data } = await axios.get('/api/simulate', {
+        params: {
+          hexList: hexList,
+          type: type,
+        },
+      });
+      return data.simulatedHexList;
+    } catch (error) {
+      console.log(error);
     }
+  }
 
-    //set colorBlindPalette to the new array
-    setColorBlindPalette(palette);
+  useEffect(() => {
+    async function getSimulatedColors() {
+      const simulatedColors = await simulateColors(hexColors, type);
+      setColorBlindPalette(simulatedColors);
+    }
+    getSimulatedColors();
   }, [hexColors, type]);
 
   return (
@@ -38,18 +37,19 @@ export default function ColorBlindSim({ hexColors, type }) {
           {type}
         </div>
         <div className="flex w-full justify-between md:gap-4">
-          {colorBlindPalette.map((color) => {
-            return (
-              <div key={color}>
-                <div
-                  className="w-8 md:w-10 h-8 md:h-10 rounded-full"
-                  style={{
-                    backgroundColor: color,
-                  }}
-                ></div>
-              </div>
-            );
-          })}
+          {colorBlindPalette.length > 0 &&
+            colorBlindPalette.map((color) => {
+              return (
+                <div key={color}>
+                  <div
+                    className="w-8 md:w-10 h-8 md:h-10 rounded-full"
+                    style={{
+                      backgroundColor: color,
+                    }}
+                  ></div>
+                </div>
+              );
+            })}
         </div>
       </div>
     </>
