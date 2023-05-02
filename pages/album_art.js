@@ -167,7 +167,7 @@ const AlbumArt = () => {
                   <div>{freeSpotifyUsesRemaining} free uses remaining</div>
                 ) : (
                   <div>
-                    Sign up for a subscription to get unlimited generations
+                    <Link href={'/pricing'}>Get unlimited generations</Link>
                   </div>
                 )}
               </div>
@@ -323,8 +323,7 @@ const AlbumArt = () => {
                 {!generating && (
                   <button
                     disabled={
-                      (freeSpotifyUsesRemaining === 0 && subscribed == false) ||
-                      subscribed == false
+                      freeSpotifyUsesRemaining === 0 && subscribed == false
                         ? true
                         : false
                     }
