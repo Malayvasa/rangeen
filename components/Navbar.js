@@ -28,6 +28,11 @@ export default function NavBar() {
       url: '/album_art',
       color: '#0000ff',
     },
+    {
+      name: 'Pricing',
+      url: '/pricing',
+      color: '#0000ff',
+    },
   ];
 
   useEffect(() => {

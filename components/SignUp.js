@@ -90,7 +90,7 @@ export default function SignUp() {
           type: 'spring',
           stiffness: 20,
         }}
-        className="z-20 bg-white/70 items-center mix-blend-lighten p-8 w-96 rounded-3xl flex flex-col gap-4"
+        className="z-20 bg-white items-center p-8 w-full max-w-96 rounded-3xl flex flex-col gap-4"
       >
         <input
           type="username"
@@ -99,19 +99,19 @@ export default function SignUp() {
           onChange={(e) => {
             setEmail(e.target.value);
           }}
-          className="p-4 rounded-lg w-full"
+          className="p-4 border-2 rounded-lg w-full"
         />
         <input
           type="password"
           placeholder="Password"
           value={password}
-          className="p-4 rounded-lg w-full"
+          className="p-4 border-2 rounded-lg w-full"
           onChange={(e) => {
             setPassword(e.target.value);
           }}
         />
         <button
-          className="p-4 w-full bg-black/40 mt-8 text-lg rounded-md font-bold text-white"
+          className="p-4 w-full bg-black/80 mt-8 text-lg rounded-md font-bold text-white"
           onClick={async () => {
             let error = await SignUp(email, password);
             if (error) {

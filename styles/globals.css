@@ -361,6 +361,53 @@ body {
   animation: rotate 9s linear infinite;
 }
 
+.constantcircle1 {
+  translate: -50% -50%;
+  position: absolute;
+  width: 1000px;
+  height: 1800px;
+  border-radius: 600px;
+  mix-blend-mode: overlay;
+  background: radial-gradient(
+    circle at right,
+    #1eff85 0%,
+    rgba(58, 243, 255, 0.874892) 37.9%,
+    rgba(255, 255, 255, 0) 66.67%
+  );
+  animation: rotate 8s linear infinite;
+}
+
+.constantcircle2 {
+  translate: -50% -50%;
+  position: absolute;
+  width: 1000px;
+  height: 1800px;
+  border-radius: 600px;
+  background: radial-gradient(
+    circle at right,
+    rgba(250, 30, 255, 0) 0%,
+    rgba(28, 24, 230, 0.64) 0.01%,
+    #fa1eff 18.23%,
+    rgba(255, 255, 255, 0) 66.67%
+  );
+  animation: rotateinv 5s linear infinite;
+}
+
+.constantcircle3 {
+  translate: -50% -50%;
+  position: absolute;
+  width: 1000px;
+  height: 1800px;
+  border-radius: 600px;
+  background: radial-gradient(
+    86.86% 86.86% at 33.13% 1.99%,
+    rgba(255, 255, 255, 0) 45.83%,
+    #ff813a 92.71%,
+    #ffeb3a 100%
+  );
+  animation: rotate 9s linear infinite;
+}
+
 .noise {
   background: url(https://grainy-gradients.vercel.app/noise.svg);
   filter: contrast(100%) brightness(100%);

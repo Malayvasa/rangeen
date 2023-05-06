@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import Color from 'color';
 import { motion } from 'framer-motion';
-import album from '../components/assets/album.jpeg';
 import Image from 'next/image';
 import Head from 'next/head';
 import { usePostHog } from 'posthog-js/react';
@@ -22,7 +21,16 @@ const Home = () => {
   const session = useSession();
   const supabase = useSupabaseClient();
   const user = useUser();
-  const colorblindTypes = ['protanopia', 'deuteranopia', 'tritanopia'];
+  const colorblindTypes = [
+    'protanomaly',
+
+    'deuteranomaly',
+
+    'tritanomaly',
+
+    'achromatomaly',
+    'achromatopsia',
+  ];
   const [randomNewPalette, setRandomNewPalette] = useState([
     '#9867D5',
     '#DF8F7F',
@@ -205,7 +213,7 @@ const Home = () => {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <g clip-path="url(#clip0_0_1)">
+              <g clipPath="url(#clip0_0_1)">
                 <path
                   d="M108.579 10.7943H85.8427V10.1141C85.8427 4.88906 83.4118 2.27612 78.55 2.27612C75.9554 2.27612 74.0776 2.97465 72.9165 4.3717C71.7372 5.75046 71.1476 7.66487 71.1476 10.1141V10.7943H42.7319C41.4611 10.7943 40.4316 11.8238 40.4316 13.0937C40.4316 14.3636 41.4611 15.3931 42.7319 15.3931H48.1337V16.1012C48.1337 17.0444 47.8977 17.77 47.4256 18.2777C46.9544 18.7681 46.0651 19.0129 44.7587 19.0129C43.2858 19.0129 42.0917 20.207 42.0917 21.6798V25.2447C42.0917 26.3691 42.3373 27.3856 42.8268 28.2923C43.3163 29.1815 44.0331 29.8888 44.9764 30.4148C45.938 30.9235 47.0903 31.1769 48.4325 31.1769C50.3016 31.1769 51.7526 30.6509 52.7865 29.5987C53.8395 28.5466 54.3656 27.1225 54.3656 25.3257C54.3656 24.9259 54.0302 24.6185 53.6296 24.6185H49.9297C49.4332 24.6185 49.0317 25.0209 49.0317 25.5165C49.0317 25.7891 48.9681 26.0155 48.8409 26.1967C48.7321 26.3787 48.5596 26.4693 48.3236 26.4693C47.8341 26.4693 47.5893 26.1514 47.5893 25.5165V23.4209C49.8565 23.2946 51.4356 22.5778 52.324 21.2713C53.2315 19.9648 53.6853 18.2412 53.6853 16.1012V15.3931H63.0553V21.0266C63.0553 21.4803 62.9917 21.8522 62.8646 22.1423C62.7557 22.414 62.5292 22.5508 62.1843 22.5508C61.8394 22.5508 61.5947 22.4236 61.4492 22.1693C61.3221 21.8975 61.2594 21.516 61.2594 21.0266C61.2594 20.5371 60.8692 20.1556 60.3884 20.1556H56.7965C56.2878 20.1556 55.8706 20.5449 55.8706 21.0536C55.8706 23.1038 56.4333 24.6551 57.5577 25.7072C58.7013 26.7411 60.2978 27.2584 62.3472 27.2584C64.3966 27.2584 65.994 26.6688 67.0279 25.4895C68.08 24.3101 68.6069 22.7406 68.6069 20.7818V15.3931H71.1371V29.604C71.1371 30.3373 71.732 30.9322 72.4654 30.9322H75.3614C76.0947 30.9322 76.6888 30.3373 76.6888 29.604V15.3931H80.2911V29.604C80.2911 30.3373 80.886 30.9322 81.6194 30.9322H84.5145C85.2487 30.9322 85.8427 30.3373 85.8427 29.604V15.3931H103.231V17.5705H95.6656C94.3957 17.5705 93.2347 17.797 92.1826 18.2507C91.1305 18.6862 90.2865 19.3665 89.6515 20.2915C89.0349 21.2173 88.7265 22.36 88.7265 23.7205C88.7265 24.9904 89.0262 26.0974 89.6245 27.0407C90.2412 27.9656 91.0399 28.6738 92.0197 29.1632C93.017 29.6353 94.0787 29.8705 95.2031 29.8705C96.3276 29.8705 97.29 29.671 98.1967 29.2721C99.1043 28.8732 99.8298 28.274 100.374 27.4762C100.918 26.6601 101.19 25.6619 101.19 24.4826C101.19 23.6299 101.045 22.8591 100.755 22.1693H103.231V29.604C103.231 30.3373 103.826 30.9322 104.559 30.9322H107.455C108.189 30.9322 108.783 30.3373 108.783 29.604V15.3931C109.94 15.3931 110.878 14.455 110.878 13.2975V13.0937C110.878 11.8238 109.849 10.7943 108.579 10.7943ZM80.4549 10.7943H76.5355V9.84145C76.5355 9.04363 76.6626 8.36339 76.9169 7.80074C77.1704 7.2198 77.7148 6.92976 78.55 6.92976C79.3296 6.92976 79.8382 7.2198 80.0734 7.80074C80.3277 8.36339 80.4549 9.04363 80.4549 9.84145V10.7943ZM96.3737 24.8092C96.1011 25.081 95.7388 25.2177 95.285 25.2177C94.8312 25.2177 94.4323 25.081 94.1423 24.8092C93.8514 24.5192 93.7068 24.1473 93.7068 23.6935C93.7068 23.2397 93.8514 22.8948 94.1423 22.6048C94.4506 22.3147 94.8312 22.1693 95.285 22.1693C95.7388 22.1693 96.1011 22.3147 96.3737 22.6048C96.6638 22.8948 96.8084 23.258 96.8084 23.6935C96.8084 24.129 96.6638 24.5192 96.3737 24.8092Z"
                   fill="black"
@@ -216,8 +224,8 @@ const Home = () => {
                 />
               </g>
               <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
+                fillRule="evenodd"
+                clipRule="evenodd"
                 d="M23.9806 6.92842C23.1796 5.54113 21.6994 4.68652 20.0975 4.68652H9.9019C8.29999 4.68652 6.81977 5.54113 6.01881 6.92842L0.921028 15.758C0.120074 17.1453 0.120074 18.8546 0.921027 20.2418L6.01881 29.0715C6.81977 30.4588 8.29999 31.3134 9.9019 31.3134L20.0975 31.3134C21.6994 31.3134 23.1796 30.4588 23.9806 29.0715L29.0783 20.2418C29.8793 18.8546 29.8793 17.1453 29.0783 15.758L23.9806 6.92842ZM19.6935 13.4769C19.6935 16.2092 17.4785 18.4243 14.7462 18.4243C12.0138 18.4243 9.79883 16.2092 9.79883 13.4769C9.79883 10.7445 12.0138 8.52954 14.7462 8.52954C17.4785 8.52954 19.6935 10.7445 19.6935 13.4769ZM9.97608 19.8249C9.66598 19.2487 10.2934 18.6213 10.8696 18.9314L18.5203 23.0494C18.9095 23.2588 18.9866 23.7842 18.6741 24.0967L15.1414 27.6294C14.8289 27.9419 14.3035 27.8648 14.0941 27.4756L9.97608 19.8249Z"
                 fill="black"
               />
@@ -258,9 +266,7 @@ const Home = () => {
                     className="
                     w-[50px] h-[50px]
                     aspect-w-1 aspect-h-1
-                    md:w-[60px] md:h-[60px]
-                    
-                    "
+                    md:w-[60px] md:h-[60px]"
                   >
                     <svg
                       viewBox="0 0 288 288"
@@ -292,7 +298,7 @@ const Home = () => {
                 <svg
                   width="22px"
                   height="22px"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -301,23 +307,23 @@ const Home = () => {
                   <path
                     d="M22 7c-3 0-8.5 0-10.5 5.5S5 18 2 18"
                     stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   ></path>
                   <path
                     d="M20 5l2 2-2 2M22 18c-3 0-8.5 0-10.5-5.5S5 7 2 7"
                     stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   ></path>
                   <path
                     d="M20 20l2-2-2-2"
                     stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   ></path>
                 </svg>
               </button>
@@ -328,7 +334,7 @@ const Home = () => {
                 <svg
                   width="22px"
                   height="22px"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -337,9 +343,9 @@ const Home = () => {
                   <path
                     d="M6 20h12M12 4v12m0 0l3.5-3.5M12 16l-3.5-3.5"
                     stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   ></path>
                 </svg>
               </button>
@@ -369,15 +375,15 @@ const Home = () => {
                 <path
                   d="M22 50.183L36.3068 35.8763M43.4601 28.7229L39.8834 32.2996"
                   stroke="#1D785D"
-                  stroke-width="2.14601"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2.14601"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 />
                 <path
                   d="M31.2994 23L32.6513 26.6554L36.3067 28.0074L32.6513 29.3594L31.2994 33.0147L29.9474 29.3594L26.292 28.0074L29.9474 26.6554L31.2994 23ZM44.8908 34.4454L45.6633 36.5342L47.7521 37.3068L45.6633 38.0793L44.8908 40.1681L44.1182 38.0793L42.0294 37.3068L44.1182 36.5342L44.8908 34.4454Z"
                   stroke="#1D785D"
-                  stroke-width="2.14601"
-                  stroke-linejoin="round"
+                  strokeWidth="2.14601"
+                  strokeLinejoin="round"
                 />
               </svg>
               <div className="font-semibold text-2xl">Prompt to Palette</div>
@@ -387,6 +393,8 @@ const Home = () => {
                 <div className="flex gap-x-4 items-center border-[2px] rounded-full">
                   <input
                     value={'ghibli ocean'}
+                    readOnly
+                    disabled
                     placeholder="What's your mood?"
                     className="p-4 rounded-full focus:outline-none  focus:text-blue-500 focus:placeholder-white/50"
                   ></input>
@@ -398,7 +406,7 @@ const Home = () => {
                       width="32px"
                       height="32px"
                       viewBox="0 0 24 24"
-                      stroke-width="1.5"
+                      strokeWidth="1.5"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                       color="currentColor"
@@ -406,15 +414,15 @@ const Home = () => {
                       <path
                         d="M3 21l10-10m5-5l-2.5 2.5"
                         stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       ></path>
                       <path
                         d="M9.5 2l.945 2.555L13 5.5l-2.555.945L9.5 9l-.945-2.555L6 5.5l2.555-.945L9.5 2zM19 10l.54 1.46L21 12l-1.46.54L19 14l-.54-1.46L17 12l1.46-.54L19 10z"
                         stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linejoin="round"
+                        strokeWidth="1.5"
+                        strokeLinejoin="round"
                       ></path>
                     </svg>
                   </button>
@@ -486,23 +494,23 @@ const Home = () => {
                   <path
                     d="M33.1574 38.7895C35.2512 38.7895 37.2593 37.9577 38.7399 36.4772C40.2204 34.9966 41.0522 32.9886 41.0522 30.8947C41.0522 28.8009 40.2204 26.7929 38.7399 25.3123C37.2593 23.8318 35.2512 23 33.1574 23C31.0636 23 29.0556 23.8318 27.575 25.3123C26.0945 26.7929 25.2627 28.8009 25.2627 30.8947C25.2627 32.9886 26.0945 34.9966 27.575 36.4772C29.0556 37.9577 31.0636 38.7895 33.1574 38.7895Z"
                     stroke="#69490B"
-                    stroke-width="1.97368"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.97368"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M38.4211 47.9999C39.4579 47.9999 40.4845 47.7957 41.4423 47.399C42.4001 47.0022 43.2704 46.4207 44.0035 45.6876C44.7366 44.9545 45.3181 44.0842 45.7149 43.1264C46.1116 42.1685 46.3158 41.1419 46.3158 40.1052C46.3158 39.0684 46.1116 38.0418 45.7149 37.084C45.3181 36.1262 44.7366 35.2559 44.0035 34.5228C43.2704 33.7897 42.4001 33.2081 41.4423 32.8114C40.4845 32.4147 39.4579 32.2104 38.4211 32.2104C36.3273 32.2104 34.3192 33.0422 32.8387 34.5228C31.3581 36.0033 30.5264 38.0114 30.5264 40.1052C30.5264 42.199 31.3581 44.2071 32.8387 45.6876C34.3192 47.1682 36.3273 47.9999 38.4211 47.9999Z"
                     stroke="#69490B"
-                    stroke-width="1.97368"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.97368"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                   <path
                     d="M27.8947 47.9999C28.9315 47.9999 29.9581 47.7957 30.9159 47.399C31.8738 47.0022 32.7441 46.4207 33.4772 45.6876C34.2103 44.9545 34.7918 44.0842 35.1885 43.1264C35.5853 42.1685 35.7895 41.1419 35.7895 40.1052C35.7895 39.0684 35.5853 38.0418 35.1885 37.084C34.7918 36.1262 34.2103 35.2559 33.4772 34.5228C32.7441 33.7897 31.8738 33.2081 30.9159 32.8114C29.9581 32.4147 28.9315 32.2104 27.8947 32.2104C25.8009 32.2104 23.7929 33.0422 22.3123 34.5228C20.8318 36.0033 20 38.0114 20 40.1052C20 42.199 20.8318 44.2071 22.3123 45.6876C23.7929 47.1682 25.8009 47.9999 27.8947 47.9999Z"
                     stroke="#69490B"
-                    stroke-width="1.97368"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="1.97368"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   />
                 </svg>
 
@@ -516,7 +524,7 @@ const Home = () => {
                 w-[300px] h-[300px] bg-gray-100 rounded-md flex items-center justify-center mb-8
                 "
                 >
-                  <Image src={album} />
+                  <img className="rounded-md" alt="album" src="/album.jpeg" />
                 </div>
                 <div>
                   {albumArtExamplePalette && (
@@ -608,7 +616,7 @@ const Home = () => {
                   <svg
                     width="24px"
                     height="24px"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     viewBox="0 0 24 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -617,16 +625,16 @@ const Home = () => {
                     <path
                       d="M19.4 20H9.6a.6.6 0 01-.6-.6V9.6a.6.6 0 01.6-.6h9.8a.6.6 0 01.6.6v9.8a.6.6 0 01-.6.6z"
                       stroke="currentColor"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     ></path>
                     <path
                       d="M15 9V4.6a.6.6 0 00-.6-.6H4.6a.6.6 0 00-.6.6v9.8a.6.6 0 00.6.6H9"
                       stroke="currentColor"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     ></path>
                   </svg>
                 </div>
@@ -637,17 +645,17 @@ const Home = () => {
                       width="22px"
                       height="22px"
                       viewBox="0 0 24 24"
-                      stroke-width="1.5"
+                      strokeWidth="1.5"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
                       color="currentColor"
                     >
                       <g
-                        clip-path="url(#bright-star_svg__clip0_3057_14628)"
+                        clipPath="url(#bright-star_svg__clip0_3057_14628)"
                         stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                       >
                         <path d="M9.952 9.623l1.559-3.305a.535.535 0 01.978 0l1.559 3.305 3.485.533c.447.068.625.644.302.974l-2.522 2.57.595 3.631c.077.467-.391.822-.791.602L12 16.218l-3.117 1.715c-.4.22-.868-.135-.791-.602l.595-3.63-2.522-2.571c-.323-.33-.145-.906.302-.974l3.485-.533zM22 12h1M12 2V1M12 23v-1M20 20l-1-1M20 4l-1 1M4 20l1-1M4 4l1 1M1 12h1"></path>
                       </g>
@@ -666,7 +674,7 @@ const Home = () => {
                   <svg
                     width="24px"
                     height="24px"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     viewBox="0 0 24 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -675,16 +683,16 @@ const Home = () => {
                     <path
                       d="M19.4 20H9.6a.6.6 0 01-.6-.6V9.6a.6.6 0 01.6-.6h9.8a.6.6 0 01.6.6v9.8a.6.6 0 01-.6.6z"
                       stroke="currentColor"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     ></path>
                     <path
                       d="M15 9V4.6a.6.6 0 00-.6-.6H4.6a.6.6 0 00-.6.6v9.8a.6.6 0 00.6.6H9"
                       stroke="currentColor"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     ></path>
                   </svg>
                 </div>
@@ -695,7 +703,7 @@ const Home = () => {
                   <svg
                     width="24px"
                     height="24px"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     viewBox="0 0 24 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -704,16 +712,16 @@ const Home = () => {
                     <path
                       d="M19.4 20H9.6a.6.6 0 01-.6-.6V9.6a.6.6 0 01.6-.6h9.8a.6.6 0 01.6.6v9.8a.6.6 0 01-.6.6z"
                       stroke="currentColor"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     ></path>
                     <path
                       d="M15 9V4.6a.6.6 0 00-.6-.6H4.6a.6.6 0 00-.6.6v9.8a.6.6 0 00.6.6H9"
                       stroke="currentColor"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     ></path>
                   </svg>
                 </div>
@@ -724,7 +732,7 @@ const Home = () => {
                   <svg
                     width="24px"
                     height="24px"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     viewBox="0 0 24 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -733,16 +741,16 @@ const Home = () => {
                     <path
                       d="M19.4 20H9.6a.6.6 0 01-.6-.6V9.6a.6.6 0 01.6-.6h9.8a.6.6 0 01.6.6v9.8a.6.6 0 01-.6.6z"
                       stroke="currentColor"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     ></path>
                     <path
                       d="M15 9V4.6a.6.6 0 00-.6-.6H4.6a.6.6 0 00-.6.6v9.8a.6.6 0 00.6.6H9"
                       stroke="currentColor"
-                      stroke-width="1.5"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     ></path>
                   </svg>
                 </div>

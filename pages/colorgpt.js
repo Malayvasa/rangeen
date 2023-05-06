@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { usePostHog } from 'posthog-js/react';
 
 const ColorGPT = () => {
-  const { supabase, user, session, AddPaletteToLibrary } =
+  const { supabase, user, userFull, session, AddPaletteToLibrary } =
     useContext(Supabase_data);
   const [loading, setLoading] = useState(true);
   const [response, setResponse] = useState([]);
@@ -14,6 +14,7 @@ const ColorGPT = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [hexList, setHexList] = useState([]);
   const [gptUsesRemaining, setGPTUsesRemaining] = useState(0);
+  const [justification, setJustification] = useState('');
   const posthog = usePostHog();
 
   async function getFreeGPTUsesRemaining() {
@@ -66,8 +67,7 @@ const ColorGPT = () => {
     setResponse('');
     setIsLoading(true);
 
-    const prompt = `You are colorGPT an expert in color theory and color science, generate a color palette with 10 hex codes based on the prompt: ${mood}. Generate the color palette to follow one of the following color scheme styles that works for the given prompt : 1. Analogous, 2. Monochromatic, 3. Complementary, 4. Triadic, 5. Split-Complementary, 6. Tetradic, 7. Neutral, 8. Warm/Cool, 9. Pastel, 10. Retro/Vintage. Uniquely name each color accordingly, format the response as a JSON and only return the JSON, the JSON should have two parameters, name and hex and the entire list should be inside colorPalette. Response :`;
-
+    const prompt = `You are colorGPT an expert in color theory and color science, generate a color palette with 10 hex codes based on the prompt: ${mood}. Generate the color palette to follow one of the following color scheme styles that works for the given prompt : Analogous, Monochromatic, Complementary,  Triadic, Split-Complementary, Tetradic, Neutral, Warm/Cool, Pastel, Retro/Vintage. Choose the scheme that applies the best to the given prompt. Also give a "justification" field justifying why this palette works for this particular prompt. Do not include any nextline or breaklne characters and  format the response as a JSON and only return the JSON structured exactly like {"colors":[],"justification":" "}  Response:`;
     const response = await fetch('/api/openai', {
       method: 'POST',
       headers: {
@@ -77,46 +77,59 @@ const ColorGPT = () => {
     });
 
     const data = await response.json();
+    console.log(data.text);
     setIsLoading(false);
-
-    // try check if response is valid json and if not return an error
-    let json;
+    setResponse(data.text);
     try {
-      json = JSON.parse(data.text);
-
-      // format the json
-      const formatted = json.colorPalette.map((color) => {
-        return {
-          name: color.name,
-          hex: color.hex,
-        };
-      });
-
-      //function to check if a string is a valid hex code
-      const isHex = (str) => {
-        const regex = /^#([0-9A-F]{3}){1,2}$/i;
-        return regex.test(str);
-      };
-
-      // filter out the colors that are not hex codes
-      const filtered = formatted.filter((color) => {
-        return isHex(color.hex);
-      });
-
-      const hexCodes = filtered.map((color) => color.hex);
-      setHexList(hexCodes);
-
-      console.log(filtered);
-      setResponse(filtered);
-
-      // update the number of uses remaining
+      const json = JSON.parse(data.text);
+      console.log(json);
+      setResponse(json.colors);
+      setJustification(json.justification);
       updateFreeGPTUsesRemaining();
       getFreeGPTUsesRemaining();
-    } catch (e) {
-      console.log('error');
+    } catch (error) {
+      console.log(error);
       toast.error('Something went wrong, try again');
       return;
     }
+
+    // // try check if response is valid json and if not return an error
+    // let json;
+    // try {
+    //   json = JSON.parse(data.text);
+
+    //   // format the json
+    //   const formatted = json.colorPalette.map((color) => {
+    //     return {
+    //       name: color.name,
+    //       hex: color.hex,
+    //     };
+    //   });
+
+    //   //function to check if a string is a valid hex code
+    //   const isHex = (str) => {
+    //     const regex = /^#([0-9A-F]{3}){1,2}$/i;
+    //     return regex.test(str);
+    //   };
+
+    //   // filter out the colors that are not hex codes
+    //   const filtered = formatted.filter((color) => {
+    //     return isHex(color.hex);
+    //   });
+
+    //   const hexCodes = filtered.map((color) => color.hex);
+    //   setHexList(hexCodes);
+    //   console.log(filtered);
+    //   setResponse(filtered);
+
+    //   // update the number of uses remaining
+    // updateFreeGPTUsesRemaining();
+    // getFreeGPTUsesRemaining();
+    // } catch (e) {
+    //   console.log('error');
+    // toast.error('Something went wrong, try again');
+    // return;
+    // }
   };
 
   useEffect(() => {
@@ -177,6 +190,16 @@ const ColorGPT = () => {
                 onChange={(e) => {
                   setMood(e.target.value);
                 }}
+                // make it so that get response is called when enter is pressed
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    {
+                      gptUsesRemaining === 0
+                        ? toast.error('No uses remaining')
+                        : getResponseFromOpenAI();
+                    }
+                  }
+                }}
                 placeholder="What's your mood?"
                 className="p-4 rounded-full focus:outline-none  focus:text-blue-500 focus:placeholder-white/50"
               ></input>
@@ -219,9 +242,22 @@ const ColorGPT = () => {
               </button>
             </div>
             <div className="p-2 px-4 text-sm bg-green-50 text-green-500 rounded-full mt-4">
-              {gptUsesRemaining > 0
-                ? `${gptUsesRemaining} Free uses remaining`
-                : 'You have no free uses remaining'}
+              {gptUsesRemaining > 0 &&
+                !userFull.isSubscribed &&
+                `${gptUsesRemaining} Free Uses Remaining`}
+              {gptUsesRemaining > 0 &&
+                userFull.isSubscribed &&
+                `${gptUsesRemaining} Uses Remaining`}
+              {gptUsesRemaining === 0 && !userFull?.isSubscribed && (
+                <div className="flex items-center gap-x-2">
+                  <div className="text-red-500">0 Uses Remaining</div>
+                  <Link href="/pricing">
+                    <button className="text-blue-500 underline">
+                      Upgrade to get more
+                    </button>
+                  </Link>
+                </div>
+              )}
             </div>
 
             <div className="flex-grow h-full flex items-center justify-center">
@@ -236,40 +272,61 @@ const ColorGPT = () => {
               ) : (
                 response.length > 0 && (
                   <div className="flex flex-col justify-center items-center">
-                    <div className="grid grid-cols-2 md:flex gap-4 rounded-md p-4">
+                    <div className="grid grid-cols-2 md:flex gap-2 rounded-md p-4">
                       {response.map((color) => {
                         return (
                           <div
                             key={color.name}
-                            className="group w-16 flex flex-col items-center gap-2"
+                            className="group flex flex-col items-center "
                           >
                             <div
                               className="w-12 h-12 rounded-full"
-                              style={{ backgroundColor: color.hex }}
+                              style={{ backgroundColor: color }}
                             ></div>
-                            <div className=" text-transparent group-hover:text-gray-300 transition-all duration-200">
-                              {color.hex}
-                            </div>
                           </div>
                         );
                       })}
                     </div>
-                    <button>
-                      <div
-                        onClick={() => {
-                          // addGPTPalette();
-                          let hexList = response.map((color) => color.hex);
-                          AddPaletteToLibrary(
-                            `${mood} - Generated Palette`,
-                            hexList,
-                            'colorgpt'
-                          );
-                        }}
-                        className="h-max w-max bg-slate-500/5 text-slate-500 rounded-md p-2 hover:bg-slate-800 hover:text-slate-100 transition-all duration-200"
+                    <button
+                      className="bg-slate-500/20 w-max text-slate-500 flex items-center gap-2 rounded-md p-2 hover:bg-slate-800 hover:text-slate-100 transition-all duration-200"
+                      onClick={() => {
+                        // addGPTPalette();
+                        let hexList = response.map((color) => color);
+                        AddPaletteToLibrary(
+                          `${mood} - Generated Palette`,
+                          hexList,
+                          'colorgpt'
+                        );
+                      }}
+                    >
+                      <svg
+                        width="32px"
+                        height="32px"
+                        stroke-width="1.5"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        color="currentColor"
                       >
-                        Save Palette
-                      </div>
+                        <path
+                          d="M8 12h4m4 0h-4m0 0V8m0 4v4M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"
+                          stroke="currentColor"
+                          stroke-width="1.5"
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                        ></path>
+                      </svg>
+                      <div>Save to Library</div>
                     </button>
+
+                    <div className="flex flex-col mt-16 m-8 w-96 bg-gray-200 rounded-md">
+                      <div className="text-sm py-2 text-center font-semibold   text-gray-700">
+                        Why this palette?
+                      </div>
+                      <div className=" text-left p-[12px] text-sm w-96 rounded-md bg-gray-100 text-gray-500">
+                        {justification}
+                      </div>
+                    </div>
                   </div>
                 )
               )}
