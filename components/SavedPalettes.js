@@ -7,6 +7,7 @@ import ExportModal from './ExportModal';
 import Color from 'color';
 import Iconoir from 'iconoir/icons/iconoir.svg';
 import { toast } from 'react-hot-toast';
+import { usePostHog } from 'posthog-js/react';
 
 export default function SavedPalettes({}) {
   const [filter, setFilter] = useState('all');
@@ -14,6 +15,7 @@ export default function SavedPalettes({}) {
   const [palettes, setPalettes] = useState([]);
   const { session, SignOut, GetPalettes, DeletePalette } =
     useContext(Supabase_data);
+  const posthog = usePostHog();
 
   const filterTypes = [
     {
@@ -57,6 +59,9 @@ export default function SavedPalettes({}) {
     document.body.removeChild(el);
     toast.success('Link copied to clipboard!', {
       duration: 5000,
+    });
+    posthog.capture('Palette Shared', {
+      property: `https://rangeen.studio/palette/${id}`,
     });
   }
 

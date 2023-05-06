@@ -6,10 +6,12 @@ import Color from 'color';
 import toast, { Toaster } from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
 import ExportPalette from './ExportPalette';
+import { usePostHog } from 'posthog-js/react';
 
 export default function ExportModal({ hexList, children }) {
   let subtitle;
   let [isOpen, setIsOpen] = useState(false);
+  const posthog = usePostHog();
 
   function closeModal() {
     setIsOpen(false);
@@ -39,6 +41,9 @@ export default function ExportModal({ hexList, children }) {
     el.select();
     document.execCommand('copy');
     document.body.removeChild(el);
+    posthog.capture('Palette Exported', {
+      property: list,
+    });
   }
 
   function copyHexList(hexList) {

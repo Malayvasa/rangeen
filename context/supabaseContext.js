@@ -7,6 +7,8 @@ import {
   useSupabaseClient,
 } from '@supabase/auth-helpers-react';
 import axios from 'axios';
+import { PostHogProvider, usePostHog } from 'posthog-js/react';
+
 
 export const Supabase_data = createContext(null);
 
