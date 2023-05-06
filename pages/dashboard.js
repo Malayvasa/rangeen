@@ -33,7 +33,7 @@ const Dashboard = () => {
             <div className="bg-green-200 h-full flex items-center justify-center w-24 text-center text-green-700 rounded-md py-1 px-2">
               {userFull?.is_subscribed
                 ? 'Unlimited'
-                : userFull?.openai_generations}
+                : userFull?.spotify_generations}
             </div>
           </div>
         </div>

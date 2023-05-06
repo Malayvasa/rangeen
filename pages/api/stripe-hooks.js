@@ -33,14 +33,29 @@ const handler = async (req, res) => {
   const currentPeriodEnd = user.data.current_period_end || null;
 
   if (event.type === 'customer.subscription.updated') {
-    // if the subscription is canceled, set the current_period_end to null
-    if (event.data.object.cancel_at_period_end) {
+    //if subscription is new, status is active and the current_period_end is null, update the current_period_end
+    if (
+      event.data.object.status === 'active' &&
+      currentPeriodEnd === null &&
+      event.data.object.current_period_end !== null
+    ) {
       await supabase
         .from('profiles')
         .update({
-          current_period_end: null,
+          is_subscribed: true,
+          interval: event.data.object.items.data[0].plan.interval,
+          current_period_end: event.data.object.current_period_end,
+          openai_generations: currentOpenAiGenerations + 30,
         })
         .eq('stripe_customer', event.data.object.customer);
+    }
+
+    // if the subscription is canceled or the current_period_end is the same as the one in the database, do nothing
+    if (
+      event.data.object.cancel_at_period_end ||
+      currentPeriodEnd === event.data.object.current_period_end
+    ) {
+      // do nothing
     }
 
     // if the subscription is active and the current_period_end is not the same as the one in the database, update the current_period_end
@@ -59,17 +74,6 @@ const handler = async (req, res) => {
   }
 
   switch (event.type) {
-    case 'customer.subscription.created':
-      await supabase
-        .from('profiles')
-        .update({
-          is_subscribed: true,
-          interval: event.data.object.items.data[0].plan.interval,
-          openai_generations: currentOpenAiGenerations + 30,
-          current_period_end: event.data.object.current_period_end,
-        })
-        .eq('stripe_customer', event.data.object.customer);
-      break;
     case 'customer.subscription.deleted':
       await supabase
         .from('profiles')
