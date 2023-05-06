@@ -1,23 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
 import { useRouter } from 'next/router';
+import { Supabase_data } from '@/context/supabaseContext';
+import { useContext } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import HeaderLogo from './Header_Logo';
 import MobileNav from './MobileNav';
 
 export default function NavBar() {
-  const session = useSession();
-  const supabase = useSupabaseClient();
+  const { supabase, user, userFull, session, AddPaletteToLibrary } =
+    useContext(Supabase_data);
   const [currentPage, setCurrentPage] = useState('/');
   const router = useRouter();
 
   const pages = [
-    {
-      name: 'Randomizer',
-      url: '/randomizer',
-      color: '#00ff00',
-    },
     {
       name: 'ColorGPT',
       url: '/colorgpt',
@@ -28,6 +25,12 @@ export default function NavBar() {
       url: '/album_art',
       color: '#0000ff',
     },
+    {
+      name: 'Randomizer',
+      url: '/randomizer',
+      color: '#00ff00',
+    },
+    //only show pricing if user is not subscribed
     {
       name: 'Pricing',
       url: '/pricing',
@@ -50,7 +53,7 @@ export default function NavBar() {
         stiffness: 40,
         tween: 'easeOut',
       }}
-      className="fixed z-[20] top-0 w-screen flex h-max px-4 pt-10"
+      className="fixed z-[30] top-0 w-screen flex h-max px-4 pt-10"
     >
       <div className="w-full md:w-3/5 items-center font-semibold justify-between rounded-full shadow-lg mx-auto top-0 h-12 pl-4 pr-2 md:pr-0  bg-white flex z-20">
         <div className="font-bold text-lg h-full">
@@ -60,37 +63,40 @@ export default function NavBar() {
         </div>
 
         <div className="flex h-full py-[4px] ">
-          {pages.map((page) => (
-            <div key={page.name} className="flex h-full gap-4">
-              <div className="h-full hidden md:block">
-                <Link
-                  className={`mx-1 group  relative flex items-center px-2 h-full`}
-                  href={page.url}
-                >
-                  {currentPage === page.url && (
-                    <motion.div
-                      layoutId="pill"
-                      className="absolute z-[6] cursor-none  inset-0 border-[2px] border-blue-500/10 bg-blue-400/30"
-                      style={{
-                        borderRadius: '9999px',
-                      }}
-                      transition={{
-                        duration: 0.5,
-                        type: 'spring',
-                      }}
-                    ></motion.div>
-                  )}
-                  <span
-                    className={`flex items-center bg-blend-exclusion text-black px-2 h-full z-10 transition-colors
+          {pages.map((page) =>
+            //if user is subscribed remove pricing from navbar
+            userFull?.is_subscribed && page.name === 'Pricing' ? null : (
+              <div key={page.name} className="flex h-full gap-4">
+                <div className="h-full hidden md:block">
+                  <Link
+                    className={`mx-1 group  relative flex items-center px-2 h-full`}
+                    href={page.url}
+                  >
+                    {currentPage === page.url && (
+                      <motion.div
+                        layoutId="pill"
+                        className="absolute z-[6] cursor-none  inset-0 border-[2px] border-blue-500/10 bg-blue-400/30"
+                        style={{
+                          borderRadius: '9999px',
+                        }}
+                        transition={{
+                          duration: 0.5,
+                          type: 'spring',
+                        }}
+                      ></motion.div>
+                    )}
+                    <span
+                      className={`flex items-center bg-blend-exclusion text-black px-2 h-full z-10 transition-colors
                     ${currentPage === page.url ? 'text-blue-500' : 'text-black'}
                     `}
-                  >
-                    {page.name}
-                  </span>
-                </Link>
+                    >
+                      {page.name}
+                    </span>
+                  </Link>
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          )}
           {session ? (
             <div className="flex h-full gap-4">
               <div className="h-full hidden md:block">

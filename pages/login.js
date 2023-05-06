@@ -11,7 +11,7 @@ const Profile = () => {
   //useEffect to check if user is logged in and redirect to profile page
   useEffect(() => {
     if (session) {
-      push('/');
+      push('/library');
     }
   }, [session]);
 

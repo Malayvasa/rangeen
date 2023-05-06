@@ -9,7 +9,6 @@ import {
 import axios from 'axios';
 import { PostHogProvider, usePostHog } from 'posthog-js/react';
 
-
 export const Supabase_data = createContext(null);
 
 function SupabaseContext({ children }) {
@@ -30,12 +29,11 @@ function SupabaseContext({ children }) {
       (event, session) => {
         if (event === 'SIGNED_OUT' || event === 'USER_DELETED') {
           // delete cookies on sign out
-          console.log('cookie deleted');
+
           const expires = new Date(0).toUTCString();
           document.cookie = `my-access-token=; path=/; expires=${expires}; SameSite=Lax; secure`;
           document.cookie = `my-refresh-token=; path=/; expires=${expires}; SameSite=Lax; secure`;
         } else if (event === 'SIGNED_IN' || event === 'TOKEN_REFRESHED') {
-          console.log('cookie set');
           const maxAge = 100 * 365 * 24 * 60 * 60; // 100 years, never expires
           document.cookie = `my-access-token=${session.access_token}; path=/; max-age=${maxAge}; SameSite=Lax; secure`;
           document.cookie = `my-refresh-token=${session.refresh_token}; path=/; max-age=${maxAge}; SameSite=Lax; secure`;
@@ -71,7 +69,6 @@ function SupabaseContext({ children }) {
           },
         });
       }
-      console.log(newData);
       let userData = { ...user, ...newData };
       setUserFull(userData);
       setLoading(false);
@@ -109,13 +106,6 @@ function SupabaseContext({ children }) {
         email,
         password,
       });
-      if (data) {
-        console.log(data);
-        toast.success(`Welcome back ${data.user.email}!`, {
-          duration: 5000,
-        });
-        return 'Success';
-      }
 
       if (error) {
         toast.error(error.message);

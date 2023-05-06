@@ -32,6 +32,10 @@ export default function MobileNav() {
       name: 'Album Art',
       href: '/album_art',
     },
+    {
+      name: 'Pricing',
+      href: '/pricing',
+    },
   ];
 
   return (
@@ -89,6 +93,18 @@ export default function MobileNav() {
               href="/album_art"
             >
               Album Art
+            </Link>
+          )}
+        </Menu.Item>
+        <Menu.Item>
+          {({ active }) => (
+            <Link
+              className={`${
+                active ? 'bg-violet-500 text-white' : 'text-gray-900'
+              } group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+              href="/pricing"
+            >
+              Pricing
             </Link>
           )}
         </Menu.Item>

@@ -10,7 +10,5 @@ export default function handler(req, res) {
     result.push(blinder[type](hex));
   });
 
-  console.log(type, ':', result);
-
   res.status(200).json({ simulatedHexList: result });
 }

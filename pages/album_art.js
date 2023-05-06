@@ -103,6 +103,12 @@ const AlbumArt = () => {
 
     let tokenResponse = await tokenres.json();
 
+    // if search string is empty, return
+    if (searchString === '') {
+      setAlbums([]);
+      return;
+    }
+
     let response = await fetch(
       `https://api.spotify.com/v1/search?type=album&include_external=audio&q=${searchString}`,
       {
@@ -124,7 +130,6 @@ const AlbumArt = () => {
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      console.log(searchString);
       GetData();
       // Send Axios request here
     }, 1500);
@@ -145,7 +150,10 @@ const AlbumArt = () => {
     setHexList(colors);
 
     setTimeout(() => {
-      updateFreeSpotifyUsesRemaining();
+      // update free spotify uses remaining if user is not subscribed
+      if (!userFull?.is_subscribed) {
+        updateFreeSpotifyUsesRemaining();
+      }
       setGenerated(true);
       setGenerating(false);
     }, 2000);
@@ -162,21 +170,23 @@ const AlbumArt = () => {
     <div className=" h-screen w-screen relative flex justify-center bg-gray-100 items-center p-4 md:py-32 md:px-32">
       {session ? (
         <div className="w-full relative h-max  md:h-full overflow-y-scroll bg-white flex flex-col gap-4 md:flex-row justify-center items-center rounded-3xl py-8 md:mt-0 md:pl-12">
-          <div className="p-2 bottom-4 h-max md:top-0 md:right-0 md:mr-4 absolute px-4 text-sm bg-green-50 text-green-500 rounded-full mt-4">
-            {!subscribed ? (
-              <div>
-                {freeSpotifyUsesRemaining > 0 ? (
-                  <div>{freeSpotifyUsesRemaining} free uses remaining</div>
-                ) : (
-                  <div>
-                    <Link href={'/pricing'}>Get unlimited generations</Link>
-                  </div>
-                )}
-              </div>
-            ) : (
-              <div></div>
-            )}
-          </div>
+          {!loading && !userFull?.is_subscribed && (
+            <div className="p-2 bottom-4 h-max md:top-0 md:right-0 md:mr-4 absolute px-4 text-sm bg-green-50 text-green-500 rounded-full mt-4">
+              {!subscribed ? (
+                <div>
+                  {freeSpotifyUsesRemaining > 0 ? (
+                    <div>{freeSpotifyUsesRemaining} free uses remaining</div>
+                  ) : (
+                    <div>
+                      <Link href={'/pricing'}>Get unlimited generations</Link>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div></div>
+              )}
+            </div>
+          )}
           <div className="flex flex-col gap-4 justify-center items-center">
             <div className="flex flex-col mt-12 rounded-3xl border-2 border-black border-opacity-10">
               <div className="flex flex-row gap-2 w-full text-black/40 placeholder-black placeholder-opacity-40 rounded-t-3xl outline-none p-2 md:p-2">
@@ -289,10 +299,10 @@ const AlbumArt = () => {
             {generated ? (
               <div className="flex flex-col items-center justify-center">
                 <div className="grid grid-cols-2 md:flex flex-row gap-1 md:gap-4">
-                  {colors.map((color) => {
+                  {colors.map((color, index) => {
                     return (
                       <div
-                        key={color.name}
+                        key={index}
                         className="group w-16 flex flex-col items-center gap-2"
                       >
                         <div

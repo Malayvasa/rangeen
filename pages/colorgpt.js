@@ -6,9 +6,9 @@ import Link from 'next/link';
 import { usePostHog } from 'posthog-js/react';
 
 const ColorGPT = () => {
-  const { supabase, user, userFull, session, AddPaletteToLibrary } =
+  const { supabase, user, userFull, loading, session, AddPaletteToLibrary } =
     useContext(Supabase_data);
-  const [loading, setLoading] = useState(true);
+  const [gptloading, setGPTLoading] = useState(true);
   const [response, setResponse] = useState([]);
   const [mood, setMood] = useState('dreamy vibes');
   const [isLoading, setIsLoading] = useState(false);
@@ -19,7 +19,7 @@ const ColorGPT = () => {
 
   async function getFreeGPTUsesRemaining() {
     try {
-      setLoading(true);
+      setGPTLoading(true);
       let { data, error, status } = await supabase
         .from('profiles')
         .select('openai_generations')
@@ -34,13 +34,13 @@ const ColorGPT = () => {
     } catch (error) {
       console.log(error);
     } finally {
-      setLoading(false);
+      setGPTLoading(false);
     }
   }
 
   async function updateFreeGPTUsesRemaining() {
     try {
-      setLoading(true);
+      setGPTLoading(true);
 
       let { data, error, status } = await supabase
         .from('profiles')
@@ -58,7 +58,7 @@ const ColorGPT = () => {
     } catch (error) {
       console.log(error);
     } finally {
-      setLoading(false);
+      setGPTLoading(false);
       getFreeGPTUsesRemaining();
     }
   }
@@ -241,24 +241,26 @@ const ColorGPT = () => {
                 </svg>
               </button>
             </div>
-            <div className="p-2 px-4 text-sm bg-green-50 text-green-500 rounded-full mt-4">
-              {gptUsesRemaining > 0 &&
-                !userFull.isSubscribed &&
-                `${gptUsesRemaining} Free Uses Remaining`}
-              {gptUsesRemaining > 0 &&
-                userFull.isSubscribed &&
-                `${gptUsesRemaining} Uses Remaining`}
-              {gptUsesRemaining === 0 && !userFull?.isSubscribed && (
-                <div className="flex items-center gap-x-2">
-                  <div className="text-red-500">0 Uses Remaining</div>
-                  <Link href="/pricing">
-                    <button className="text-blue-500 underline">
-                      Upgrade to get more
-                    </button>
-                  </Link>
-                </div>
-              )}
-            </div>
+            {!loading && userFull && (
+              <div className="p-2 px-4 text-sm bg-green-50 text-green-500 rounded-full mt-4">
+                {gptUsesRemaining > 0 &&
+                  !userFull.is_subscribed &&
+                  `${gptUsesRemaining} Free Uses Remaining`}
+                {gptUsesRemaining > 0 &&
+                  userFull.is_subscribed &&
+                  `${gptUsesRemaining} Uses Remaining`}
+                {gptUsesRemaining === 0 && !userFull?.is_subscribed && (
+                  <div className="flex items-center gap-x-2">
+                    <div className="text-red-500">0 Uses Remaining</div>
+                    <Link href="/pricing">
+                      <button className="text-blue-500 underline">
+                        Upgrade to get more
+                      </button>
+                    </Link>
+                  </div>
+                )}
+              </div>
+            )}
 
             <div className="flex-grow h-full flex items-center justify-center">
               {isLoading ? (

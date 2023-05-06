@@ -14,8 +14,6 @@ const Pricing = ({ plans }) => {
     await stripe.redirectToCheckout({ sessionId: data.data.id });
   };
 
-  console.log(plans);
-
   const showSubscribeButton = !!userFull && !userFull.is_subscribed;
   const showSignUpButton = !userFull;
   const ManageSubscription = !!userFull && userFull.is_subscribed;
@@ -35,14 +33,67 @@ const Pricing = ({ plans }) => {
         plan.id == 'price_1N2HVRSIhw3xzm9STXakfpds' ? (
           <div key={plan.id} className="z-20">
             <div className="bg-white w-96 z-20 shadow-lg rounded-lg px-4 py-4 flex flex-col">
-              <h2 className="text-xl font-semibold tracking-tight">
-                {plan.name}
-              </h2>
-              <p className="mt-2 ml-2 text-blue-500 flex-grow">
-                {plan.currency === 'inr' ? '₹' : '$'}
-                {plan.price}/ {plan.interval}
-                {plan.description}
-              </p>
+              <div className="flex flex-col w-full justify-between">
+                <h2 className="text-2xl font-semibold tracking-tight">
+                  {plan.name}
+                </h2>
+                <p className="mt-1 text-xl text-blue-500 font-semibold">
+                  {plan.currency === 'inr' ? '₹' : '$'}
+                  {plan.price}/ {plan.interval}
+                  {plan.description}
+                </p>
+              </div>
+              <div>
+                {plan.id == 'price_1N2JIsSIhw3xzm9SvWJ4LTuM' ||
+                  (plan.id == 'price_1N1gvXSIhw3xzm9STGLzyDXB' && (
+                    <div className=" gap-2 flex flex-col mt-8 bg-gray-200 p-2 rounded-md">
+                      <p className="text-gray-500 text-md">
+                        <span className="text-gray-900 font-semibold">
+                          Unlimited
+                        </span>{' '}
+                        Album Art Palettes
+                      </p>
+                      <p className="text-gray-500 text-md">
+                        <span className="text-gray-900 font-semibold">30</span>{' '}
+                        ColorGPT Palettes/mo
+                      </p>
+                      <p className="text-gray-500 text-md">
+                        <span className="text-gray-900 font-semibold">
+                          Early Access
+                        </span>{' '}
+                        To New Features
+                      </p>
+                    </div>
+                  ))}
+                {plan.id == 'price_1N2JKUSIhw3xzm9SVSHfmBCE' ||
+                  (plan.id == 'price_1N2HVRSIhw3xzm9STXakfpds' && (
+                    <div className=" gap-2 flex flex-col mt-8 bg-gray-200 p-2 rounded-md">
+                      <p className="text-gray-500 text-md">
+                        <span className="text-gray-900 font-semibold">
+                          Support
+                        </span>{' '}
+                        Development of Rangeen
+                      </p>
+                      <p className="text-gray-500 text-md">
+                        <span className="text-gray-900 font-semibold">
+                          Unlimited
+                        </span>{' '}
+                        Album Art Palettes
+                      </p>
+                      <p className="text-gray-500 text-md">
+                        <span className="text-gray-900 font-semibold">30</span>{' '}
+                        ColorGPT Palettes/mo
+                      </p>
+                      <p className="text-gray-500 text-md">
+                        <span className="text-gray-900 font-semibold">
+                          Early Access
+                        </span>{' '}
+                        To New Features
+                      </p>
+                    </div>
+                  ))}
+              </div>
+
               {showSubscribeButton && (
                 <button
                   onClick={() => {
@@ -62,19 +113,19 @@ const Pricing = ({ plans }) => {
                   Sign Up
                 </Link>
               )}
-              {ManageSubscription && (
-                <Link
-                  href="/dashboard"
-                  className="mt-4 w-full bg-blue-500 text-white rounded-lg px-4 py-2"
-                >
-                  Manage Subscription
-                </Link>
-              )}
             </div>
           </div>
         ) : (
           <></>
         )
+      )}
+      {ManageSubscription && (
+        <Link
+          href="/dashboard"
+          className="mt-4 shadow-lg z-20 w-max bg-blue-500 text-white rounded-lg px-4 py-2"
+        >
+          Manage Your Subscription
+        </Link>
       )}
     </div>
   );
