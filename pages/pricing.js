@@ -44,54 +44,54 @@ const Pricing = ({ plans }) => {
                 </p>
               </div>
               <div>
-                {plan.id == 'price_1N2JIsSIhw3xzm9SvWJ4LTuM' ||
-                  (plan.id == 'price_1N1gvXSIhw3xzm9STGLzyDXB' && (
-                    <div className=" gap-2 flex flex-col mt-8 bg-gray-200 p-2 rounded-md">
-                      <p className="text-gray-500 text-md">
-                        <span className="text-gray-900 font-semibold">
-                          Unlimited
-                        </span>{' '}
-                        Album Art Palettes
-                      </p>
-                      <p className="text-gray-500 text-md">
-                        <span className="text-gray-900 font-semibold">30</span>{' '}
-                        ColorGPT Palettes/mo
-                      </p>
-                      <p className="text-gray-500 text-md">
-                        <span className="text-gray-900 font-semibold">
-                          Early Access
-                        </span>{' '}
-                        To New Features
-                      </p>
-                    </div>
-                  ))}
-                {plan.id == 'price_1N2JKUSIhw3xzm9SVSHfmBCE' ||
-                  (plan.id == 'price_1N2HVRSIhw3xzm9STXakfpds' && (
-                    <div className=" gap-2 flex flex-col mt-8 bg-gray-200 p-2 rounded-md">
-                      <p className="text-gray-500 text-md">
-                        <span className="text-gray-900 font-semibold">
-                          Support
-                        </span>{' '}
-                        Development of Rangeen
-                      </p>
-                      <p className="text-gray-500 text-md">
-                        <span className="text-gray-900 font-semibold">
-                          Unlimited
-                        </span>{' '}
-                        Album Art Palettes
-                      </p>
-                      <p className="text-gray-500 text-md">
-                        <span className="text-gray-900 font-semibold">30</span>{' '}
-                        ColorGPT Palettes/mo
-                      </p>
-                      <p className="text-gray-500 text-md">
-                        <span className="text-gray-900 font-semibold">
-                          Early Access
-                        </span>{' '}
-                        To New Features
-                      </p>
-                    </div>
-                  ))}
+                {(plan.id == 'price_1N2JIsSIhw3xzm9SvWJ4LTuM' ||
+                  plan.id == 'price_1N1gvXSIhw3xzm9STGLzyDXB') && (
+                  <div className=" gap-2 flex flex-col mt-8 bg-gray-200 p-2 rounded-md">
+                    <p className="text-gray-500 text-md">
+                      <span className="text-gray-900 font-semibold">
+                        Unlimited
+                      </span>{' '}
+                      Album Art Palettes
+                    </p>
+                    <p className="text-gray-500 text-md">
+                      <span className="text-gray-900 font-semibold">30</span>{' '}
+                      ColorGPT Palettes/mo
+                    </p>
+                    <p className="text-gray-500 text-md">
+                      <span className="text-gray-900 font-semibold">
+                        Early Access
+                      </span>{' '}
+                      To New Features
+                    </p>
+                  </div>
+                )}
+                {(plan.id == 'price_1N2JKUSIhw3xzm9SVSHfmBCE' ||
+                  plan.id == 'price_1N2HVRSIhw3xzm9STXakfpds') && (
+                  <div className=" gap-2 flex flex-col mt-8 bg-gray-200 p-2 rounded-md">
+                    <p className="text-gray-500 text-md">
+                      <span className="text-gray-900 font-semibold">
+                        Support
+                      </span>{' '}
+                      Development of Rangeen
+                    </p>
+                    <p className="text-gray-500 text-md">
+                      <span className="text-gray-900 font-semibold">
+                        Unlimited
+                      </span>{' '}
+                      Album Art Palettes
+                    </p>
+                    <p className="text-gray-500 text-md">
+                      <span className="text-gray-900 font-semibold">30</span>{' '}
+                      ColorGPT Palettes/mo
+                    </p>
+                    <p className="text-gray-500 text-md">
+                      <span className="text-gray-900 font-semibold">
+                        Early Access
+                      </span>{' '}
+                      To New Features
+                    </p>
+                  </div>
+                )}
               </div>
 
               {showSubscribeButton && (
