@@ -238,6 +238,19 @@ const Home = () => {
             <div className="font-semibold">2. jovial</div>
           </div>
         </div>
+        <div className="flex h-max flex-row justify-center items-center gap-4 mt-12">
+          <a
+            href="https://www.producthunt.com/posts/rangeen?utm_source=badge-featured&utm_medium=badge&utm_souce=badge-rangeen"
+            target="_blank"
+          >
+            <img
+              src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=393106&theme=light"
+              alt="Rangeen - Generate&#0032;and&#0032;Curate&#0032;Color&#0032;Palettes&#0032;for&#0032;Your&#0032;Next&#0032;Project | Product Hunt"
+              width="250"
+              height="54"
+            />
+          </a>
+        </div>
 
         <div className="flex flex-col w-full max-w-[1050px] mx-auto md:px-24 items-center shadow-sm rounded-3xl my-20 py-16 px-8 gap-12 bg-white justify-center">
           {randomNewPalette && (
