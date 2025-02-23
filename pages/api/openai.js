@@ -1,22 +1,40 @@
-import { OpenAIApi, Configuration } from 'openai';
+import OpenAI from "openai";
 
-const configuration = new Configuration({
-  organization: 'org-mFqk40rcKT7h8R5gxEmWaVz9',
-  apiKey: process.env.OPEN_API_KEY,
+const openai = new OpenAI({
+	organization: "org-VAlHuoxZAyKfhGqnprj66Dez",
+	apiKey: process.env.OPEN_API_KEY,
 });
+// Assign the function to a variable
+const handleRequest = async (req, res) => {
+	if (req.body.prompt !== undefined) {
+		try {
+			const response = await openai.chat.completions.create({
+				model: "gpt-4o-mini",
+				messages: [
+					{
+						role: "user",
+						content: req.body.prompt,
+					},
+				],
+				response_format: { type: "json_object" },
+			});
+			console.log("OpenAI API response:", response.choices[0].message.content);
 
-const openai = new OpenAIApi(configuration);
+			// Parse the response content as JSON
+			const jsonResponse = JSON.parse(response.choices[0].message.content);
 
-export default async (req, res) => {
-  if (req.body.prompt !== undefined) {
-    const completion = await openai.createCompletion({
-      model: 'text-davinci-003',
-      prompt: `${req.body.prompt}`,
-      max_tokens: 500,
-    });
-
-    res.status(200).json({ text: `${completion.data.choices[0].text}` });
-  } else {
-    res.status(401).json({ text: 'No prompt provided.' });
-  }
+			// Return the JSON response
+			res.status(200).json(jsonResponse);
+		} catch (error) {
+			console.error("Error calling OpenAI API:", error.message);
+			res
+				.status(500)
+				.json({ text: "Internal server error.", error: error.message });
+		}
+	} else {
+		res.status(401).json({ text: "No prompt provided." });
+	}
 };
+
+// Export the variable
+export default handleRequest;
