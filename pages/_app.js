@@ -1,7 +1,11 @@
+"use client";
 import "../styles/globals.css";
 import NavBar from "@/components/Navbar";
 import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
+import { Toaster } from "react-hot-toast";
+import { useState } from "react";
+import { useEffect } from "react";
 
 // Check that PostHog is client-side (used to handle Next.js SSR)
 if (typeof window !== "undefined") {
@@ -16,11 +20,19 @@ if (typeof window !== "undefined") {
 }
 
 function App({ Component, pageProps }) {
+	const [isClient, setIsClient] = useState(false);
+
+	useEffect(() => {
+		setIsClient(true);
+	}, []);
 	return (
-		<PostHogProvider client={posthog}>
-			<NavBar />
-			<Component {...pageProps} />
-		</PostHogProvider>
+		<>
+			<PostHogProvider client={posthog}>
+				<NavBar />
+				{isClient && <Toaster position="bottom-right" />}
+				<Component {...pageProps} />
+			</PostHogProvider>
+		</>
 	);
 }
 export default App;
