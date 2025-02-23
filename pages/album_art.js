@@ -105,8 +105,8 @@ const AlbumArt = () => {
 	}, [selectedAlbum, data]);
 
 	return (
-		<div className=" h-screen w-screen relative flex justify-center bg-gray-100 items-center p-4 md:py-32 md:px-32">
-			<div className="w-full relative h-full overflow-y-scroll bg-white flex flex-col gap-4 md:flex-row justify-center items-center rounded-3xl py-8 md:mt-0">
+		<div className=" h-screen w-screen relative flex justify-center bg-gray-100 items-center p-4">
+			<div className="w-full relative h-full overflow-y-scroll  flex flex-col gap-4 md:flex-row justify-center items-center rounded-3xl py-8 md:mt-0">
 				<div className="flex flex-col mt-14 md:mt-0 md:flex-row gap-4 justify-center items-center">
 					<AlbumSearch
 						loadingAlbums={loadingAlbums}

@@ -87,7 +87,7 @@ const Randomizer = ({}) => {
 		<div className="h-screen w-screen flex justify-center bg-gray-100 items-center px-4 py-4 md:py-12 md:px-12">
 			<div></div>
 
-			<div className="bg-white rounded-3xl shadow-sm w-full h-full flex flex-col justify-center items-center">
+			<div className="rounded-3xl  w-full h-full flex flex-col justify-center items-center">
 				<div className="flex w-full mx-2 flex-col justify-center items-center">
 					{randomNewPalette && (
 						<motion.div

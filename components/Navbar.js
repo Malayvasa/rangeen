@@ -29,8 +29,8 @@ export default function NavBar() {
 	}, [router.pathname]);
 
 	return (
-		<div className="fixed z-[30] top-0 w-screen flex h-max px-4 pt-10">
-			<div className="w-full md:w-3/5 items-center relative font-semibold justify-between rounded-full shadow-lg mx-auto top-0 h-12 pl-4 pr-2 md:pr-0  bg-white flex z-[20]">
+		<div className="fixed z-[30] top-0 w-screen flex h-max">
+			<div className="w-full  items-center relative font-semibold justify-between mx-auto top-0 h-12 pl-4 pr-2 md:pr-0  bg-white flex z-[20]">
 				<div className="font-bold text-lg h-full">
 					<Link href={"/"}>
 						<HeaderLogo />

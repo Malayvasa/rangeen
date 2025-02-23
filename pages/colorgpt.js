@@ -70,7 +70,7 @@ const ColorGPT = () => {
 
 	return (
 		<div className="h-screen w-screen flex justify-center bg-gray-100 items-center p-4  md:py-32 md:px-32">
-			<div className="w-full h-full bg-white flex-grow flex justify-center rounded-3xl pt-24 py-8 md:mt-0 md:py-12">
+			<div className="w-full h-full  flex-grow flex justify-center rounded-3xl pt-24 py-8 md:mt-0 md:py-12">
 				<div className=" flex flex-col items-center justify-between ">
 					<div className="flex gap-x-4 items-center border-[2px] rounded-full">
 						<input
@@ -83,7 +83,8 @@ const ColorGPT = () => {
 								}
 							}}
 							placeholder="What's your mood?"
-							className="p-4 rounded-full focus:outline-none  focus:text-blue-500 focus:placeholder-white/50"></input>
+							className="p-4 rounded-full focus:outline-none  bg-transparent focus:text-black focus:placeholder-black/30"></input>
+
 						<button
 							onClick={() => {
 								getResponseFromOpenAI();
