@@ -5,6 +5,7 @@ import posthog from "posthog-js";
 import { PostHogProvider } from "posthog-js/react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 
 // Check that PostHog is client-side (used to handle Next.js SSR)
 if (typeof window !== "undefined") {
@@ -34,6 +35,7 @@ function App({ Component, pageProps }) {
 	return (
 		<PostHogProvider client={posthog}>
 			<NavBar />
+			<Toaster position="bottom_right" />
 			<Component {...pageProps} />
 		</PostHogProvider>
 	);

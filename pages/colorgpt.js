@@ -54,6 +54,14 @@ const ColorGPT = () => {
 			body: JSON.stringify({ prompt: prompt }),
 		});
 
+		if (!response.ok) {
+			setIsLoading(false);
+			const errorMessage = await response.json();
+
+			toast.error(errorMessage.error);
+			return;
+		}
+
 		const data = await response.json();
 		console.log(data);
 		setIsLoading(false);
