@@ -190,25 +190,34 @@ const Home = () => {
 			<div className="flex flex-col w-full">
 				<div className="font-black text-5xl md:text-7xl  text-center">
 					The perfect{" "}
-					<span
-						style={{
-							color: `${Color(randomNewPalette[0])
-								.saturate(1)
-								.darken(0.3)
-								.hex()}`,
-						}}>
+					<motion.span
+						initial={{
+							color: Color(randomNewPalette[0]).saturate(1).darken(0.3).hex(),
+						}}
+						animate={{
+							color: Color(randomNewPalette[0]).saturate(1).darken(0.3).hex(),
+						}}
+						transition={{ duration: 0.5 }}>
 						color
-					</span>{" "}
-					<span
-						style={{
-							color: `${Color(randomNewPalette[0])
+					</motion.span>{" "}
+					<motion.span
+						initial={{
+							color: Color(randomNewPalette[0])
 								.hue(Color(randomNewPalette[0]).hue() + 90)
 								.saturate(1)
 								.darken(0.3)
-								.hex()}`,
-						}}>
+								.hex(),
+						}}
+						animate={{
+							color: Color(randomNewPalette[0])
+								.hue(Color(randomNewPalette[0]).hue() + 90)
+								.saturate(1)
+								.darken(0.3)
+								.hex(),
+						}}
+						transition={{ duration: 0.5 }}>
 						palette
-					</span>{" "}
+					</motion.span>{" "}
 					<br /> for your next project.{" "}
 					{/* <span className="text-[#EDA315]">rangeen</span> */}
 				</div>
@@ -578,10 +587,8 @@ const Home = () => {
 					<div className="flex flex-col md:flex-row gap-8 relative overflow-x-hidden overflow-y-hidden">
 						<div className="flex flex-col  ">
 							<div className="font-black text-5xl md:text-6xl  text-center md:text-left">
-								Easily <span className="text-[#EC3D3D]">save</span>, <br />
-								<span className="text-[#1ECDD6]">view</span> and <br />
-								<span className="text-[#7A36A5]">export</span> your <br />{" "}
-								palettes.
+								Easily{"  "}
+								<span className="text-[#7A36A5]">export</span> palettes.
 							</div>
 						</div>
 
@@ -607,7 +614,7 @@ const Home = () => {
 							})}
 						</div>
 					</div>
-					<div className="bg-gray-50 md:absolute z-[4] md:bottom-0 md:right-0 scale-75 md:scale-[90%] md:translate-y-[35%] md:-translate-x-[10%] mx-auto flex items-center justify-center p-8 w-max rounded-3xl shadow-lg">
+					<div className="bg-gray-50 md:absolute z-[4] md:-bottom-4 md:left-0 scale-75 md:scale-[90%] md:translate-y-[35%] md:-translate-x-[10%] mx-auto flex items-center justify-center p-8 w-max rounded-3xl shadow-lg">
 						<div className="flex flex-col gap-y-4">
 							<div className="w-72 md:w-96 p-4 gap-2 relative items-center shadow-sm flex text-gray-600 rounded-lg bg-white">
 								<div>
@@ -858,9 +865,9 @@ const Home = () => {
 						</div>
 
 						<div>
-							<Link href="/signup">
+							<Link href="/colorgpt">
 								<button className="bg-slate-800 mix-blend-overlay text-3xl font-semibold w-max flex absolute left-1/2 top-1/2 -translate-x-[50%] -translate-y-[50%] md:-translate-y-[0%] text-slate-300 rounded-full py-[30px] gap-2 px-[40px] hover:bg-slate-800 hover:text-slate-100 transition-all duration-200 z-[20]">
-									Sign Up
+									Try Now
 								</button>
 							</Link>
 						</div>
