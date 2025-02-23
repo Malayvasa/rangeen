@@ -1,9 +1,7 @@
-// import { ColorExtractor } from 'react-color-extractor';
+/* eslint-disable @next/next/no-img-element */
 import { usePalette } from "color-thief-react";
-import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
-import Image from "next/image";
+import { useState, useEffect, useCallback } from "react";
+import { motion } from "framer-motion";
 import { usePostHog } from "posthog-js/react";
 import ExportModal from "@/components/ExportModal";
 import toast from "react-hot-toast";
@@ -305,23 +303,17 @@ const AlbumArt = () => {
 		],
 	});
 	const [searchString, setSearchString] = useState("");
-	const {
-		data,
-		loading: colorThiefLoading,
-		error,
-	} = usePalette(selectedAlbum.images[0].url, 10, "hex", {
-		crossOrigin: "anonymous",
-		quality: 10,
-	});
-	const posthog = usePostHog();
+	const { data, loading: colorThiefLoading } = usePalette(
+		selectedAlbum.images[0].url,
+		10,
+		"hex",
+		{
+			crossOrigin: "anonymous",
+			quality: 10,
+		}
+	);
 
-	let GetData = async () => {
-		let tokenres = await fetch("/api/spotify?token=true", {
-			method: "POST",
-		});
-
-		let tokenResponse = await tokenres.json();
-
+	const GetData = useCallback(async () => {
 		// if search string is empty, return
 		if (searchString === "") {
 			setAlbums([]);
@@ -330,49 +322,40 @@ const AlbumArt = () => {
 
 		setLoadingAlbums(true); // Set loading state to true before fetching
 
-		let response;
 		try {
-			response = await fetch(
-				`https://api.spotify.com/v1/search?type=album&include_external=audio&q=${searchString}`,
-				{
-					headers: {
-						Authorization: "Bearer " + tokenResponse.res.access_token,
-						"Content-type": "application/json",
-					},
-				}
-			);
+			const response = await fetch("/api/album?search=true", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					searchString: searchString,
+				}),
+			});
+
+			if (!response.ok) {
+				toast.error("Failed to fetch albums. Please try again.");
+				setAlbums([]);
+				setLoadingAlbums(false); // Ensure loading state is reset
+				return;
+			}
+
+			let albumsData = await response.json();
+			setAlbums(albumsData);
 		} catch (error) {
 			toast.error("Network error. Please try again.");
+		} finally {
 			setLoadingAlbums(false); // Ensure loading state is reset
-			return;
 		}
-
-		if (!response.ok) {
-			toast.error("Failed to fetch albums. Please try again.");
-			setAlbums([]);
-			setLoadingAlbums(false); // Ensure loading state is reset
-			return;
-		} else {
-			setLoadingAlbums(false);
-		}
-
-		let data = await response.json();
-
-		if (data.albums) {
-			setAlbums(data.albums.items);
-		} else {
-			setAlbums([]);
-		}
-	};
+	}, [searchString]);
 
 	useEffect(() => {
 		const delayDebounceFn = setTimeout(() => {
 			GetData();
-			// Send Axios request here
 		}, 300);
 
 		return () => clearTimeout(delayDebounceFn);
-	}, [searchString]);
+	}, [GetData]);
 
 	const handleAlbumSelect = (album) => {
 		console.log(album);

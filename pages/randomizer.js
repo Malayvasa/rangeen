@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import Color from "color";
 import { motion } from "framer-motion";
@@ -60,7 +61,6 @@ const Randomizer = ({}) => {
 
 	useEffect(() => {
 		generateRandomColors();
-		console.log(randomNewPalette);
 	}, []);
 
 	const container = {
